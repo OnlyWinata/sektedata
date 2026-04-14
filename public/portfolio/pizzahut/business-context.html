@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 — Memahami Pizza Hut Indonesia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.svg" alt="Pizza Hut" style="width:28px;height:auto;"> Pizza Hut Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html" class="active"><span class="icon">📋</span> <span data-i18n="sidebar.riset">Riset Bisnis</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.overview">Overview</span></a>
+    <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+    <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p01.topbar">Memahami Pizza Hut Indonesia</h2><span class="badge" data-i18n="p01.badge">Portfolio · 01</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.svg" alt="Pizza Hut">
+        <div>
+            <h1 data-i18n="p01.hero.title">Riset Bisnis: Pizza Hut Indonesia</h1>
+            <p data-i18n="p01.hero.sub">Sebelum menyentuh data, penting untuk memahami bisnisnya terlebih dahulu. Siapa mereka, bagaimana kondisinya, dan masalah apa yang sedang dihadapi.</p>
+        </div>
+    </div>
+    <div class="content-area">
+
+        <p data-i18n="p01.intro">Pizza Hut Indonesia dioperasikan oleh PT Sarimelati Kencana Tbk — perusahaan publik di BEI dengan kode saham <code>PZZA</code>. Laporan keuangan mereka bisa diakses siapa saja.</p>
+
+        <h2 class="section-title" data-i18n="p01.sec.keuangan">Kondisi Keuangan: 3 Tahun Rugi, Baru Recovery</h2>
+
+        <table>
+            <thead><tr><th data-i18n="p01.th.tahun">Tahun</th><th>Revenue</th><th>Net Income</th><th>Margin</th><th data-i18n="p01.th.catatan">Catatan</th></tr></thead>
+            <tbody>
+                <tr><td>2019</td><td>Rp 3.99T</td><td>+Rp 200M</td><td>+5.0%</td><td data-i18n="p01.note.2019">Peak — pre-COVID</td></tr>
+                <tr><td>2020</td><td>Rp 3.46T</td><td>-Rp 93.5M</td><td>-2.7%</td><td data-i18n="p01.note.2020">COVID hit</td></tr>
+                <tr><td>2021</td><td>Rp 3.42T</td><td>+Rp 50M</td><td>+1.5%</td><td data-i18n="p01.note.2021">Slight recovery</td></tr>
+                <tr class="row-bad"><td>2022</td><td>Rp 3.61T</td><td>-Rp 23.5M</td><td>-0.6%</td><td data-i18n="p01.note.2022">Rugi lagi</td></tr>
+                <tr class="row-bad"><td>2023</td><td>Rp 3.54T</td><td>-Rp 96.2M</td><td>-2.7%</td><td data-i18n="p01.note.2023">Makin rugi</td></tr>
+                <tr class="row-bad"><td>2024</td><td>Rp 2.80T</td><td>-Rp 72.8M</td><td>-2.6%</td><td data-i18n="p01.note.2024">Revenue drop 21%</td></tr>
+                <tr class="row-good"><td>2025</td><td>Rp 3.05T</td><td>+Rp 24.8M</td><td>+0.8%</td><td data-i18n="p01.note.2025">Recovery — tipis</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p01.callout.sumber.title">Sumber data</h4>
+            <p data-i18n="p01.callout.sumber.text">Semua angka dari laporan keuangan publik PZZA di IDX, diakses via stockanalysis.com dan simplywall.st. Ini angka audited, bukan estimasi.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p01.sec.skala">Skala Operasi</h2>
+
+        <div class="kpi-row" style="padding: 0;">
+            <div class="kpi-card c-red"><div class="kpi-num">595</div><div class="kpi-label" data-i18n="p01.kpi.outlet">Outlet (official)</div><div class="kpi-sub" data-i18n="p01.kpi.outlet.sub">per Sep 2024</div></div>
+            <div class="kpi-card c-blue"><div class="kpi-num">552</div><div class="kpi-label" data-i18n="p01.kpi.gmaps">Ditemukan di GMaps</div><div class="kpi-sub" data-i18n="p01.kpi.gmaps.sub">selisih 43</div></div>
+            <div class="kpi-card c-green"><div class="kpi-num">287</div><div class="kpi-label" data-i18n="p01.kpi.dinein">Dine-in</div><div class="kpi-sub" data-i18n="p01.kpi.dinein.sub">Pizza Hut Restoran</div></div>
+            <div class="kpi-card c-yellow"><div class="kpi-num">265</div><div class="kpi-label" data-i18n="p01.kpi.phd">PHD</div><div class="kpi-sub" data-i18n="p01.kpi.phd.sub">Delivery only</div></div>
+            <div class="kpi-card c-purple"><div class="kpi-num">120</div><div class="kpi-label" data-i18n="p01.kpi.kota">Kota</div><div class="kpi-sub" data-i18n="p01.kpi.kota.sub">seluruh Indonesia</div></div>
+        </div>
+
+        <p style="margin-top: 1.5rem;" data-i18n="p01.skala.text">Official statement PZZA menyebutkan 595 outlet per September 2024. Dari Google Maps, ditemukan 552. Selisih 43 kemungkinan karena outlet baru tutup, baru buka, atau tidak terlisting.</p>
+
+        <h2 class="section-title" data-i18n="p01.sec.cost">Cost Structure: Mengapa Margin Tipis</h2>
+
+        <p data-i18n="p01.cost.intro">Berikut income statement Pizza Hut Indonesia FY 2025 dalam format waterfall — setiap baris mengurangi baris sebelumnya. Semua angka dari laporan keuangan publik PZZA di IDX:</p>
+
+        <table>
+            <thead><tr><th></th><th data-i18n="p01.cost.th.item">Item</th><th data-i18n="p01.cost.th.angka">Angka</th><th>% Revenue</th><th data-i18n="p01.cost.th.sumber">Sumber</th></tr></thead>
+            <tbody>
+                <tr style="font-weight:700;"><td></td><td>Revenue</td><td>Rp 3.05T</td><td>100%</td><td data-i18n="p01.cost.lk">Laporan keuangan PZZA</td></tr>
+                <tr style="color:#ef4444;"><td>−</td><td data-i18n="p01.cost.foodcost">Food Cost (COGS / bahan baku)</td><td>Rp 973M</td><td>31.9%</td><td data-i18n="p01.cost.lk">Laporan keuangan PZZA</td></tr>
+                <tr style="font-weight:700; background:#f0fdf4;"><td>=</td><td>Gross Profit</td><td>Rp 2.08T</td><td>68.1%</td><td></td></tr>
+                <tr style="color:#ef4444;"><td>−</td><td data-i18n="p01.cost.sga">SG&A (gaji, sewa, listrik, marketing)</td><td>Rp 2.05T</td><td>67.0%</td><td data-i18n="p01.cost.lk">Laporan keuangan PZZA</td></tr>
+                <tr><td>+</td><td data-i18n="p01.cost.othrev">Pendapatan operasional lain</td><td>Rp 61.6M</td><td>2.0%</td><td data-i18n="p01.cost.lk">Laporan keuangan PZZA</td></tr>
+                <tr style="font-weight:700; background:#eff6ff;"><td>=</td><td>Operating Income</td><td>Rp 95.5M</td><td>3.1%</td><td></td></tr>
+                <tr style="color:#ef4444;"><td>−</td><td data-i18n="p01.cost.interest">Bunga & pajak</td><td>Rp 70.7M</td><td>2.3%</td><td data-i18n="p01.cost.lk">Laporan keuangan PZZA</td></tr>
+                <tr style="font-weight:700; background:#f0fdf4;"><td>=</td><td data-i18n="p01.cost.netincome">Net Income (laba bersih)</td><td>Rp 24.8M</td><td>0.8%</td><td data-i18n="p01.cost.lk">Laporan keuangan PZZA</td></tr>
+            </tbody>
+        </table>
+
+        <p data-i18n="p01.cost.explain">Cara membaca: Revenue Rp 3.05T dikurangi food cost (31.9%) = gross profit Rp 2.08T. Gross profit dikurangi SG&A (67%) + pendapatan lain = operating income Rp 95.5M (3.1%). Setelah bunga dan pajak, tersisa net income Rp 24.8M (0.8%). Margin sangat tipis — hampir tidak ada buffer.</p>
+
+        <div class="callout-orange">
+            <h4 data-i18n="p01.callout.limit.title">⚠️ Keterbatasan</h4>
+            <p data-i18n="p01.callout.limit.text">SG&A sebesar 67% dilaporkan sebagai satu line item di laporan keuangan PZZA — tidak di-breakdown per komponen secara publik. Estimasi breakdown berikut berdasarkan industry benchmark QSR Indonesia dan data advertising expense PZZA (Rp 112M = 3.7% revenue) yang memang dilaporkan terpisah:</p>
+            <ul style="color: #78350f; font-size: 0.85rem; margin-top: 0.5rem;">
+                <li>Labor ~24% — benchmark QSR Indonesia</li>
+                <li>Rent ~12% — benchmark, bervariasi besar (mall vs standalone)</li>
+                <li>Utilities ~6% — benchmark QSR</li>
+                <li>Marketing ~4% — dari data advertising expense PZZA</li>
+            </ul>
+            <p style="margin-top: 0.5rem;" data-i18n="p01.callout.limit.sub">Dengan data internal, breakdown ini bisa jauh lebih akurat.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p01.sec.channel">4 Channel Penjualan</h2>
+
+        <table>
+            <thead><tr><th data-i18n="p01.ch.th.channel">Channel</th><th data-i18n="p01.ch.th.desc">Deskripsi</th><th>Margin Profile</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-red">Dine-in</span></td><td data-i18n="p01.ch.dinein.desc">Makan di tempat, full service</td><td data-i18n="p01.ch.dinein.margin">Revenue tinggi, cost tinggi (sewa, staff)</td></tr>
+                <tr><td><span class="badge-ch b-blue">Own Delivery</span></td><td data-i18n="p01.ch.delivery.desc">Delivery fleet sendiri (PHD)</td><td data-i18n="p01.ch.delivery.margin">Margin lebih baik dari aggregator</td></tr>
+                <tr><td><span class="badge-ch b-yellow">Aggregator</span></td><td data-i18n="p01.ch.agg.desc">GoFood, GrabFood, ShopeeFood</td><td data-i18n="p01.ch.agg.margin">Reach luas, komisi 20-30%</td></tr>
+                <tr><td><span class="badge-ch b-green">Takeaway</span></td><td data-i18n="p01.ch.takeaway.desc">Beli bawa pulang</td><td data-i18n="p01.ch.takeaway.margin">Margin terbaik — no commission</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="p01.sec.masalah">Masalah Utama</h2>
+
+        <ol>
+            <li data-i18n="p01.masalah.1"><strong>Tidak semua outlet profitable</strong> — operating margin 3.1% company-wide, pasti ada yang 15% dan ada yang -20%</li>
+            <li data-i18n="p01.masalah.2"><strong>Channel mix belum optimal</strong> — aggregator growing tapi margin tipis</li>
+            <li data-i18n="p01.masalah.3"><strong>Cannibalization</strong> — 33 outlet punya 3+ neighbors dalam 2km</li>
+            <li data-i18n="p01.masalah.4"><strong>Fixed cost trap</strong> — sewa mall tidak turun meski revenue turun</li>
+        </ol>
+
+        <div class="callout-green">
+            <h4 data-i18n="p01.callout.framework.title">✅ Framework tetap applicable</h4>
+            <p data-i18n="p01.callout.framework.text">Semua insight berdasarkan data publik dan proxy. Namun framework analisis yang dibangun — scoring model, segmentasi, channel profitability — tetap applicable. Dengan data internal, tinggal plug in.</p>
+        </div>
+
+    </div>
+</div>
+<script src="lang.js" defer></script>
+</body>
+</html>

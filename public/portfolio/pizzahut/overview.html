@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Hut Indonesia — Senior Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* HERO */
+        .index-hero {
+            background: linear-gradient(135deg, #7a1a1d, #ba2529);
+            padding: 2.5rem;
+            color: white;
+            margin: 1.25rem 2rem 0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+        .index-hero .logo-area img {
+            width: 56px;
+            height: auto;
+            filter: brightness(0) invert(1);
+            flex-shrink: 0;
+        }
+        .index-hero h1 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+            color: white;
+        }
+        .index-hero .subtitle {
+            color: #fecaca;
+            font-size: 0.88rem;
+            margin: 0;
+        }
+        .index-hero .tags {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.65rem;
+            flex-wrap: wrap;
+        }
+        .index-hero .tag {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #ffffff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+
+        /* SECTION LABELS */
+        .section-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 2.25rem 2rem 0.65rem;
+        }
+
+        /* CARD GRIDS */
+        .cards-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            padding: 0 2rem;
+        }
+        .cards-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            padding: 0 2rem;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 1.15rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.15s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 14px rgba(255,90,0,0.06);
+            transform: translateY(-1px);
+        }
+        .card-num {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.78rem;
+            flex-shrink: 0;
+        }
+        .card-num.muted {
+            background: #e2e8f0;
+            color: var(--text-muted);
+        }
+        .card h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        /* FOOTER */
+        .index-footer {
+            text-align: center;
+            padding: 2.5rem 2rem 2rem;
+            color: var(--text-light);
+            font-size: 0.7rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .cards-3, .cards-2 { grid-template-columns: 1fr; padding: 0 1rem; }
+            .index-hero { margin: 1rem; padding: 1.75rem; flex-direction: column; text-align: center; gap: 1rem; }
+            .index-hero .tags { justify-content: center; }
+            .section-label { margin-left: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.svg" alt="Pizza Hut" style="width:28px;height:auto;"> Pizza Hut Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html" class="active"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.riset">Riset Bisnis</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.overview">Overview</span></a>
+    <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+    <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="idx.topbar">Portfolio</h2><span class="badge" data-i18n="idx.badge">Portfolio</span></div>
+
+    <div class="index-hero">
+        <div class="logo-area">
+            <img src="logo.svg" alt="Pizza Hut">
+        </div>
+        <div>
+            <h1 data-i18n="idx.hero.title">Pizza Hut Indonesia</h1>
+            <p class="subtitle" data-i18n="idx.hero.sub">Outlet Performance & Channel Mix Optimization</p>
+            <div class="tags">
+                <span class="tag" data-i18n="idx.tag1">552 Outlet Real</span>
+                <span class="tag" data-i18n="idx.tag2">Data Keuangan IDX</span>
+                <span class="tag" data-i18n="idx.tag3">Menu dari GrabFood</span>
+                <span class="tag" data-i18n="idx.tag4">Google Maps Scraping</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-label" data-i18n="idx.sec.portfolio">Portfolio</div>
+    <div class="cards-3">
+        <a href="business-context.html" class="card">
+            <div class="card-num">01</div>
+            <h3 data-i18n="idx.card1.title">Memahami Pizza Hut Indonesia</h3>
+            <p data-i18n="idx.card1.desc">Kondisi keuangan, skala operasi, cost structure, 4 channel, masalah utama</p>
+        </a>
+        <a href="business-questions.html" class="card">
+            <div class="card-num">02</div>
+            <h3 data-i18n="idx.card2.title">Pertanyaan Bisnis</h3>
+            <p data-i18n="idx.card2.desc">3 pertanyaan strategis, framework analisis, mapping ke job posting</p>
+        </a>
+        <a href="findings.html" class="card">
+            <div class="card-num">03</div>
+            <h3 data-i18n="idx.card3.title">Temuan & Rekomendasi</h3>
+            <p data-i18n="idx.card3.desc">Key findings, peta cannibalization, 4 rekomendasi quantified</p>
+        </a>
+    </div>
+
+    <div class="section-label" data-i18n="idx.sec.reports">Reports</div>
+    <div class="cards-2">
+        <a href="report.html" class="card">
+            <div class="card-num">04</div>
+            <h3 data-i18n="idx.card4.title">Report: Q1 2026 Overview</h3>
+            <p data-i18n="idx.card4.desc">Revenue trend, channel breakdown, region comparison, aggregator commission</p>
+        </a>
+        <a href="deep-dive.html" class="card">
+            <div class="card-num">05</div>
+            <h3 data-i18n="idx.card5.title">Deep Dive: Segmentation</h3>
+            <p data-i18n="idx.card5.desc">Scatter plot 552 outlet, BCG segmentasi, age/mall/promo patterns</p>
+        </a>
+    </div>
+
+    <div class="section-label" data-i18n="idx.sec.appendix">Appendix</div>
+    <div class="cards-2">
+        <a href="methodology.html" class="card">
+            <div class="card-num muted">A1</div>
+            <h3 data-i18n="idx.card6.title">Cara Kerja (Teknis)</h3>
+            <p data-i18n="idx.card6.desc">Data pipeline, scraping, Haversine, tools & stack</p>
+        </a>
+        <a href="job-mapping.html" class="card">
+            <div class="card-num muted">A2</div>
+            <h3 data-i18n="idx.card7.title">Perihal Loker</h3>
+            <p data-i18n="idx.card7.desc">Job posting Senior Data Analytics, 12 responsibilities, mapping ke portfolio</p>
+        </a>
+    </div>
+
+    <div class="index-footer">April 2026</div>
+</div>
+<script src="lang.js" defer></script>
+</body>
+</html>

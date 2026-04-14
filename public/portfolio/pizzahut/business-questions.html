@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 — Pertanyaan Bisnis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.svg" alt="Pizza Hut" style="width:28px;height:auto;"> Pizza Hut Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.riset">Riset Bisnis</span></a>
+    <a href="business-questions.html" class="active"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.overview">Overview</span></a>
+    <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+    <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p02.topbar">Pertanyaan Bisnis</h2><span class="badge" data-i18n="p02.badge">Portfolio · 02</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.svg" alt="Pizza Hut">
+        <div>
+            <h1 data-i18n="p02.hero.title">Pertanyaan Bisnis & Framework</h1>
+            <p data-i18n="p02.hero.sub">Tidak langsung membuat pivot table. Dimulai dari pertanyaan bisnis, siapa stakeholder-nya, dan framework apa yang tepat.</p>
+        </div>
+    </div>
+    <div class="content-area">
+
+        <p data-i18n="p02.intro">Dari riset bisnis, teridentifikasi 3 pertanyaan utama:</p>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q1.title">Pertanyaan 1: Outlet mana yang harus ditutup, mana yang diinvestasi?</h4>
+            <div class="who" data-i18n="p02.q1.who">Stakeholder: VP Operations + CFO + Board</div>
+            <p data-i18n="p02.q1.text">552 outlet tidak bisa di-evaluate satu-satu. Dibutuhkan scoring framework yang sistematis — mempertimbangkan trend, area, dan lease expiry, bukan hanya profitabilitas saat ini.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q2.title">Pertanyaan 2: Channel mana yang benar-benar profitable?</h4>
+            <div class="who" data-i18n="p02.q2.who">Stakeholder: CMO + VP Operations</div>
+            <p data-i18n="p02.q2.text">Revenue aggregator naik, tapi setelah komisi 20-30%, masih profitable? Apakah aggregator cannibalize own delivery?</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q3.title">Pertanyaan 3: Apa yang di-present ke board?</h4>
+            <div class="who" data-i18n="p02.q3.who">Stakeholder: Board of Directors</div>
+            <p data-i18n="p02.q3.text">1 halaman. Berapa outlet profitable vs unprofitable? Projected savings? 1 biggest risk, 1 biggest opportunity.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p02.sec.seg">Framework: Outlet Segmentation</h2>
+
+        <div class="seg-grid">
+            <div class="seg-card seg-star"><div class="num">★</div><div class="label" data-i18n="p02.seg.star">Stars — High Rev + High Margin</div><div class="desc" data-i18n="p02.seg.star.desc">Invest & expand</div></div>
+            <div class="seg-card seg-cow"><div class="num">$</div><div class="label" data-i18n="p02.seg.cow">Cash Cows — Low Rev + High Margin</div><div class="desc" data-i18n="p02.seg.cow.desc">Maintain, efficient</div></div>
+            <div class="seg-card seg-question"><div class="num">?</div><div class="label" data-i18n="p02.seg.q">Question Marks — High Rev + Low Margin</div><div class="desc" data-i18n="p02.seg.q.desc">Investigate, fix or close</div></div>
+            <div class="seg-card seg-dog"><div class="num">×</div><div class="label" data-i18n="p02.seg.dog">Dogs — Low Rev + Low Margin</div><div class="desc" data-i18n="p02.seg.dog.desc">Closure candidates</div></div>
+        </div>
+
+        <h2 class="section-title" data-i18n="p02.sec.channel">Framework: Channel Profitability</h2>
+
+        <table>
+            <thead><tr><th>Channel</th><th>Revenue</th><th>Deductions</th><th>True Margin</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-green">Takeaway</span></td><td>Revenue</td><td>Food cost only</td><td>Highest</td></tr>
+                <tr><td><span class="badge-ch b-red">Dine-in</span></td><td>Revenue</td><td>Food + labor + rent</td><td>Good</td></tr>
+                <tr><td><span class="badge-ch b-blue">Own Delivery</span></td><td>Revenue</td><td>Food + delivery cost (~7%)</td><td>Moderate</td></tr>
+                <tr><td><span class="badge-ch b-yellow">Aggregator</span></td><td>Revenue</td><td>Food + commission (20-30%)</td><td>Lowest / negative</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="p02.sec.mapping">Mapping ke Job Posting</h2>
+
+        <ul>
+            <li data-i18n="p02.map.1"><strong>Data Engineering</strong> (R1-3, R10-11) — collect, validate, transform → data cleaning & profiling</li>
+            <li data-i18n="p02.map.2"><strong>Analysis & Modeling</strong> (R4-6) — patterns, scoring model → outlet segmentation & channel analysis</li>
+            <li data-i18n="p02.map.3"><strong>Strategic Thinking</strong> (R8) — propose solutions → rekomendasi ke board</li>
+            <li data-i18n="p02.map.4"><strong>Communication</strong> (R7, R12) — present to stakeholders → executive summary & report</li>
+        </ul>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p02.callout.senior.title">Senior vs Junior</h4>
+            <p data-i18n="p02.callout.senior.text">Level Junior: mengeksekusi report yang diminta. Level Senior: menentukan pertanyaan yang tepat, merancang framework, dan meng-communicate ke stakeholder yang berbeda.</p>
+        </div>
+
+    </div>
+</div>
+<script src="lang.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 — Methodology · Bocorocco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.png" alt="Bocorocco" style="width:28px;height:auto;"> Bocorocco Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Rekom</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.report">Sales Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html" class="active"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+    <div class="sidebar-contact">
+        <a href="https://linkedin.com" target="_blank">🔗 LinkedIn</a>
+        <a href="mailto:hello@winata.io">✉️ Email</a>
+    </div>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="pA1.topbar">Methodology</h2><span class="badge" data-i18n="pA1.badge">Appendix · A1</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.png" alt="Bocorocco">
+        <div>
+            <h1 data-i18n="pA1.hero.title">Data Pipeline & Pendekatan Teknis</h1>
+            <p data-i18n="pA1.hero.sub">Dari 3 file sumber ke dataset bersih — setiap langkah didokumentasikan.</p>
+        </div>
+    </div>
+    <div class="content-area">
+        <h2 class="section-title" data-i18n="pA1.sec.pipeline">Data Pipeline Overview</h2>
+        <p data-i18n="pA1.pipeline.intro">Proyek ini mengikuti pipeline 4 langkah: Collect → Validate → Clean → Analyze. Tiga file sumber dikonsolidasikan menjadi satu dataset bersih untuk analisis.</p>
+
+        <table>
+            <thead><tr><th data-i18n="pA1.th.step">Step</th><th data-i18n="pA1.th.source">Source</th><th data-i18n="pA1.th.input">Input</th><th data-i18n="pA1.th.output">Output</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-blue">1</span></td><td data-i18n="pA1.step1.source">Sales Transactions</td><td data-i18n="pA1.step1.input">Raw transaction data (CSV)</td><td data-i18n="pA1.step1.output">2,547 raw rows</td></tr>
+                <tr><td><span class="badge-ch b-green">2</span></td><td data-i18n="pA1.step2.source">Sales Targets</td><td data-i18n="pA1.step2.input">Target per channel/month</td><td data-i18n="pA1.step2.output">Target benchmarks</td></tr>
+                <tr><td><span class="badge-ch b-yellow">3</span></td><td data-i18n="pA1.step3.source">Customer Feedback</td><td data-i18n="pA1.step3.input">Survey responses</td><td data-i18n="pA1.step3.output">899 feedback entries</td></tr>
+                <tr><td><span class="badge-ch b-red">4</span></td><td data-i18n="pA1.step4.source">Cleaning & Analysis</td><td data-i18n="pA1.step4.input">All 3 sources</td><td data-i18n="pA1.step4.output">2,460 clean rows + insights</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="pA1.sec.anomalies">Anomaly Summary</h2>
+        <p data-i18n="pA1.anomalies.intro">Dari 2.547 baris raw data, ditemukan beberapa jenis anomali yang harus dibersihkan sebelum analisis:</p>
+        <table>
+            <thead><tr><th data-i18n="pA1.th.issue">Issue Type</th><th data-i18n="pA1.th.count">Count</th><th data-i18n="pA1.th.action">Action Taken</th></tr></thead>
+            <tbody>
+                <tr><td data-i18n="pA1.anomaly.dup">Duplicate rows</td><td>24</td><td data-i18n="pA1.action.dup">Removed exact duplicates</td></tr>
+                <tr><td data-i18n="pA1.anomaly.neg">Negative values</td><td>15</td><td data-i18n="pA1.action.neg">Converted to absolute values</td></tr>
+                <tr><td data-i18n="pA1.anomaly.missing">Missing fields</td><td>18</td><td data-i18n="pA1.action.missing">Imputed or removed</td></tr>
+                <tr><td data-i18n="pA1.anomaly.format">Format inconsistency</td><td>20</td><td data-i18n="pA1.action.format">Standardized date/text formats</td></tr>
+                <tr><td data-i18n="pA1.anomaly.outlier">Outliers (price zero)</td><td>10</td><td data-i18n="pA1.action.outlier">Removed zero-price transactions</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-orange">
+            <h4 data-i18n="pA1.callout.dirty.title">⚠️ Data Quality Note</h4>
+            <p data-i18n="pA1.callout.dirty.text">Total 87 rows were affected by anomalies (3.4% of raw data). After cleaning, 2,460 clean rows remained — a 96.6% retention rate. This is within acceptable range for multi-source consolidated data.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="pA1.sec.cleaning">Cleaning Process</h2>
+        <p data-i18n="pA1.cleaning.intro">Proses cleaning dilakukan secara sistematis dengan urutan prioritas:</p>
+        <ol>
+            <li data-i18n="pA1.clean.1"><strong>Remove duplicates</strong> — identifikasi dan hapus baris yang persis sama</li>
+            <li data-i18n="pA1.clean.2"><strong>Fix negative values</strong> — konversi nilai negatif di kolom quantity/revenue ke absolut</li>
+            <li data-i18n="pA1.clean.3"><strong>Handle missing data</strong> — imputasi untuk field non-critical, hapus untuk field critical</li>
+            <li data-i18n="pA1.clean.4"><strong>Standardize formats</strong> — unifikasi format tanggal, nama channel, kategori produk</li>
+            <li data-i18n="pA1.clean.5"><strong>Remove outliers</strong> — hapus transaksi dengan harga 0 atau nilai yang tidak masuk akal</li>
+        </ol>
+
+        <h2 class="section-title" data-i18n="pA1.sec.tools">Tools & Stack</h2>
+        <table>
+            <thead><tr><th data-i18n="pA1.th.tool">Tool</th><th data-i18n="pA1.th.purpose">Purpose</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-green">Microsoft Excel</span></td><td data-i18n="pA1.tool.excel">Data cleaning, pivot tables, formula-based analysis</td></tr>
+                <tr><td><span class="badge-ch b-blue">Google Sheets</span></td><td data-i18n="pA1.tool.sheets">Collaborative review, sharing with stakeholders</td></tr>
+                <tr><td><span class="badge-ch b-red">HTML/CSS/JS</span></td><td data-i18n="pA1.tool.html">Portfolio presentation (this website)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <h4 data-i18n="pA1.callout.repro.title">📋 Reproducibility</h4>
+            <p data-i18n="pA1.callout.repro.text">All cleaning steps are documented in the Excel workbook with formulas (not hardcoded values). The analysis can be reproduced by anyone with access to the original 3 source files.</p>
+        </div>
+    </div>
+</div>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

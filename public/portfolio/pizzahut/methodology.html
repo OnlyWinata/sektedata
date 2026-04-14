@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 — Cara Kerja (Teknis)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* ── Pipeline Flow ── */
+        .pipeline-flow { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+        .pipe-step { display: grid; grid-template-columns: 56px 1fr; gap: 0; position: relative; }
+        .pipe-marker { display: flex; flex-direction: column; align-items: center; }
+        .pipe-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800; color: white; flex-shrink: 0; z-index: 2; }
+        .pipe-line { width: 3px; flex: 1; background: var(--border); margin: 0 auto; }
+        .pipe-step:last-child .pipe-line { display: none; }
+        .pipe-body { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.15rem 1.25rem; margin-bottom: 0.75rem; transition: box-shadow 0.15s; }
+        .pipe-body:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .pipe-body .pipe-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .pipe-body .pipe-title code { font-size: 0.75rem; background: #eef2ff; color: #4338ca; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'Fira Code', monospace; }
+        .pipe-body .pipe-why { font-size: 0.84rem; color: var(--primary); font-weight: 600; margin: 0.35rem 0 0.15rem; }
+        .pipe-body .pipe-desc { font-size: 0.84rem; color: var(--text-muted); margin: 0; }
+        .pipe-body .pipe-meta { display: flex; gap: 1rem; margin-top: 0.6rem; flex-wrap: wrap; }
+        .pipe-body .pipe-tag { font-size: 0.72rem; padding: 0.2rem 0.55rem; border-radius: 5px; font-weight: 600; }
+        .tag-output { background: #dcfce7; color: #166534; }
+        .tag-time { background: #fef3c7; color: #92400e; }
+        .tag-tool { background: #dbeafe; color: #1e40af; }
+
+        /* ── Source Cards ── */
+        .source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+        .source-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; position: relative; overflow: hidden; }
+        .source-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .source-card.sc-red::before { background: var(--red); }
+        .source-card.sc-blue::before { background: var(--blue); }
+        .source-card.sc-green::before { background: var(--green); }
+        .source-card.sc-yellow::before { background: var(--yellow); }
+        .source-card .sc-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .source-card .sc-title { font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem; }
+        .source-card .sc-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+        .source-card .sc-stats { margin-top: 0.65rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+        /* ── Haversine Visual ── */
+        .haversine-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.25rem 0; }
+        .hav-explain { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+        .hav-explain h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .hav-explain p { font-size: 0.84rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .hav-diagram { background: #f8fafc; border: 2px solid var(--border); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; justify-content: center; }
+        .hav-diagram svg { max-width: 100%; height: auto; }
+
+        /* ── Scraping Detail ── */
+        .scrape-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+        .scrape-step { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; text-align: center; }
+        .scrape-step .ss-num { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .scrape-step .ss-label { font-size: 0.78rem; font-weight: 600; color: var(--text-main); margin-top: 0.15rem; }
+        .scrape-step .ss-desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        /* ── Tools Grid ── */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem; margin: 1.25rem 0; }
+        .tool-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; display: flex; gap: 0.75rem; align-items: flex-start; }
+        .tool-card .tc-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .tool-card .tc-name { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
+        .tool-card .tc-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+        /* ── Big Picture ── */
+        .big-picture { background: linear-gradient(135deg, #1e293b, #334155); border-radius: 14px; padding: 2rem; margin: 1.5rem 0; color: white; }
+        .big-picture h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.75rem; color: white; }
+        .bp-flow { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+        .bp-node { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.65rem 1rem; text-align: center; min-width: 110px; }
+        .bp-node .bp-emoji { font-size: 1.3rem; }
+        .bp-node .bp-label { font-size: 0.72rem; font-weight: 600; margin-top: 0.2rem; color: #e2e8f0; }
+        .bp-node .bp-sub { font-size: 0.62rem; color: #94a3b8; margin-top: 0.1rem; }
+        .bp-arrow { font-size: 1.2rem; color: #94a3b8; flex-shrink: 0; }
+
+        /* ── Rate Bar ── */
+        .rate-bar-wrap { margin: 0.35rem 0; }
+        .rate-bar { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+        .rate-bar-fill { height: 100%; border-radius: 3px; }
+        .rate-label { font-size: 0.7rem; color: var(--text-muted); display: flex; justify-content: space-between; margin-top: 0.15rem; }
+
+        @media (max-width: 900px) {
+            .haversine-visual { grid-template-columns: 1fr; }
+            .bp-flow { flex-direction: column; }
+            .bp-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.svg" alt="Pizza Hut" style="width:28px;height:auto;"> Pizza Hut Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.riset">Riset Bisnis</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.overview">Overview</span></a>
+    <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html" class="active"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+    <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p04.topbar">Cara Kerja (Teknis)</h2><span class="badge" data-i18n="p04.badge">Appendix · A1</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.svg" alt="Pizza Hut">
+        <div>
+            <h1 data-i18n="p04.hero.title">Data Pipeline & Methods</h1>
+            <p data-i18n="p04.hero.sub">Bagian ini menjelaskan bagaimana data dikumpulkan dan diolah. Bisnis di depan, teknis di sini.</p>
+        </div>
+    </div>
+    <div class="content-area">
+
+        <!-- ════════════════════════════════════ -->
+        <!-- BIG PICTURE                          -->
+        <!-- ════════════════════════════════════ -->
+        <div class="big-picture">
+            <h3>🗺️ Gambaran Besar: Dari Mana Data Ini Berasal?</h3>
+            <p style="font-size:0.84rem; color:#cbd5e1; margin-bottom:1.25rem;">Portfolio ini tidak menggunakan dataset yang sudah jadi. Semua data dikumpulkan sendiri dari sumber publik, lalu diolah menjadi satu dataset terpadu.</p>
+            <div class="bp-flow">
+                <div class="bp-node">
+                    <div class="bp-emoji">🗺️</div>
+                    <div class="bp-label">Google Maps</div>
+                    <div class="bp-sub">552 outlet + lokasi</div>
+                </div>
+                <div class="bp-arrow">→</div>
+                <div class="bp-node">
+                    <div class="bp-emoji">🍕</div>
+                    <div class="bp-label">GrabFood</div>
+                    <div class="bp-sub">60+ menu + harga</div>
+                </div>
+                <div class="bp-arrow">→</div>
+                <div class="bp-node">
+                    <div class="bp-emoji">📈</div>
+                    <div class="bp-label">IDX (Bursa)</div>
+                    <div class="bp-sub">Revenue quarterly</div>
+                </div>
+                <div class="bp-arrow">→</div>
+                <div class="bp-node" style="background:rgba(186,37,41,0.3); border-color:rgba(186,37,41,0.5);">
+                    <div class="bp-emoji">🧩</div>
+                    <div class="bp-label">Master Dataset</div>
+                    <div class="bp-sub">Unified + generated</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- DATA SOURCES                         -->
+        <!-- ════════════════════════════════════ -->
+        <h2 class="section-title">📦 Sumber Data: Dari Mana & Kenapa?</h2>
+        <p>Setiap sumber data dipilih karena alasan spesifik. Tidak ada data yang diambil "karena bisa" — semuanya menjawab kebutuhan analisis.</p>
+
+        <div class="source-grid">
+            <div class="source-card sc-red">
+                <div class="sc-icon">🗺️</div>
+                <div class="sc-title">Google Maps — Lokasi Outlet</div>
+                <div class="sc-desc">
+                    <strong>Kenapa?</strong> Pizza Hut tidak mempublikasikan daftar outlet lengkap. Google Maps adalah satu-satunya sumber publik yang punya nama, alamat, koordinat, rating, dan foto untuk setiap outlet.
+                </div>
+                <div class="sc-stats">
+                    <span class="pipe-tag tag-output">552 outlet</span>
+                    <span class="pipe-tag tag-time">~65 menit scraping</span>
+                </div>
+            </div>
+            <div class="source-card sc-green">
+                <div class="sc-icon">🍕</div>
+                <div class="sc-title">GrabFood — Menu & Harga</div>
+                <div class="sc-desc">
+                    <strong>Kenapa?</strong> Website resmi pizzahut.co.id adalah SPA dengan API yang di-protect — tidak bisa di-scrape. GrabFood web version menampilkan menu lengkap dengan harga real.
+                </div>
+                <div class="sc-stats">
+                    <span class="pipe-tag tag-output">60+ items</span>
+                    <span class="pipe-tag tag-tool">Harga real-time</span>
+                </div>
+            </div>
+            <div class="source-card sc-blue">
+                <div class="sc-icon">📈</div>
+                <div class="sc-title">IDX (Bursa Efek) — Keuangan</div>
+                <div class="sc-desc">
+                    <strong>Kenapa?</strong> Pizza Hut Indonesia (PZZA) adalah perusahaan publik. Laporan keuangan mereka bisa diakses siapa saja — ini anchor untuk memastikan angka revenue realistis.
+                </div>
+                <div class="sc-stats">
+                    <span class="pipe-tag tag-output">Quarterly revenue</span>
+                    <span class="pipe-tag tag-tool">TTM derivation</span>
+                </div>
+            </div>
+            <div class="source-card sc-yellow">
+                <div class="sc-icon">🧮</div>
+                <div class="sc-title">Generated — Performance Data</div>
+                <div class="sc-desc">
+                    <strong>Kenapa?</strong> Data revenue per outlet tidak publik. Jadi di-generate secara realistis — anchored ke total revenue PZZA dari IDX, lalu didistribusikan ke 552 outlet berdasarkan tipe, lokasi, dan rating.
+                </div>
+                <div class="sc-stats">
+                    <span class="pipe-tag tag-output">Revenue, cost, transactions</span>
+                    <span class="pipe-tag tag-time">~5 detik</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- PIPELINE                             -->
+        <!-- ════════════════════════════════════ -->
+        <h2 class="section-title" data-i18n="p04.sec.pipeline">🔄 Pipeline: 4 Langkah dari Nol ke Dataset</h2>
+        <p>Setiap script punya satu tugas. Jalankan berurutan = full pipeline dari scraping sampai data siap analisis.</p>
+
+        <div class="pipeline-flow">
+            <!-- Step 1 -->
+            <div class="pipe-step">
+                <div class="pipe-marker">
+                    <div class="pipe-dot" style="background:var(--red);">1</div>
+                    <div class="pipe-line"></div>
+                </div>
+                <div class="pipe-body">
+                    <div class="pipe-title">Scrape Lokasi Outlet <code>01_scrape_locations.py</code></div>
+                    <div class="pipe-why">🎯 Tujuan: Dapatkan daftar semua outlet Pizza Hut di Indonesia</div>
+                    <div class="pipe-desc">Melakukan 99 search query di Google Maps ("Pizza Hut [kota]" + "PHD [kota]" untuk 50 kota). Scroll feed sampai habis, extract nama + URL + koordinat. Deduplicate berdasarkan URL.</div>
+                    <div class="pipe-meta">
+                        <span class="pipe-tag tag-output">📦 552 outlet unik</span>
+                        <span class="pipe-tag tag-time">⏱️ ~35 menit</span>
+                        <span class="pipe-tag tag-tool">🔧 Playwright + scrapling</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="pipe-step">
+                <div class="pipe-marker">
+                    <div class="pipe-dot" style="background:var(--blue);">2</div>
+                    <div class="pipe-line"></div>
+                </div>
+                <div class="pipe-body">
+                    <div class="pipe-title">Scrape Detail Outlet <code>02_scrape_details.py</code></div>
+                    <div class="pipe-why">🎯 Tujuan: Lengkapi profil setiap outlet (alamat, rating, foto)</div>
+                    <div class="pipe-desc">Buka halaman Google Maps setiap outlet satu per satu. Extract alamat lengkap, rating, kategori (Restoran/PHD), jam operasional, nomor telepon, dan foto.</div>
+                    <div class="pipe-meta">
+                        <span class="pipe-tag tag-output">📦 Alamat, rating, foto</span>
+                        <span class="pipe-tag tag-time">⏱️ ~30 menit</span>
+                        <span class="pipe-tag tag-tool">🔧 CSS selectors</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="pipe-step">
+                <div class="pipe-marker">
+                    <div class="pipe-dot" style="background:var(--green);">3</div>
+                    <div class="pipe-line"></div>
+                </div>
+                <div class="pipe-body">
+                    <div class="pipe-title">Build Master Dataset <code>03_build_outlet_master.py</code></div>
+                    <div class="pipe-why">🎯 Tujuan: Gabungkan semua data + hitung jarak antar outlet</div>
+                    <div class="pipe-desc">Merge data lokasi + detail. Hitung jarak Haversine antar semua pasangan outlet. Tandai outlet yang punya ≥3 neighbors dalam 2km (cannibalization risk). Assign region dan tipe.</div>
+                    <div class="pipe-meta">
+                        <span class="pipe-tag tag-output">📦 Unified master + proximity</span>
+                        <span class="pipe-tag tag-time">⏱️ ~2 menit</span>
+                        <span class="pipe-tag tag-tool">🔧 Haversine formula</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="pipe-step">
+                <div class="pipe-marker">
+                    <div class="pipe-dot" style="background:var(--yellow);">4</div>
+                    <div class="pipe-line"></div>
+                </div>
+                <div class="pipe-body">
+                    <div class="pipe-title">Generate Performance Data <code>04_generate_performance_data.py</code></div>
+                    <div class="pipe-why">🎯 Tujuan: Buat data revenue & cost per outlet yang realistis</div>
+                    <div class="pipe-desc">Revenue per outlet tidak publik, jadi di-generate. Total revenue di-anchor ke laporan keuangan PZZA (IDX), lalu didistribusikan ke 552 outlet berdasarkan tipe (Dine-in vs PHD), lokasi, rating, dan jumlah neighbors. Cost structure mengikuti benchmark industri QSR.</div>
+                    <div class="pipe-meta">
+                        <span class="pipe-tag tag-output">📦 Revenue, cost, transactions</span>
+                        <span class="pipe-tag tag-time">⏱️ ~5 detik</span>
+                        <span class="pipe-tag tag-tool">🔧 Anchored ke IDX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- SCRAPING DETAIL                      -->
+        <!-- ════════════════════════════════════ -->
+        <h2 class="section-title" data-i18n="p04.sec.scraping">🔍 Detail: Scraping Google Maps</h2>
+        <p>Scraping dilakukan dalam 2 tahap. Tahap 1 mengumpulkan daftar outlet, tahap 2 mengambil detail per outlet.</p>
+
+        <div class="scrape-steps">
+            <div class="scrape-step">
+                <div class="ss-num">99</div>
+                <div class="ss-label">Search Queries</div>
+                <div class="ss-desc">"Pizza Hut [kota]" + "PHD [kota]" untuk 50 kota besar</div>
+            </div>
+            <div class="scrape-step">
+                <div class="ss-num">552</div>
+                <div class="ss-label">Outlet Unik</div>
+                <div class="ss-desc">Setelah deduplicate berdasarkan URL Google Maps</div>
+            </div>
+            <div class="scrape-step">
+                <div class="ss-num">65</div>
+                <div class="ss-label">Menit Total</div>
+                <div class="ss-desc">Scrape lokasi (~35m) + detail (~30m)</div>
+            </div>
+            <div class="scrape-step">
+                <div class="ss-num">4</div>
+                <div class="ss-label">Data Fields</div>
+                <div class="ss-desc">Alamat, rating, foto, koordinat</div>
+            </div>
+        </div>
+
+        <h3>Kelengkapan Data (Completeness Rate)</h3>
+        <p>Tidak semua field berhasil di-extract. Berikut tingkat kelengkapan per field:</p>
+
+        <div style="max-width:500px;">
+            <div class="rate-bar-wrap">
+                <div class="rate-bar"><div class="rate-bar-fill" style="width:100%; background:var(--green);"></div></div>
+                <div class="rate-label"><span>Alamat — <code>button[data-item-id="address"]</code></span><span>100%</span></div>
+            </div>
+            <div class="rate-bar-wrap">
+                <div class="rate-bar"><div class="rate-bar-fill" style="width:99.6%; background:var(--green);"></div></div>
+                <div class="rate-label"><span>Rating — <code>div.F7nice span</code></span><span>99.6%</span></div>
+            </div>
+            <div class="rate-bar-wrap">
+                <div class="rate-bar"><div class="rate-bar-fill" style="width:99.1%; background:var(--green);"></div></div>
+                <div class="rate-label"><span>Foto — <code>img[src*="googleusercontent"]</code></span><span>99.1%</span></div>
+            </div>
+            <div class="rate-bar-wrap">
+                <div class="rate-bar"><div class="rate-bar-fill" style="width:0%; background:var(--red);"></div></div>
+                <div class="rate-label"><span>Review count — tidak di-render Google Maps</span><span style="color:var(--red);">0%</span></div>
+            </div>
+        </div>
+
+        <div class="callout-orange" style="margin-top:1.25rem;">
+            <h4>⚠️ Kenapa review count 0%?</h4>
+            <p>Google Maps tidak me-render jumlah review untuk listing bisnis franchise besar seperti Pizza Hut. Elemen HTML-nya ada, tapi isinya kosong. Ini bukan bug scraping — memang tidak tersedia.</p>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- HAVERSINE                            -->
+        <!-- ════════════════════════════════════ -->
+        <h2 class="section-title" data-i18n="p04.sec.haversine">📐 Haversine: Menghitung Jarak Antar Outlet</h2>
+
+        <div class="haversine-visual">
+            <div class="hav-explain">
+                <h4>Kenapa perlu hitung jarak?</h4>
+                <p>Kalau 2 outlet Pizza Hut terlalu dekat (< 2km), mereka saling "makan" pelanggan satu sama lain — ini disebut <strong>cannibalization</strong>. Outlet yang punya ≥3 neighbors dalam 2km berisiko tinggi.</p>
+                <h4 style="margin-top:0.75rem;">Kenapa Haversine, bukan jarak biasa?</h4>
+                <p>Bumi itu bulat. Jarak lurus (Euclidean) antara dua koordinat GPS tidak akurat. Haversine menghitung jarak di permukaan bola — hasilnya dalam kilometer, akurat untuk jarak pendek.</p>
+                <h4 style="margin-top:0.75rem;">Threshold: 2km</h4>
+                <p style="margin:0;">Radius delivery standar PHD (Pizza Hut Delivery). Kalau ada outlet lain dalam radius ini, mereka bersaing untuk pelanggan yang sama.</p>
+            </div>
+            <div class="hav-diagram">
+                <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;">
+                    <!-- Earth arc -->
+                    <path d="M 30 200 Q 150 80 270 200" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+                    <!-- Points -->
+                    <circle cx="60" cy="185" r="8" fill="#ef4444"/>
+                    <circle cx="240" cy="185" r="8" fill="#3b82f6"/>
+                    <!-- Straight line (wrong) -->
+                    <line x1="60" y1="185" x2="240" y2="185" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="6,4"/>
+                    <!-- Arc line (correct) -->
+                    <path d="M 60 185 Q 150 110 240 185" fill="none" stroke="#ba2529" stroke-width="2.5"/>
+                    <!-- Labels -->
+                    <text x="60" y="215" text-anchor="middle" font-size="11" fill="#ef4444" font-weight="700">Outlet A</text>
+                    <text x="240" y="215" text-anchor="middle" font-size="11" fill="#3b82f6" font-weight="700">Outlet B</text>
+                    <text x="150" y="170" text-anchor="middle" font-size="10" fill="#94a3b8">Euclidean ✗</text>
+                    <text x="150" y="120" text-anchor="middle" font-size="11" fill="#ba2529" font-weight="700">Haversine ✓</text>
+                    <!-- Distance label -->
+                    <rect x="105" y="230" width="90" height="24" rx="6" fill="#fef3c7"/>
+                    <text x="150" y="247" text-anchor="middle" font-size="11" fill="#92400e" font-weight="700">d = 2R·arcsin(√a)</text>
+                    <!-- R label -->
+                    <text x="150" y="95" text-anchor="middle" font-size="9" fill="#64748b">R = 6,371 km (radius Bumi)</text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula">a = sin²(Δlat/2) + cos(lat₁)·cos(lat₂)·sin²(Δlon/2)</div>
+            <div class="formula">d = 2R · arcsin(√a)</div>
+            <div class="explain" style="margin-top:0.5rem;">R = 6,371 km (radius Bumi) · Threshold: 2km (radius delivery PHD)</div>
+        </div>
+
+<pre><code>import math
+
+def haversine_km(lat1, lon1, lat2, lon2):
+    """Hitung jarak (km) antara 2 koordinat GPS di permukaan Bumi."""
+    R = 6371  # radius Bumi dalam km
+    dlat = math.radians(lat2 - lat1)
+    dlon = math.radians(lon2 - lon1)
+    a = (math.sin(dlat/2)**2 +
+         math.cos(math.radians(lat1)) *
+         math.cos(math.radians(lat2)) *
+         math.sin(dlon/2)**2)
+    return R * 2 * math.asin(math.sqrt(a))
+
+# Contoh: 2 outlet di Jakarta
+# haversine_km(-6.175, 106.827, -6.200, 106.845)
+# → ~3.2 km → TIDAK cannibalize (> 2km)</code></pre>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- KEUANGAN                             -->
+        <!-- ════════════════════════════════════ -->
+        <h2 class="section-title" data-i18n="p04.sec.keuangan">💰 Keuangan: Derivasi dari IDX</h2>
+
+        <div class="chart-card">
+            <div class="title">Kenapa perlu derivasi?</div>
+            <p style="font-size:0.84rem;">PZZA melaporkan revenue dalam format TTM (Trailing Twelve Months) — bukan per kuartal. Untuk mendapatkan revenue kuartal tunggal, perlu dihitung mundur:</p>
+            <div class="formula-box" style="margin:0.75rem 0;">
+                <div class="formula" style="font-size:0.95rem;">single_Q(t) = single_Q(t-4) + [TTM(t) − TTM(t-1)]</div>
+                <div class="explain">Ambil Q yang sama tahun lalu, lalu tambahkan selisih TTM terbaru</div>
+            </div>
+            <div class="insight-box">
+                💡 Ini penting karena revenue total dari IDX menjadi "anchor" — memastikan data generated per outlet tidak ngawur. Total revenue 552 outlet harus match dengan laporan keuangan PZZA.
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- TOOLS                                -->
+        <!-- ════════════════════════════════════ -->
+        <h2 class="section-title" data-i18n="p04.sec.tools">🛠️ Tools & Stack</h2>
+        <p>Setiap tool dipilih karena alasan spesifik — bukan karena populer.</p>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tc-icon">🐍</div>
+                <div>
+                    <div class="tc-name">Python 3.13 + scrapling</div>
+                    <div class="tc-desc">Scraping Google Maps. Scrapling = wrapper di atas Playwright (headless browser). Dipilih karena Google Maps butuh JavaScript rendering.</div>
+                </div>
+            </div>
+            <div class="tool-card">
+                <div class="tc-icon">📊</div>
+                <div>
+                    <div class="tc-name">Chart.js</div>
+                    <div class="tc-desc">Visualisasi chart (bar, line, scatter, doughnut). Ringan, responsive, dan bisa di-embed langsung di HTML tanpa backend.</div>
+                </div>
+            </div>
+            <div class="tool-card">
+                <div class="tc-icon">🗺️</div>
+                <div>
+                    <div class="tc-name">Leaflet.js</div>
+                    <div class="tc-desc">Peta interaktif untuk visualisasi lokasi 552 outlet. Open-source, ringan, dan support circle markers + radius overlay.</div>
+                </div>
+            </div>
+            <div class="tool-card">
+                <div class="tc-icon">🌐</div>
+                <div>
+                    <div class="tc-name">HTML / CSS / JS</div>
+                    <div class="tc-desc">Seluruh portfolio ini adalah static HTML — tidak ada backend, tidak ada database. Bisa dibuka langsung di browser manapun.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════ -->
+        <!-- REPRODUCIBLE                         -->
+        <!-- ════════════════════════════════════ -->
+        <div class="callout-blue">
+            <h4 data-i18n="p04.callout.title">♻️ Reproducible</h4>
+            <p data-i18n="p04.callout.text">Semua code di folder <code>scripts/</code>. Run 4 scripts berurutan = full pipeline dari scraping sampai data generation.</p>
+        </div>
+
+        <div class="callout-green">
+            <h4>✅ Kenapa ini penting untuk portfolio?</h4>
+            <p>Halaman ini menunjukkan bahwa data tidak "jatuh dari langit". Ada proses engineering yang jelas — collect, validate, transform, generate. Ini yang membedakan Senior DA dari Junior: bukan cuma bisa analisis, tapi juga bisa build pipeline-nya.</p>
+        </div>
+
+    </div>
+</div>
+<script src="lang.js" defer></script>
+</body>
+</html>

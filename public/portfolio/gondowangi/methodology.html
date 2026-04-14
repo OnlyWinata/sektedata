@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 — Methodology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.png" alt="Gondowangi" style="width:28px;height:auto;"> Gondowangi Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Recs</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.report">Data Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html" class="active"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="pA1.topbar">Methodology</h2><span class="badge" data-i18n="pA1.badge">Appendix · A1</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.png" alt="Gondowangi">
+        <div>
+            <h1 data-i18n="pA1.hero.title">Data Pipeline & Technical Approach</h1>
+            <p data-i18n="pA1.hero.sub">From marketplace scraping to clean dataset — every step documented.</p>
+        </div>
+    </div>
+    <div class="content-area">
+        <h2 class="section-title" data-i18n="pA1.sec.pipeline">Data Pipeline Overview</h2>
+        <p data-i18n="pA1.pipeline.intro">The project follows a 4-step pipeline: Scrape → Generate → Dirty → Clean. Each step is a separate Python script, fully reproducible.</p>
+
+        <table>
+            <thead><tr><th data-i18n="pA1.th.step">Step</th><th data-i18n="pA1.th.script">Script</th><th data-i18n="pA1.th.input">Input</th><th data-i18n="pA1.th.output">Output</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-blue">1</span></td><td><code>01_scrape_blibli_categories.py</code></td><td data-i18n="pA1.step1.input">Blibli search pages</td><td data-i18n="pA1.step1.output">113 products (JSON)</td></tr>
+                <tr><td><span class="badge-ch b-green">2</span></td><td><code>02_generate_sales_data.py</code></td><td data-i18n="pA1.step2.input">Product catalog</td><td data-i18n="pA1.step2.output">12,172 transactions (CSV)</td></tr>
+                <tr><td><span class="badge-ch b-yellow">3</span></td><td data-i18n="pA1.step3.desc">(inject dirty data)</td><td>Clean CSV</td><td data-i18n="pA1.step3.output">12,188 dirty rows (CSV)</td></tr>
+                <tr><td><span class="badge-ch b-red">4</span></td><td><code>03_clean_sales_data.py</code></td><td>Dirty CSV</td><td data-i18n="pA1.step4.output">Clean CSV (validated)</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="pA1.sec.scraping">Step 1: Data Collection — The Scraping Journey</h2>
+        <p data-i18n="pA1.scraping.intro">The goal was to get a product catalog with Gondowangi products alongside competitors — with real prices, ratings, and store info.</p>
+
+        <div class="callout-orange">
+            <h4 data-i18n="pA1.attempt1.title">❌ Attempt 1: Tokopedia</h4>
+            <p data-i18n="pA1.attempt1.text">Tokopedia uses client-side rendering (SPA). Product data only loads after JavaScript executes. Programmatic access returns empty HTML shells. Anti-bot CAPTCHA triggered after a few requests.</p>
+        </div>
+
+        <div class="callout-orange">
+            <h4 data-i18n="pA1.attempt2.title">❌ Attempt 2: Shopee</h4>
+            <p data-i18n="pA1.attempt2.text">Same SPA architecture as Tokopedia, plus even more aggressive CAPTCHA. Blocked before page even renders.</p>
+        </div>
+
+        <div class="callout-orange">
+            <h4 data-i18n="pA1.attempt3.title">❌ Attempt 3: Gondowangi Website</h4>
+            <p data-i18n="pA1.attempt3.text">Company website focuses on branding, not e-commerce. No product catalog with prices. No competitor data.</p>
+        </div>
+
+        <div class="callout-green">
+            <h4 data-i18n="pA1.attempt4.title">✅ Attempt 4: Blibli</h4>
+            <p data-i18n="pA1.attempt4.text">Blibli uses server-side rendering — product data is embedded in the initial HTML response. No JavaScript execution needed. Successfully extracted 113 unique products across 8 categories with prices, ratings, sold counts, and store info.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="pA1.sec.generation">Step 2: Sales Data Generation</h2>
+        <p data-i18n="pA1.generation.intro">Since internal Gondowangi data isn't publicly available, realistic sales transactions were generated using:</p>
+        <ul>
+            <li data-i18n="pA1.gen.1"><strong>Real product catalog</strong> from Blibli as SKU master (113 products, real prices)</li>
+            <li data-i18n="pA1.gen.2"><strong>10 Indonesian regions</strong> with weighted distribution (Jabodetabek 30%, Jawa Barat 12%, etc.)</li>
+            <li data-i18n="pA1.gen.3"><strong>6 sales channels</strong> with realistic share (Modern Trade 30%, General Trade 25%, E-Commerce 35%)</li>
+            <li data-i18n="pA1.gen.4"><strong>12-month period</strong> (Mar 2025 – Feb 2026) with seasonality (Ramadan boost, year-end spike)</li>
+            <li data-i18n="pA1.gen.5"><strong>Brand-weighted demand</strong> — multinational brands (Dove, Pantene) get higher base volume than local brands</li>
+        </ul>
+
+        <h2 class="section-title" data-i18n="pA1.sec.dirty">Step 3: Dirty Data Injection</h2>
+        <p data-i18n="pA1.dirty.intro">9 types of realistic data quality issues were injected:</p>
+        <table>
+            <thead><tr><th data-i18n="pA1.th.issue">Issue</th><th data-i18n="pA1.th.rate">Rate</th><th data-i18n="pA1.th.example">Example</th></tr></thead>
+            <tbody>
+                <tr><td>Duplicate rows</td><td>15 rows</td><td>Exact row duplicates</td></tr>
+                <tr><td>Region typos</td><td>5%</td><td>"jabodetabek" instead of "Jabodetabek"</td></tr>
+                <tr><td>Channel typos</td><td>5%</td><td>"modern trade" instead of "Modern Trade (Supermarket)"</td></tr>
+                <tr><td>Category typos</td><td>3%</td><td>"shampo" instead of "Shampoo"</td></tr>
+                <tr><td>Missing Brand</td><td>3%</td><td>Empty brand field</td></tr>
+                <tr><td>Missing Region</td><td>2%</td><td>Empty region field</td></tr>
+                <tr><td>Negative Qty</td><td>1%</td><td>-274 instead of 274</td></tr>
+                <tr><td>Zero Price</td><td>1%</td><td>Harga_Satuan = 0</td></tr>
+                <tr><td>Date format mix</td><td>3%</td><td>DD/MM/YYYY vs YYYY-MM-DD</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="pA1.sec.tools">Tools & Stack</h2>
+        <table>
+            <thead><tr><th data-i18n="pA1.th.tool">Tool</th><th data-i18n="pA1.th.purpose">Purpose</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-blue">Python</span></td><td data-i18n="pA1.tool.python">Data collection, generation, cleaning (pandas, numpy)</td></tr>
+                <tr><td><span class="badge-ch b-green">SQL</span></td><td data-i18n="pA1.tool.sql">Alternative cleaning pipeline (03_clean_sales_data.sql)</td></tr>
+                <tr><td><span class="badge-ch b-yellow">Tableau</span></td><td data-i18n="pA1.tool.tableau">Dashboard visualization (interactive)</td></tr>
+                <tr><td><span class="badge-ch b-red">HTML/CSS/JS</span></td><td data-i18n="pA1.tool.html">Portfolio presentation (this website)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <h4 data-i18n="pA1.callout.title">📋 Reproducibility</h4>
+            <p data-i18n="pA1.callout.text">All scripts use <code>random.seed(42)</code> for reproducible output. Running the pipeline from scratch produces identical datasets every time.</p>
+        </div>
+    </div>
+</div>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

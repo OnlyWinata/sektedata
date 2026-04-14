@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 — Understanding Gondowangi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.png" alt="Gondowangi" style="width:28px;height:auto;"> Gondowangi Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html" class="active"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Recs</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.report">Data Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p01.topbar">Understanding Gondowangi</h2><span class="badge" data-i18n="p01.badge">Portfolio · 01</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.png" alt="Gondowangi">
+        <div>
+            <h1 data-i18n="p01.hero.title">PT Gondowangi Tradisional Kosmetika</h1>
+            <p data-i18n="p01.hero.sub">Before analyzing data, understand the business first — who they are, what they sell, and what challenges they face in the Indonesian FMCG market.</p>
+        </div>
+    </div>
+    <div class="content-area">
+        <p data-i18n="p01.intro">Gondowangi is an Indonesian FMCG company specializing in personal care products. They operate 4 brands across 8 product categories, competing head-to-head with multinational giants like Unilever and P&G.</p>
+
+        <h2 class="section-title" data-i18n="p01.sec.brands">Brand Portfolio</h2>
+        <div class="kpi-row" style="padding:0;">
+            <div class="kpi-card c-green"><div class="kpi-num">4</div><div class="kpi-label" data-i18n="p01.kpi.brands">Brands</div><div class="kpi-sub" data-i18n="p01.kpi.brands.sub">Natur · Azalea · Mizzu · HG</div></div>
+            <div class="kpi-card c-blue"><div class="kpi-num">8</div><div class="kpi-label" data-i18n="p01.kpi.categories">Categories</div><div class="kpi-sub" data-i18n="p01.kpi.categories.sub">Hair · Makeup · Body · Men</div></div>
+            <div class="kpi-card c-yellow"><div class="kpi-num">19</div><div class="kpi-label" data-i18n="p01.kpi.skus">SKUs</div><div class="kpi-sub" data-i18n="p01.kpi.skus.sub">Gondowangi products</div></div>
+            <div class="kpi-card c-red"><div class="kpi-num">45</div><div class="kpi-label" data-i18n="p01.kpi.competitors">Competitors</div><div class="kpi-sub" data-i18n="p01.kpi.competitors.sub">Dove, Pantene, Wardah, etc</div></div>
+            <div class="kpi-card c-purple"><div class="kpi-num">10</div><div class="kpi-label" data-i18n="p01.kpi.regions">Regions</div><div class="kpi-sub" data-i18n="p01.kpi.regions.sub">Nationwide distribution</div></div>
+        </div>
+
+        <table style="margin-top:1.5rem;">
+            <thead><tr><th data-i18n="p01.th.brand">Brand</th><th data-i18n="p01.th.categories">Categories</th><th data-i18n="p01.th.positioning">Positioning</th><th data-i18n="p01.th.competitors">Key Competitors</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-green">Natur</span></td><td data-i18n="p01.natur.cat">Shampoo, Hair Tonic, Conditioner, Body Care</td><td data-i18n="p01.natur.pos">Natural/herbal hair & body care</td><td>Dove, Pantene, Sunsilk, TRESemmé</td></tr>
+                <tr><td><span class="badge-ch b-blue">Azalea</span></td><td data-i18n="p01.azalea.cat">Hijab Hair Care, Body Care</td><td data-i18n="p01.azalea.pos">Hijab-specific personal care</td><td>Sunsilk Hijab, Rejoice Hijab, Sariayu</td></tr>
+                <tr><td><span class="badge-ch b-red">Mizzu</span></td><td data-i18n="p01.mizzu.cat">Lipstick & Lip, Face Makeup</td><td data-i18n="p01.mizzu.pos">Affordable cosmetics</td><td>Wardah, Maybelline, Implora, Emina</td></tr>
+                <tr><td><span class="badge-ch b-yellow">HG For Men</span></td><td data-i18n="p01.hg.cat">Men Grooming</td><td data-i18n="p01.hg.pos">Male personal care</td><td>Kahf, Gatsby, Nivea Men, Garnier Men</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="p01.sec.competitive">Competitive Landscape</h2>
+        <p data-i18n="p01.competitive.intro">Gondowangi operates in one of the most competitive FMCG markets in Southeast Asia. Their competitors include:</p>
+        <ul>
+            <li><strong>Unilever</strong> — Dove, Sunsilk, Clear, TRESemmé, Lifebuoy, Lux (dominant in hair & body care)</li>
+            <li><strong>P&G</strong> — Pantene, Head & Shoulders, Rejoice (strong in shampoo)</li>
+            <li><strong>Paragon (local)</strong> — Wardah, Make Over, Emina (dominant in halal cosmetics)</li>
+            <li><strong>L'Oréal Group</strong> — Maybelline, L'Oréal Paris, Garnier (premium positioning)</li>
+        </ul>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p01.callout.source.title">📊 Data Source</h4>
+            <p data-i18n="p01.callout.source.text">Product catalog scraped from Blibli marketplace — 113 unique SKUs across 8 categories. Sales transaction data generated based on realistic distribution patterns across 10 Indonesian regions and 6 sales channels.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p01.sec.channels">Distribution Channels</h2>
+        <table>
+            <thead><tr><th data-i18n="p01.th.channel">Channel</th><th data-i18n="p01.th.share">Share</th><th data-i18n="p01.th.desc">Description</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-green">Modern Trade</span></td><td>30%</td><td data-i18n="p01.ch.modern">Supermarkets, hypermarkets (Indomaret, Alfamart, Carrefour)</td></tr>
+                <tr><td><span class="badge-ch b-yellow">General Trade</span></td><td>25%</td><td data-i18n="p01.ch.general">Traditional shops (toko kelontong, warung)</td></tr>
+                <tr><td><span class="badge-ch b-blue">E-Commerce</span></td><td>35%</td><td data-i18n="p01.ch.ecom">Blibli (15%), Tokopedia (10%), Shopee (10%)</td></tr>
+                <tr><td><span class="badge-ch b-red">Distributor</span></td><td>10%</td><td data-i18n="p01.ch.dist">Wholesale distribution network</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="p01.sec.challenges">Core Business Challenges</h2>
+        <ol>
+            <li data-i18n="p01.challenge.1"><strong>Low market share (9.4%)</strong> — competing against multinationals with massive marketing budgets</li>
+            <li data-i18n="p01.challenge.2"><strong>Brand visibility</strong> — Natur and Azalea are known but not top-of-mind in their categories</li>
+            <li data-i18n="p01.challenge.3"><strong>Regional gaps</strong> — strong in Java, weak in Eastern Indonesia</li>
+            <li data-i18n="p01.challenge.4"><strong>Channel optimization</strong> — e-commerce growing fast but margin pressure from platform fees</li>
+        </ol>
+
+        <div class="callout-green">
+            <h4 data-i18n="p01.callout.why.title">✅ Why This Case Study Matters</h4>
+            <p data-i18n="p01.callout.why.text">As a Sales Data Analyst, the first job is understanding where the company stands. This page sets the stage — the brands, the competition, the distribution. The analysis that follows is built on this foundation.</p>
+        </div>
+    </div>
+</div>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 — Methodology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo">🍜 Mie Gacoan Legal</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Recs</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.report">Data Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html" class="active"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="pA1.topbar">Methodology</h2><span class="badge" data-i18n="pA1.badge">Appendix · A1</span></div>
+    <div class="hero-banner">
+        <span style="font-size:2.5rem;">🍜</span>
+        <div>
+            <h1 data-i18n="pA1.hero.title">Data Pipeline & Technical Approach</h1>
+            <p data-i18n="pA1.hero.sub">From Google Maps scraping to clean legal compliance dataset — every step documented.</p>
+        </div>
+    </div>
+    <div class="content-area">
+        <h2 class="section-title" data-i18n="pA1.sec.pipeline">Data Pipeline Overview</h2>
+        <p data-i18n="pA1.pipeline.intro">The project follows a 5-step pipeline: Scrape Locations → Scrape Details → Generate Legal Data → Inject Dirty Data → Clean. Each step is documented and reproducible.</p>
+
+        <table>
+            <thead><tr><th data-i18n="pA1.th.step">Step</th><th data-i18n="pA1.th.desc">Description</th><th data-i18n="pA1.th.input">Input</th><th data-i18n="pA1.th.output">Output</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-blue">1</span></td><td data-i18n="pA1.step1.desc">Google Maps scraping (locations)</td><td data-i18n="pA1.step1.input">25+ regional search queries</td><td data-i18n="pA1.step1.output">557 outlet locations (JSON)</td></tr>
+                <tr><td><span class="badge-ch b-green">2</span></td><td data-i18n="pA1.step2.desc">Detail scraping (per outlet)</td><td data-i18n="pA1.step2.input">557 Google Maps URLs</td><td data-i18n="pA1.step2.output">Address, rating, reviews, hours (JSON)</td></tr>
+                <tr><td><span class="badge-ch b-yellow">3</span></td><td data-i18n="pA1.step3.desc">Legal data generation</td><td data-i18n="pA1.step3.input">Outlet master data</td><td data-i18n="pA1.step3.output">IMB, lease, halal, disputes, rent (CSV)</td></tr>
+                <tr><td><span class="badge-ch b-red">4</span></td><td data-i18n="pA1.step4.desc">Dirty data injection</td><td>Clean CSV</td><td data-i18n="pA1.step4.output">562 dirty rows (5 duplicates + anomalies)</td></tr>
+                <tr><td><span class="badge-ch b-blue">5</span></td><td data-i18n="pA1.step5.desc">Data cleaning & validation</td><td>Dirty CSV</td><td data-i18n="pA1.step5.output">557 clean rows (validated)</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="pA1.sec.scraping">Step 1: Google Maps Scraping</h2>
+        <p data-i18n="pA1.scraping.intro">The goal was to collect all Mie Gacoan outlet locations across Indonesia from Google Maps — a publicly available data source.</p>
+
+        <div class="callout-green">
+            <h4 data-i18n="pA1.scraping.method.title">✅ Approach: Playwright + StealthyFetcher</h4>
+            <p data-i18n="pA1.scraping.method.text">Used Playwright with stealth mode to search Google Maps for "Mie Gacoan" across 25+ regional queries (e.g., "Mie Gacoan Surabaya", "Mie Gacoan Jakarta", "Mie Gacoan Bandung"). Each query returns a scrollable list of locations. Successfully extracted 557 unique outlet locations with coordinates, names, and place IDs.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="pA1.sec.detail">Step 2: Detail Scraping</h2>
+        <p data-i18n="pA1.detail.intro">For each of the 557 locations, additional details were scraped from individual Google Maps pages:</p>
+        <ul>
+            <li data-i18n="pA1.detail.1"><strong>Full address</strong> — street, city, province, postal code</li>
+            <li data-i18n="pA1.detail.2"><strong>Rating & reviews</strong> — average rating and review count</li>
+            <li data-i18n="pA1.detail.3"><strong>Operating hours</strong> — daily schedule</li>
+            <li data-i18n="pA1.detail.4"><strong>Accessibility info</strong> — wheelchair access, parking availability</li>
+        </ul>
+
+        <h2 class="section-title" data-i18n="pA1.sec.generation">Step 3: Legal Data Generation</h2>
+        <p data-i18n="pA1.generation.intro">Since internal legal compliance data isn't publicly available, realistic legal attributes were generated for each outlet:</p>
+        <ul>
+            <li data-i18n="pA1.gen.1"><strong>IMB status</strong> — Approved (80%), In Progress (15%), Bermasalah (5%) — weighted by province and outlet age</li>
+            <li data-i18n="pA1.gen.2"><strong>Lease dates</strong> — start/end dates with realistic 2-5 year terms, rent amounts weighted by province (Jakarta highest)</li>
+            <li data-i18n="pA1.gen.3"><strong>Halal certification</strong> — Certified (85%), In Process (10%), Pending Audit (5%)</li>
+            <li data-i18n="pA1.gen.4"><strong>Dispute levels</strong> — Low (70%), Medium (20%), High (10%) — weighted by urban density</li>
+            <li data-i18n="pA1.gen.5"><strong>Annual rent</strong> — Rp 150M-800M range, correlated with province and location type</li>
+        </ul>
+
+        <h2 class="section-title" data-i18n="pA1.sec.dirty">Step 4: Dirty Data Injection</h2>
+        <p data-i18n="pA1.dirty.intro">Realistic data quality issues were injected to simulate real-world data problems:</p>
+        <table>
+            <thead><tr><th data-i18n="pA1.th.issue">Issue</th><th data-i18n="pA1.th.count">Count</th><th data-i18n="pA1.th.example">Example</th></tr></thead>
+            <tbody>
+                <tr><td>Duplicate rows</td><td>5</td><td>Exact row duplicates</td></tr>
+                <tr><td>Province typos</td><td>~3%</td><td>"jawa timur" instead of "Jawa Timur"</td></tr>
+                <tr><td>Missing IMB status</td><td>~2%</td><td>Empty IMB field</td></tr>
+                <tr><td>Inconsistent date formats</td><td>~3%</td><td>DD/MM/YYYY vs YYYY-MM-DD</td></tr>
+                <tr><td>Missing rent values</td><td>~2%</td><td>Empty rent field</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="pA1.sec.cleaning">Step 5: Data Cleaning</h2>
+        <p data-i18n="pA1.cleaning.intro">The cleaning pipeline handles all injected anomalies:</p>
+        <ul>
+            <li data-i18n="pA1.clean.1"><strong>Deduplication</strong> — remove 5 exact duplicate rows</li>
+            <li data-i18n="pA1.clean.2"><strong>Standardize province names</strong> — title case, fix typos</li>
+            <li data-i18n="pA1.clean.3"><strong>Standardize date formats</strong> — convert all to YYYY-MM-DD</li>
+            <li data-i18n="pA1.clean.4"><strong>Handle missing values</strong> — impute or flag for review</li>
+            <li data-i18n="pA1.clean.5"><strong>Recalculate derived fields</strong> — days to expiry, compliance score</li>
+        </ul>
+
+        <h2 class="section-title" data-i18n="pA1.sec.tools">Tools & Stack</h2>
+        <table>
+            <thead><tr><th data-i18n="pA1.th.tool">Tool</th><th data-i18n="pA1.th.purpose">Purpose</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-blue">Python</span></td><td data-i18n="pA1.tool.python">Scraping (Playwright), data generation, cleaning (Pandas)</td></tr>
+                <tr><td><span class="badge-ch b-green">SQL</span></td><td data-i18n="pA1.tool.sql">Alternative cleaning pipeline (ClickHouse-compatible)</td></tr>
+                <tr><td><span class="badge-ch b-yellow">Looker Studio</span></td><td data-i18n="pA1.tool.looker">Dashboard visualization (interactive)</td></tr>
+                <tr><td><span class="badge-ch b-red">HTML/CSS/JS</span></td><td data-i18n="pA1.tool.html">Portfolio presentation (this website)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <h4 data-i18n="pA1.callout.title">📋 Reproducibility</h4>
+            <p data-i18n="pA1.callout.text">All generation scripts use <code>random.seed(42)</code> for reproducible output. The scraping scripts capture a snapshot of Google Maps data at a specific point in time — outlet counts may change as Mie Gacoan continues expanding.</p>
+        </div>
+    </div>
+</div>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

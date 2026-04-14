@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 — Business Questions · Bocorocco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.png" alt="Bocorocco" style="width:28px;height:auto;"> Bocorocco Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html" class="active"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Rekom</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.report">Sales Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+    <div class="sidebar-contact">
+        <a href="https://linkedin.com" target="_blank">🔗 LinkedIn</a>
+        <a href="mailto:hello@winata.io">✉️ Email</a>
+    </div>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p02.topbar">Pertanyaan Bisnis</h2><span class="badge" data-i18n="p02.badge">Portfolio · 02</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.png" alt="Bocorocco">
+        <div>
+            <h1 data-i18n="p02.hero.title">Pertanyaan Bisnis & Framework Analisis</h1>
+            <p data-i18n="p02.hero.sub">Sebelum menyelam ke data, tentukan pertanyaan apa yang paling penting — dan untuk siapa.</p>
+        </div>
+    </div>
+    <div class="content-area">
+        <p data-i18n="p02.intro">Sebagai Sales Support & Analyst di Bocorocco, tugasnya bukan cuma bikin laporan — tapi menjawab pertanyaan yang mendorong keputusan bisnis. Berikut 4 pertanyaan strategis yang dijawab analisis ini.</p>
+
+        <h2 class="section-title" data-i18n="p02.sec.questions">Strategic Questions</h2>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q1.title">Q1: Seberapa akurat data konsolidasi Q1 kita?</h4>
+            <div class="who" data-i18n="p02.q1.who">👤 Stakeholder: Head of Sales</div>
+            <p data-i18n="p02.q1.text">Data penjualan datang dari 3 sumber berbeda (transaksi, target, feedback). Sebelum analisis apapun, kita harus memastikan data bersih dan reliable. Framework: Data validation — identifikasi anomali, cleaning, dan rekonsiliasi antar sumber.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q2.title">Q2: Channel mana yang paling besar kontribusi revenue dan capai target?</h4>
+            <div class="who" data-i18n="p02.q2.who">👤 Stakeholder: Head of Sales</div>
+            <p data-i18n="p02.q2.text">Dengan 4 channel yang sangat berbeda karakteristiknya (dept store vs IBO vs marketplace vs event), manajemen perlu tahu mana yang jadi mesin pertumbuhan dan mana yang underperform. Framework: Channel performance analysis — revenue share, target achievement, trend bulanan.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q3.title">Q3: Bagaimana persepsi customer terhadap produk vs klaim kita?</h4>
+            <div class="who" data-i18n="p02.q3.who">👤 Stakeholder: Marketing Team</div>
+            <p data-i18n="p02.q3.text">Bocorocco mengklaim Pillow Concept Technology™ memberikan kenyamanan superior. Apakah customer feedback mendukung klaim ini? Framework: Customer intelligence — rating per dimensi, pain reduction analysis, gap antara klaim dan persepsi.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q4.title">Q4: Apa yang harus dipresentasikan di business review?</h4>
+            <div class="who" data-i18n="p02.q4.who">👤 Stakeholder: Management</div>
+            <p data-i18n="p02.q4.text">Management butuh executive summary yang ringkas tapi komprehensif — angka kunci, highlight, dan rekomendasi actionable untuk Q2. Framework: Executive summary — KPI dashboard, key findings, strategic recommendations.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p02.sec.framework">Analysis Framework</h2>
+
+        <table>
+            <thead><tr><th data-i18n="p02.th.lens">Lens</th><th data-i18n="p02.th.metric">Metric</th><th data-i18n="p02.th.why">Why It Matters</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-green">Data Quality</span></td><td data-i18n="p02.fw.quality.metric">Dirty rows, anomaly types, cleaning rate</td><td data-i18n="p02.fw.quality.why">Ensure analysis is built on reliable data</td></tr>
+                <tr><td><span class="badge-ch b-blue">Channel Performance</span></td><td data-i18n="p02.fw.channel.metric">Revenue share, target %, monthly trend</td><td data-i18n="p02.fw.channel.why">Identify revenue engine and growth opportunities</td></tr>
+                <tr><td><span class="badge-ch b-yellow">Customer Perception</span></td><td data-i18n="p02.fw.customer.metric">Rating per dimension, pain reduction %</td><td data-i18n="p02.fw.customer.why">Validate product claims with real feedback</td></tr>
+                <tr><td><span class="badge-ch b-red">Executive Summary</span></td><td data-i18n="p02.fw.exec.metric">KPI achievement, key findings, recommendations</td><td data-i18n="p02.fw.exec.why">Provide actionable insights for business review</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p02.callout.title">💡 Cara Berpikir Senior vs Junior</h4>
+            <p data-i18n="p02.callout.text">Analis junior langsung bikin pivot table revenue per channel. Analis senior bertanya: "Data ini bersih belum? Siapa yang butuh informasi ini? Keputusan apa yang akan dibuat?" Setiap tabel di portfolio ini ada karena stakeholder membutuhkannya untuk keputusan spesifik.</p>
+        </div>
+    </div>
+</div>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

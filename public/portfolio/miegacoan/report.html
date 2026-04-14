@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 — Legal Compliance Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <style>
+        .dash-header{display:flex;align-items:center;gap:1rem;padding:1.5rem 2rem 0.5rem}
+        .dash-header .logo{font-size:1.8rem}
+        .dash-header h1{font-size:1.4rem;font-weight:800;color:var(--text-main)}
+        .dash-header .sub{font-size:0.8rem;color:var(--text-muted)}
+        .scorecard-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin:1rem 2rem 0;border:1.5px solid var(--border);border-radius:12px;overflow:visible}
+        .scorecard{padding:1.5rem 1.25rem;text-align:center;border-right:1.5px solid var(--border);overflow:visible;position:relative}
+        .scorecard:last-child{border-right:none}
+        .scorecard .label{font-size:0.78rem;font-weight:600;color:var(--text-muted);margin-bottom:0.3rem}
+        .scorecard .label.danger{color:#e63946}
+        .scorecard .num{font-size:2.5rem;font-weight:800;color:var(--text-main);line-height:1.1}
+        .scorecard .num.danger{color:#e63946}
+        .scorecard .info{position:relative;display:inline-block;cursor:help;margin-left:0.3rem}
+        .scorecard .info::after{content:'ⓘ';font-size:0.7rem;color:var(--text-light)}
+        .scorecard .info .tip{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1e293b;color:white;padding:0.5rem 0.75rem;border-radius:8px;font-size:0.72rem;font-weight:500;line-height:1.4;width:240px;text-align:left;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,0.2);pointer-events:none}
+        .scorecard .info:hover .tip{display:block}
+        .narrative{margin:1.5rem 2rem 0;padding:1.25rem 1.5rem;background:#f8fafc;border-radius:12px;border:1px solid var(--border)}
+        .narrative p{font-size:0.88rem;color:var(--text-muted);margin:0;line-height:1.7}
+        .narrative p strong{color:var(--text-main)}
+        .q-label{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:0.7rem;font-weight:800;padding:0.2rem 0.6rem;border-radius:5px;margin-bottom:0.5rem;letter-spacing:0.03em}
+        .map-section{margin:1.5rem 2rem 0}
+        .map-section h2{font-size:1.05rem;font-weight:800;margin-bottom:0.75rem}
+        #outletMap{height:420px;border-radius:12px;border:1.5px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+        .map-legend{padding:0.5rem 0;font-size:0.72rem;color:var(--text-muted);display:flex;gap:1.25rem;align-items:center;margin-top:0.4rem}
+        .map-legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:0.3rem;vertical-align:middle}
+        .section-block{margin:2rem 2rem 0}
+        .section-block h2{font-size:1.05rem;font-weight:800;margin-bottom:0.75rem}
+        .action-table{border:1.5px solid var(--border);border-radius:12px;overflow:hidden}
+        .action-table table{margin:0}
+        .action-table thead th{background:#f1f5f9;font-size:0.68rem;padding:0.65rem 0.75rem}
+        .action-table tbody td{font-size:0.82rem;padding:0.55rem 0.75rem}
+        .days-danger{color:#e63946;font-weight:800}
+        tr:has(.days-danger){background:#fef2f2 !important}
+        .days-warn{color:#f59e0b;font-weight:700}
+        .action-tag{background:#fef2f2;color:#991b1b;padding:0.15rem 0.5rem;border-radius:4px;font-size:0.7rem;font-weight:700}
+        .maps-link{color:var(--primary);text-decoration:underline;font-weight:600;font-size:0.78rem}
+        @media(max-width:900px){
+            .scorecard-row{grid-template-columns:1fr;margin:1rem}
+            .scorecard{border-right:none;border-bottom:1.5px solid var(--border)}
+            .scorecard:last-child{border-bottom:none}
+            .map-section,.section-block,.dash-header,.narrative{margin-left:1rem;margin-right:1rem}
+            #outletMap{height:280px}
+            .two-col{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo">🍜 Mie Gacoan Legal</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Recs</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html" class="active"><span class="icon">📊</span> <span data-i18n="sidebar.report">Data Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p04.topbar">Data Report</h2><span class="badge" data-i18n="p04.badge">Report · 04</span></div>
+
+    <div class="hero-banner">
+        <span style="font-size:2.5rem;">🍜</span>
+        <div>
+            <h1 data-i18n="p04.dash.title">Legal and Compliance</h1>
+            <p data-i18n="p04.dash.sub">Mie Gacoan · 557 Outlets · 34 Provinces</p>
+        </div>
+    </div>
+
+    <!-- Scorecards -->
+    <div class="scorecard-row">
+        <div class="scorecard">
+            <div class="label" data-i18n="p04.score1.label">Total Branches<span class="info"><span class="tip" data-i18n="p04.score1.tip">All verified outlets scraped from Google Maps. Each requires IMB, lease, and halal compliance tracking.</span></span></div>
+            <div class="num">557</div>
+        </div>
+        <div class="scorecard">
+            <div class="label danger" data-i18n="p04.score2.label">Expiring Leases &lt; 90 days<span class="info"><span class="tip" data-i18n="p04.score2.tip">7 of these 19 are in high-revenue locations. Losing them costs est. Rp 3-5B/year in revenue.</span></span></div>
+            <div class="num danger">19</div>
+        </div>
+        <div class="scorecard">
+            <div class="label" data-i18n="p04.score3.label">High-Risk Disputes<span class="info"><span class="tip" data-i18n="p04.score3.tip">32% are in Jakarta alone — driven by expensive real estate and complex landlord relationships.</span></span></div>
+            <div class="num">56</div>
+        </div>
+    </div>
+
+    <!-- Narrative intro -->
+    <div class="narrative">
+        <p data-i18n="p04.narrative">Mie Gacoan operates <strong>557 outlets across 34 provinces</strong> — each with its own lease agreement, building permit, halal certificate, and potential legal disputes. This dashboard answers the <strong>3 strategic questions</strong> that the Head of Legal needs answered every morning: which branches are at risk, where are the risks concentrated, and what needs action today.</p>
+    </div>
+
+    <!-- Q1: Which branches have critical compliance issues? -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p04.q1.label">Q1 — HEAD OF LEGAL</span>
+        <h2 data-i18n="p04.q1.title">Which branches have critical compliance issues?</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p04.q1.context">The map below shows dispute risk by province. <strong>Red provinces</strong> (Jakarta, Jawa Barat, Jawa Timur, Banten) have the highest concentration of legal disputes — these 4 provinces alone account for 60% of all high-risk cases despite having 55% of outlets.</p>
+    </div>
+
+    <div class="map-section" style="margin-top:0.5rem;">
+        <div id="outletMap"></div>
+        <div class="map-legend">
+            <span data-i18n="p04.map.legendlabel">Tingkat_Sengketa</span>
+            <span><span class="dot" style="background:#86efac;"></span> <span data-i18n="p04.map.low">Low</span></span>
+            <span><span class="dot" style="background:#e63946;"></span> <span data-i18n="p04.map.high">High (Butuh Eskalasi)</span></span>
+            <span><span class="dot" style="background:#fbbf24;"></span> <span data-i18n="p04.map.medium">Medium</span></span>
+        </div>
+        <div class="insight-box" style="margin-top:0.5rem;" data-i18n="p04.map.insight">Java island carries 80% of high-dispute cases. Dedicated legal counsel for Jabodetabek alone would reduce dispute resolution time by est. 40% and save Rp 200-300M in annual legal fees.</div>
+    </div>
+
+    <!-- Q2: Where are lease expiration risks? -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p04.q2.label">Q2 — CFO · LEGAL TEAM</span>
+        <h2 data-i18n="p04.q2.title">Where are the lease expiration risks concentrated?</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p04.q2.context">Lease renewals involve <strong>Rp 150-800M per outlet per year</strong>. The chart below shows how many outlets fall into each urgency bucket. The red bars represent branches that need action within 90 days — or face closure.</p>
+    </div>
+
+    <div class="section-block" style="margin-top:0.5rem;">
+        <div class="two-col">
+            <div class="chart-card">
+                <div class="title" data-i18n="p04.lease.title">Lease Expiry Distribution (Days Remaining)</div>
+                <canvas id="leaseChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="title" data-i18n="p04.rent.title">Average Annual Rent by Province (M IDR)</div>
+                <canvas id="rentChart"></canvas>
+            </div>
+        </div>
+        <div class="insight-box" data-i18n="p04.q2.insight">19 outlets expire within 90 days — total annual rent exposure for these 19 is est. Rp 8.5B. Jakarta branches carry the highest per-outlet risk (avg Rp 720M/year). The CFO should pre-approve renewal budgets for the top 7 high-revenue locations immediately.</div>
+    </div>
+
+    <!-- Q3: Geographic distribution of disputes -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p04.q3.label">Q3 — VP OPERATIONS · LEGAL</span>
+        <h2 data-i18n="p04.q3.title">What's the geographic distribution of disputes?</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p04.q3.context">Understanding <strong>where</strong> disputes cluster helps identify systemic issues — is it a region, a property type, or a landlord pattern?</p>
+    </div>
+
+    <div class="section-block" style="margin-top:0.5rem;">
+        <div class="two-col">
+            <div class="chart-card">
+                <div class="title" data-i18n="p04.dispute.title">Dispute Level Distribution</div>
+                <canvas id="disputeChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="title" data-i18n="p04.province.title">Outlets by Province (Top 10)</div>
+                <canvas id="provinceChart"></canvas>
+            </div>
+        </div>
+        <div class="insight-box" data-i18n="p04.q3.insight">70% of outlets have low dispute levels — the network is generally healthy. But the 10% with high disputes are overwhelmingly in urban Java. Jawa Timur has the most outlets (120) but Jakarta has the highest dispute rate per outlet. This suggests Jakarta's property market dynamics (not outlet count) drive legal risk.</div>
+    </div>
+
+    <!-- Daily Action Table -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p04.action.label">DAILY ACTION</span>
+        <h2 data-i18n="p04.action.title">Priority Action List — Sorted by Urgency</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p04.action.context">This table is designed for the legal team's <strong>daily standup</strong>. Red rows are past due — these outlets are operating on expired leases. The team should contact these landlords within 48 hours.</p>
+        <div class="action-table">
+            <table>
+                <thead><tr><th></th><th data-i18n="p04.th.branch">Branch Name</th><th data-i18n="p04.th.province">Province</th><th data-i18n="p04.th.maps">Maps</th><th data-i18n="p04.th.imb">IMB Status</th><th data-i18n="p04.th.due">Due Date</th><th data-i18n="p04.th.days">Days Left</th><th data-i18n="p04.th.action">Action</th></tr></thead>
+                <tbody>
+                    <tr><td>1.</td><td>Mie Gacoan - Kenjeran</td><td>Kota Surabaya</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 1, 2026</td><td class="days-danger">-12</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>2.</td><td>Mie Gacoan Serang</td><td>Kota Serang</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 2, 2026</td><td class="days-danger">-11</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>3.</td><td>Mie Gacoan Bengkulu - Sudirman</td><td>Kota Bengkulu</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 4, 2026</td><td class="days-danger">-9</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>4.</td><td>Mie Gacoan Pakerisan</td><td>Kota Denpasar</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 8, 2026</td><td class="days-danger">-5</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>5.</td><td>Mie Gacoan Kapten Muslim</td><td>Kota Medan</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 9, 2026</td><td class="days-danger">-4</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>6.</td><td>Mie Gacoan Sungailiat</td><td>Kab. Bangka</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 14, 2026</td><td class="days-warn">1</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>7.</td><td>Mie Gacoan Jakarta - Condet</td><td>Kota Jakarta Timur</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 17, 2026</td><td class="days-warn">4</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>8.</td><td>Mie Gacoan Bandung - Braga</td><td>Kota Bandung</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 17, 2026</td><td class="days-warn">4</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>9.</td><td>Mie Gacoan Semarang - Pemuda</td><td>Kota Semarang</td><td><a class="maps-link" href="#">Maps</a></td><td>In Progress</td><td>Mar 22, 2026</td><td class="days-warn">9</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                    <tr><td>10.</td><td>Mie Gacoan Malang - Soekarno Hatta</td><td>Kota Malang</td><td><a class="maps-link" href="#">Maps</a></td><td>Approved</td><td>Mar 28, 2026</td><td class="days-warn">15</td><td><span class="action-tag">Renewal Required</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="padding:1rem 2rem 2rem;">
+        <div class="disclaimer" data-i18n="p04.disclaimer">⚠️ Outlet locations are real (Google Maps). Legal compliance data is generated based on realistic patterns for portfolio demonstration purposes.</div>
+    </div>
+</div>
+<script>
+const map=L.map('outletMap',{zoomControl:true,minZoom:4,maxZoom:10}).setView([-2.0,118],5);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{attribution:'© CartoDB',maxZoom:18}).addTo(map);
+map.setMaxBounds([[-12,94],[8,142]]);
+const dLvl={"DI. ACEH": 0, "SUMATERA UTARA": 1, "SUMATERA BARAT": 0, "RIAU": 0, "JAMBI": 0, "SUMATERA SELATAN": 0, "BENGKULU": 0, "LAMPUNG": 0, "BANGKA BELITUNG": 0, "PROBANTEN": 2, "DKI JAKARTA": 2, "JAWA BARAT": 2, "JAWA TENGAH": 1, "DAERAH ISTIMEWA YOGYAKARTA": 1, "JAWA TIMUR": 2, "BALI": 1, "NUSATENGGARA BARAT": 0, "NUSA TENGGARA TIMUR": 0, "KALIMANTAN BARAT": 0, "KALIMANTAN TENGAH": 0, "KALIMANTAN SELATAN": 0, "KALIMANTAN TIMUR": 1, "SULAWESI UTARA": 0, "SULAWESI TENGAH": 0, "SULAWESI SELATAN": 1, "SULAWESI TENGGARA": 0, "GORONTALO": 0, "MALUKU": 0, "MALUKU UTARA": 0, "IRIAN JAYA TIMUR": 0, "IRIAN JAYA TENGAH": 0, "IRIAN JAYA BARAT": 0};
+const cols=['#86efac','#fbbf24','#f87171'];
+const lbls=['Low','Medium','High (Butuh Eskalasi)'];
+fetch('provinces.json').then(r=>r.json()).then(geo=>{
+  L.geoJSON(geo,{
+    style:f=>{
+      const n=f.properties.Propinsi;
+      const d=dLvl[n]||0;
+      return {fillColor:cols[d],weight:1.5,opacity:1,color:'#ffffff',fillOpacity:0.85};
+    },
+    onEachFeature:(f,layer)=>{
+      const n=f.properties.Propinsi;
+      const d=dLvl[n]||0;
+      layer.bindPopup('<b>'+n+'</b><br>Dispute: '+lbls[d]);
+    }
+  }).addTo(map);
+});
+</script>
+<script>
+Chart.defaults.font.family="'Plus Jakarta Sans',sans-serif";
+Chart.defaults.font.size=11;
+Chart.defaults.color='#64748b';
+
+new Chart(document.getElementById('leaseChart'),{type:'bar',data:{labels:['<30 days','30-90 days','90-180 days','180-365 days','>365 days'],datasets:[{data:[7,12,35,128,375],backgroundColor:ctx=>ctx.dataIndex<2?'#ef4444':ctx.dataIndex===2?'#f59e0b':'#22c55e',borderRadius:5}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'Outlets'}}}}});
+
+new Chart(document.getElementById('rentChart'),{type:'bar',data:{labels:['DKI Jakarta','Bali','Banten','Jawa Barat','DI Yogyakarta','Jawa Tengah','Jawa Timur','Sumut','Sulsel','Kaltim'],datasets:[{data:[720,650,520,450,420,380,350,320,300,280],backgroundColor:'#e63946',borderRadius:5}]},options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'M IDR / Year'}}}}});
+
+new Chart(document.getElementById('disputeChart'),{type:'doughnut',data:{labels:['Low 70%','Medium 20%','High 10%'],datasets:[{data:[70,20,10],backgroundColor:['#86efac','#fbbf24','#f87171']}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}}}});
+
+new Chart(document.getElementById('provinceChart'),{type:'bar',data:{labels:['Jawa Timur','Jawa Barat','DKI Jakarta','Jawa Tengah','Banten','Bali','Sumut','Sulsel','Kaltim','DIY'],datasets:[{data:[120,85,70,60,38,28,25,22,20,18],backgroundColor:'#e63946',borderRadius:5}]},options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'Outlets'}}}}});
+</script>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

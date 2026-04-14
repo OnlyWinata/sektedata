@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 — Business Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo">🍜 Mie Gacoan Legal</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html" class="active"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Recs</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.report">Data Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p02.topbar">Business Questions</h2><span class="badge" data-i18n="p02.badge">Portfolio · 02</span></div>
+    <div class="hero-banner">
+        <span style="font-size:2.5rem;">🍜</span>
+        <div>
+            <h1 data-i18n="p02.hero.title">Strategic Questions & Compliance Framework</h1>
+            <p data-i18n="p02.hero.sub">Before diving into data, define what questions matter most — and for whom.</p>
+        </div>
+    </div>
+    <div class="content-area">
+        <p data-i18n="p02.intro">As a Legal Data Analyst at Mie Gacoan, the job isn't just tracking permits — it's answering the questions that protect the business from legal risk. Here are the 3 strategic questions this analysis addresses.</p>
+
+        <h2 class="section-title" data-i18n="p02.sec.questions">Strategic Questions</h2>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q1.title">Q1: Which branches have critical legal compliance issues that need immediate action?</h4>
+            <div class="who" data-i18n="p02.q1.who">👤 Stakeholder: Head of Legal</div>
+            <p data-i18n="p02.q1.text">With 557 outlets, the legal team can't monitor everything manually. They need a prioritized list of branches with problematic IMB status, expiring leases, or lapsed halal certifications — ranked by urgency so resources are allocated to the highest-risk locations first.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q2.title">Q2: Where are the lease expiration risks concentrated geographically?</h4>
+            <div class="who" data-i18n="p02.q2.who">👤 Stakeholder: CFO · Legal Team</div>
+            <p data-i18n="p02.q2.text">Lease renewals involve significant financial commitments (Rp 150-800M per outlet per year). The CFO needs to know which provinces have clusters of expiring leases so budget can be allocated for renewals or relocation — before it becomes an emergency.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q3.title">Q3: What's the geographic distribution of dispute levels across the outlet network?</h4>
+            <div class="who" data-i18n="p02.q3.who">👤 Stakeholder: VP Operations · Legal Team</div>
+            <p data-i18n="p02.q3.text">Legal disputes (with landlords, neighbors, or local authorities) are costly and time-consuming. Understanding where disputes cluster helps operations identify systemic issues — is it a specific region, a property type, or a landlord pattern?</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p02.sec.framework">Analysis Framework</h2>
+
+        <table>
+            <thead><tr><th data-i18n="p02.th.lens">Lens</th><th data-i18n="p02.th.metric">Metric</th><th data-i18n="p02.th.why">Why It Matters</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-red">Permit Compliance</span></td><td data-i18n="p02.fw.permit.metric">IMB status distribution, problematic rate by province</td><td data-i18n="p02.fw.permit.why">Identify outlets at risk of forced closure</td></tr>
+                <tr><td><span class="badge-ch b-yellow">Lease Risk</span></td><td data-i18n="p02.fw.lease.metric">Days to expiry, renewal rate, rent per province</td><td data-i18n="p02.fw.lease.why">Prevent business disruption from expired leases</td></tr>
+                <tr><td><span class="badge-ch b-green">Halal Status</span></td><td data-i18n="p02.fw.halal.metric">Certification rate, pending audits, renewal gaps</td><td data-i18n="p02.fw.halal.why">Ensure regulatory compliance with UU JPH</td></tr>
+                <tr><td><span class="badge-ch b-blue">Dispute Analysis</span></td><td data-i18n="p02.fw.dispute.metric">Dispute level by province, correlation with density</td><td data-i18n="p02.fw.dispute.why">Allocate legal resources to high-conflict areas</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p02.callout.title">💡 Legal Analyst vs General Analyst Thinking</h4>
+            <p data-i18n="p02.callout.text">A general analyst would report "19 leases are expiring." A legal data analyst asks: "Which 19? What's the financial exposure? Which ones are in high-revenue locations where closure would hurt most? What's the renewal timeline and who's the landlord?" Every metric in this portfolio connects to a legal action item.</p>
+        </div>
+    </div>
+</div>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

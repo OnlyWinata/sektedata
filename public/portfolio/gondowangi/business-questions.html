@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 — Business Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.png" alt="Gondowangi" style="width:28px;height:auto;"> Gondowangi Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.context">Business Context</span></a>
+    <a href="business-questions.html" class="active"><span class="icon">❓</span> <span data-i18n="sidebar.questions">Business Questions</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.findings">Findings & Recs</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html"><span class="icon">📊</span> <span data-i18n="sidebar.report">Data Report</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.methodology">Methodology</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p02.topbar">Business Questions</h2><span class="badge" data-i18n="p02.badge">Portfolio · 02</span></div>
+    <div class="hero-banner">
+        <img class="hero-logo" src="logo.png" alt="Gondowangi">
+        <div>
+            <h1 data-i18n="p02.hero.title">Strategic Questions & Analysis Framework</h1>
+            <p data-i18n="p02.hero.sub">Before diving into data, define what questions matter most — and for whom.</p>
+        </div>
+    </div>
+    <div class="content-area">
+        <p data-i18n="p02.intro">As a Sales Data Analyst at Gondowangi, the job isn't just making charts — it's answering the questions that drive business decisions. Here are the 3 strategic questions this analysis addresses.</p>
+
+        <h2 class="section-title" data-i18n="p02.sec.questions">Strategic Questions</h2>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q1.title">Q1: How are Gondowangi brands performing vs competitors in each category?</h4>
+            <div class="who" data-i18n="p02.q1.who">👤 Stakeholder: VP of Sales · Head of Marketing</div>
+            <p data-i18n="p02.q1.text">With 4 brands across 8 categories, management needs to know where Gondowangi is winning and where it's losing. Market share by category tells us which brands need more investment and which categories to deprioritize.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q2.title">Q2: Which regions are underperforming relative to their potential?</h4>
+            <div class="who" data-i18n="p02.q2.who">👤 Stakeholder: Regional Sales Managers · VP of Distribution</div>
+            <p data-i18n="p02.q2.text">Gondowangi distributes across 10 regions in Indonesia. Some regions may have high population but low sales penetration — these are growth opportunities.</p>
+        </div>
+
+        <div class="q-card">
+            <h4 data-i18n="p02.q3.title">Q3: What's the optimal channel mix for maximizing revenue and margin?</h4>
+            <div class="who" data-i18n="p02.q3.who">👤 Stakeholder: CFO · Head of E-Commerce · Trade Marketing</div>
+            <p data-i18n="p02.q3.text">With 6 sales channels, each has different margin profiles. E-commerce is growing fast but comes with platform fees. The question is: where should Gondowangi invest?</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p02.sec.framework">Analysis Framework</h2>
+
+        <table>
+            <thead><tr><th data-i18n="p02.th.lens">Lens</th><th data-i18n="p02.th.metric">Metric</th><th data-i18n="p02.th.why">Why It Matters</th></tr></thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-green">Brand Performance</span></td><td data-i18n="p02.fw.brand.metric">Revenue share, growth rate, category rank</td><td data-i18n="p02.fw.brand.why">Identify which brands are winning/losing</td></tr>
+                <tr><td><span class="badge-ch b-blue">Regional Analysis</span></td><td data-i18n="p02.fw.region.metric">Revenue per region, penetration rate</td><td data-i18n="p02.fw.region.why">Find underserved markets with growth potential</td></tr>
+                <tr><td><span class="badge-ch b-yellow">Channel Mix</span></td><td data-i18n="p02.fw.channel.metric">Revenue share, margin estimate, growth trend</td><td data-i18n="p02.fw.channel.why">Optimize distribution for profitability</td></tr>
+                <tr><td><span class="badge-ch b-red">Competitive Intel</span></td><td data-i18n="p02.fw.competitive.metric">Market share, price positioning, category dominance</td><td data-i18n="p02.fw.competitive.why">Understand competitive threats and opportunities</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p02.callout.title">💡 Senior vs Junior Thinking</h4>
+            <p data-i18n="p02.callout.text">A junior analyst would jump straight to "let me make a bar chart of revenue by brand." A senior analyst asks: "Who needs this information, what decision will they make with it, and what's the business impact?" Every chart in this portfolio exists because a stakeholder needs it to make a specific decision.</p>
+        </div>
+    </div>
+</div>
+<script src="lang.js?v=2" defer></script>
+</body>
+</html>

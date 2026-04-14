@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report: Q1 2026 Overview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <style>
+        .report-hero {
+            background: linear-gradient(135deg, #7a1a1d, #ba2529);
+            padding: 2rem 2.5rem;
+            color: white;
+            margin: 1.25rem 2rem 0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .report-hero img {
+            width: 48px;
+            height: auto;
+            filter: brightness(0) invert(1);
+            flex-shrink: 0;
+        }
+        .report-hero h1 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 0.15rem;
+            color: white;
+        }
+        .report-hero p {
+            color: #fecaca;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            padding: 1rem 2rem 0;
+        }
+        .kpi-card {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 1rem 0.75rem;
+            text-align: center;
+            border: 1.5px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        .kpi-card.c-red::before { background: var(--red); }
+        .kpi-card.c-blue::before { background: var(--blue); }
+        .kpi-card.c-green::before { background: var(--green); }
+        .kpi-card.c-yellow::before { background: var(--yellow); }
+        .kpi-card.c-purple::before { background: var(--purple); }
+        .kpi-num { font-size: 1.5rem; font-weight: 800; color: var(--text-main); }
+        .kpi-label { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.1rem; }
+        .kpi-sub { font-size: 0.62rem; color: var(--text-light); margin-top: 0.15rem; }
+
+        .narrative { margin: 1.5rem 2rem 0; padding: 1.25rem 1.5rem; background: #f8fafc; border-radius: 12px; border: 1px solid var(--border); }
+        .narrative p { font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.7; }
+        .narrative p strong { color: var(--text-main); }
+        .q-label { display: inline-block; background: var(--primary-light); color: var(--primary); font-size: 0.7rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 5px; margin-bottom: 0.5rem; letter-spacing: 0.03em; }
+        .section-block { margin: 2rem 2rem 0; }
+        .section-block h2 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.75rem; }
+
+        @media (max-width: 900px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .report-hero { flex-direction: column; text-align: center; margin: 1rem; }
+            .section-block, .narrative { margin-left: 1rem; margin-right: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="sidebar-logo"><img src="logo.svg" alt="Pizza Hut" style="width:28px;height:auto;"> Pizza Hut Analytics</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+    <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+    <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+    <a href="business-context.html"><span class="icon">📋</span> <span data-i18n="sidebar.riset">Riset Bisnis</span></a>
+    <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+    <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+    <a href="report.html" class="active"><span class="icon">📊</span> <span data-i18n="sidebar.overview">Overview</span></a>
+    <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+    <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+    <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+    <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+</nav>
+<div class="main">
+    <div class="topbar"><h2 data-i18n="p05.topbar">Q1 2026 Performance Report</h2><span class="badge" data-i18n="p05.badge">Report · 04</span></div>
+
+    <div class="report-hero">
+        <img src="logo.svg" alt="Pizza Hut">
+        <div>
+            <h1 data-i18n="p05.hero.title">Pizza Hut Indonesia — Q1 2026 Overview</h1>
+            <p data-i18n="p05.hero.sub">552 outlet · 4 channel · Anchored ke laporan keuangan PZZA (IDX)</p>
+        </div>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-card c-red"><div class="kpi-num">Rp 744M</div><div class="kpi-label" data-i18n="p05.kpi.revenue">Total Revenue Q1</div><div class="kpi-sub">estimated</div></div>
+        <div class="kpi-card c-blue"><div class="kpi-num">552</div><div class="kpi-label">Outlet</div><div class="kpi-sub">287 Dine-in · 265 PHD</div></div>
+        <div class="kpi-card c-green"><div class="kpi-num">78%</div><div class="kpi-label" data-i18n="p05.kpi.profitable">Profitable</div><div class="kpi-sub" data-i18n="p05.kpi.profitable.sub">22% unprofitable</div></div>
+        <div class="kpi-card c-yellow"><div class="kpi-num">+24%</div><div class="kpi-label">Mar vs Jan</div><div class="kpi-sub" data-i18n="p05.kpi.growth.sub">Ramadan</div></div>
+        <div class="kpi-card c-purple"><div class="kpi-num">33</div><div class="kpi-label" data-i18n="p05.kpi.cannibal">Cannibal Risk</div><div class="kpi-sub">≥3 / 2km</div></div>
+    </div>
+
+    <!-- Narrative intro -->
+    <div class="narrative">
+        <p data-i18n="p05.narrative">Pizza Hut Indonesia operates <strong>552 outlets across 8 regions</strong> with 4 sales channels — dine-in, delivery (PHD), aggregator, and takeaway. This report answers the <strong>3 strategic questions</strong> that leadership needs to evaluate Q1 2026 performance: how channels are performing, which regions lag behind, and whether aggregator commissions are eroding margins.</p>
+    </div>
+
+    <!-- Q1: How are outlets performing across channels? -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p05.q1.label">Q1 — VP SALES</span>
+        <h2 data-i18n="p05.q1.title">How are outlets performing across channels?</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p05.q1.context">With 4 active sales channels, the VP Sales needs to know which channels drive growth — especially during Ramadan. The stacked bar below shows monthly revenue by channel, while the pie reveals each channel's share of the Rp 744M Q1 total.</p>
+    </div>
+
+    <div class="section-block" style="margin-top:0.5rem;">
+        <div class="chart-card">
+            <div class="title" data-i18n="p05.chart.monthly">Monthly Revenue by Channel (Miliar IDR)</div>
+            <canvas id="monthlyChart"></canvas>
+        </div>
+        <div class="two-col" style="margin-top:1.25rem;">
+            <div class="chart-card"><div class="title" data-i18n="p05.chart.share">Revenue Share</div><canvas id="channelPie"></canvas></div>
+            <div class="chart-card"><div class="title" data-i18n="p05.chart.margin">Estimated Net Margin</div><canvas id="marginChart"></canvas></div>
+        </div>
+        <div class="insight-box" data-i18n="p05.q1.insight">Ramadan drove a +24% revenue spike in March — but almost entirely from delivery (+44%) and aggregator (+37%). Dine-in stayed flat. Takeaway has the highest margin (15%) at 2-3× aggregator margin, yet only contributes 18% of revenue. The VP Sales should explore shifting aggregator volume to takeaway via in-app promotions.</div>
+    </div>
+
+    <!-- Q2: Which regions are underperforming? -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p05.q2.label">Q2 — REGIONAL MANAGERS</span>
+        <h2 data-i18n="p05.q2.title">Which regions are underperforming?</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p05.q2.context">Jabodetabek generates 40% of total revenue — but revenue size doesn't equal efficiency. Regional Managers need to see <strong>profitability rate</strong> alongside revenue to identify where operational costs are eating into margins.</p>
+    </div>
+
+    <div class="section-block" style="margin-top:0.5rem;">
+        <div class="two-col">
+            <div class="chart-card"><div class="title" data-i18n="p05.chart.region">Revenue by Region</div><canvas id="regionChart"></canvas></div>
+            <div class="chart-card"><div class="title" data-i18n="p05.chart.profit">Profitability Rate</div><div style="height:320px;"><canvas id="profitChart"></canvas></div></div>
+        </div>
+        <div class="insight-box" data-i18n="p05.q2.insight">Jawa Timur leads profitability at 88% despite being 4th in revenue — lean operations and lower rent drive this. Jabodetabek (77%) and Sulawesi (73%) are the weakest despite high outlet counts. Regional Managers in these areas should audit the 22-27% unprofitable outlets for closure or format conversion.</div>
+    </div>
+
+    <!-- Q3: What's the aggregator commission impact? -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p05.q3.label">Q3 — CFO</span>
+        <h2 data-i18n="p05.q3.title">What's the aggregator commission impact?</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p05.q3.context">Aggregator channels (GrabFood, GoFood, ShopeeFood) charge <strong>21-26% commission</strong> per order. For the CFO, the question isn't whether to use aggregators — it's how much margin they're costing and whether renegotiation or channel shifting can recover it.</p>
+    </div>
+
+    <div class="section-block" style="margin-top:0.5rem;">
+        <div class="two-col">
+            <div class="chart-card"><div class="title" data-i18n="p05.chart.agg">Commission Rate by Platform</div><canvas id="aggChart"></canvas></div>
+            <div class="chart-card">
+                <div class="title" data-i18n="p05.chart.impact">Impact Analysis</div>
+                <table>
+                    <thead><tr><th>Platform</th><th>Rate</th><th>Note</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge-ch b-green">ShopeeFood</span></td><td>21.5%</td><td>Cheapest</td></tr>
+                        <tr><td><span class="badge-ch b-yellow">GoFood</span></td><td>23.8%</td><td>Middle</td></tr>
+                        <tr><td><span class="badge-ch b-red">GrabFood</span></td><td>25.9%</td><td>Most expensive</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="insight-box" data-i18n="p05.q3.insight">The 4.4% gap between ShopeeFood (21.5%) and GrabFood (25.9%) translates to Rp 52.8M/year per outlet. Across 265 PHD outlets, shifting just 10% of GrabFood volume to ShopeeFood saves est. Rp 1.4B/year. The CFO should prioritize renegotiating GrabFood rates or incentivizing ShopeeFood orders.</div>
+    </div>
+
+    <!-- Dine-in vs PHD -->
+    <div class="section-block">
+        <span class="q-label" data-i18n="p05.type.label">FORMAT COMPARISON</span>
+        <h2 data-i18n="p05.type.title">Dine-in vs PHD: Revenue & Margin Gap</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1rem;" data-i18n="p05.type.context">Pizza Hut operates two outlet formats — 287 dine-in restaurants and 265 PHD (Pizza Hut Delivery) stores. Understanding the revenue and margin gap between formats helps leadership decide <strong>where to invest next</strong>.</p>
+    </div>
+
+    <div class="section-block" style="margin-top:0.5rem;">
+        <div class="chart-card"><div class="title" data-i18n="p05.chart.type">Revenue & Margin</div><canvas id="typeChart"></canvas></div>
+        <div class="insight-box" data-i18n="p05.type.insight">Dine-in outlets average Rp 506M revenue with 21.6% margin. PHD averages Rp 382M at 18.5% — the 3.1pp margin gap is driven by aggregator commissions eating into PHD profitability. New PHD outlets should prioritize own-delivery and takeaway channels to protect margins.</div>
+    </div>
+
+    <div style="padding:1rem 2rem 2rem;">
+        <div class="disclaimer" data-i18n="p05.disclaimer">⚠️ Revenue per outlet = estimasi. Pattern applicable dengan data internal.</div>
+    </div>
+</div>
+<script>
+Chart.defaults.font.family="'Plus Jakarta Sans',sans-serif";
+Chart.defaults.animation=false;
+Chart.defaults.font.size=11;
+Chart.defaults.color='#64748b';
+
+new Chart(document.getElementById('monthlyChart'),{type:'bar',data:{labels:['Januari','Februari','Maret (Ramadan)'],datasets:[{label:'Dine-in',data:[77.3,76.9,77.3],backgroundColor:'#EE3A23'},{label:'Delivery',data:[57.1,57.7,81.2],backgroundColor:'#3b82f6'},{label:'Aggregator',data:[53.0,53.5,72.7],backgroundColor:'#f59e0b'},{label:'Takeaway',data:[42.0,42.2,53.4],backgroundColor:'#22c55e'}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10}}},scales:{x:{stacked:true},y:{stacked:true,title:{display:true,text:'Miliar IDR'}}}}});
+
+new Chart(document.getElementById('channelPie'),{type:'doughnut',data:{labels:['Dine-in 33%','Delivery 25%','Aggregator 23%','Takeaway 18%'],datasets:[{data:[33.2,25.2,23.2,18.4],backgroundColor:['#EE3A23','#3b82f6','#f59e0b','#22c55e']}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}}}});
+
+new Chart(document.getElementById('marginChart'),{type:'bar',data:{labels:['Takeaway','Dine-in','Delivery','Aggregator'],datasets:[{data:[15,10,7,2],backgroundColor:['#22c55e','#EE3A23','#3b82f6','#f59e0b'],borderRadius:5}]},options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:20,title:{display:true,text:'Net Margin %'}}}}});
+
+new Chart(document.getElementById('aggChart'),{type:'bar',data:{labels:['ShopeeFood','GoFood','GrabFood'],datasets:[{data:[21.5,23.8,25.9],backgroundColor:['#22c55e','#f59e0b','#EE3A23'],borderRadius:5}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{min:18,max:28,title:{display:true,text:'%'}}}}});
+
+new Chart(document.getElementById('regionChart'),{type:'bar',data:{labels:['Jabodtbk','Jabar','Sumatra','Jatim','Jateng','Kalim','Sulawesi','Bali'],datasets:[{data:[296,104,103,65,55,39,38,36],backgroundColor:'#3b82f6',borderRadius:5}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'Miliar IDR'}}}}});
+
+new Chart(document.getElementById('profitChart'),{type:'bar',data:{labels:['Jawa Timur','Kalimantan','Jawa Tengah','Jabodetabek','Jawa Barat','Bali & NTT','Sumatera','Sulawesi'],datasets:[{data:[88,84,78,77,77,75,74,73],backgroundColor:ctx=>ctx.raw>=80?'#22c55e':ctx.raw>=75?'#f59e0b':'#EE3A23',borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',layout:{padding:{left:10}},plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:11},padding:4,autoSkip:false},afterFit:function(axis){axis.width=95;},grid:{display:false}},x:{max:100,title:{display:true,text:'%'}}}}});
+
+new Chart(document.getElementById('typeChart'),{type:'bar',data:{labels:['Dine-in (287)','PHD (265)'],datasets:[{label:'Avg Rev (M)',data:[506,382],backgroundColor:'#EE3A23',borderRadius:5},{label:'Margin %',data:[21.6,18.5],backgroundColor:'#3b82f6',borderRadius:5}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10}}}}});
+</script>
+<script src="lang.js" defer></script>
+</body>
+</html>
