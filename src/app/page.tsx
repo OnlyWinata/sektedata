@@ -269,7 +269,7 @@ export default function Home() {
               Email Me
             </a>
             <a
-              href="https://linkedin.com/in/winatasyahputra"
+              href="https://www.linkedin.com/in/winata-syahputra/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 border border-slate-200 text-slate-700 text-sm font-semibold rounded-lg hover:bg-slate-50 transition-colors"
