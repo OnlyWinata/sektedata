@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial Formula Spreadsheet — Windata 30 Case Studies</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#1e293b;--primary-light:#f1f5f9;--primary-dark:#0f172a;--text-main:#1e293b;--text-muted:#64748b;--text-light:#94a3b8;--bg:#ffffff;--card:#ffffff;--border:#e2e8f0;--red:#ef4444;--green:#22c55e;--blue:#3b82f6;--yellow:#f59e0b;--purple:#8b5cf6;--accent:#FF5A00;--sidebar-w:240px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;line-height:1.7}
+
+/* SIDEBAR — fixed layout, scrollable nav, pinned footer */
+.sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);position:fixed;top:0;left:0;height:100vh;z-index:100;display:flex;flex-direction:column}
+.sidebar-logo{padding:1.25rem 1.25rem 1rem;font-size:.95rem;font-weight:800;color:var(--primary);display:flex;align-items:center;gap:.5rem;line-height:1.25;flex-shrink:0;border-bottom:1px solid var(--border)}
+.sidebar-logo img{width:28px;height:28px}
+.sidebar-nav{flex:1;overflow-y:auto;padding:.5rem 0}
+.sidebar-section{padding:.5rem 1.25rem;font-size:.68rem;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.08em;margin-top:.5rem}
+.sidebar-nav a{display:flex;align-items:center;gap:.55rem;padding:.4rem 1.25rem;color:var(--text-muted);text-decoration:none;font-size:.78rem;font-weight:500;border-left:3px solid transparent;transition:all .15s}
+.sidebar-nav a:hover{background:#f8fafc;color:var(--text-main)}
+.sidebar-nav a.active{background:var(--primary-light);color:var(--primary);border-left-color:var(--primary);font-weight:700}
+.sidebar-nav .icon{font-size:.9rem;width:18px;text-align:center;flex-shrink:0}
+.sidebar-contact{flex-shrink:0;padding:.75rem 1.25rem;border-top:1px solid var(--border);background:var(--card)}
+.sidebar-contact .contact-label{font-size:.6rem;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.sidebar-contact a{display:flex;align-items:center;gap:.5rem;padding:.35rem .5rem;margin-bottom:.2rem;border-radius:6px;text-decoration:none;font-size:.75rem;font-weight:500;color:var(--text-muted);transition:all .15s}
+.sidebar-contact a:hover{background:var(--primary-light);color:var(--primary)}
+.sidebar-contact .contact-icon{width:14px;height:14px;flex-shrink:0}
+
+/* MAIN */
+.main{margin-left:var(--sidebar-w);flex:1}
+
+/* TOPBAR */
+.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
+.topbar h2{font-size:1rem;font-weight:700;flex:1;min-width:0}
+.topbar .badge{background:var(--primary-light);color:var(--primary);padding:.25rem .65rem;border-radius:6px;font-size:.72rem;font-weight:700;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+
+/* HERO */
+.hero-banner{background:linear-gradient(135deg,#0f172a,#1e293b);padding:2rem;color:white;margin:1.25rem 2rem 0;border-radius:14px;display:flex;align-items:center;gap:1.5rem}
+.hero-banner h1{font-size:1.5rem;font-weight:800;margin-bottom:.25rem}
+.hero-banner p{color:#94a3b8;font-size:.88rem;margin:0}
+
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;padding:1rem 2rem 0}
+.kpi-card{background:var(--card);border-radius:10px;padding:1rem;text-align:center;border:2px solid var(--border);position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-card.c-red::before{background:var(--red)}.kpi-card.c-green::before{background:var(--green)}.kpi-card.c-blue::before{background:var(--blue)}.kpi-card.c-yellow::before{background:var(--yellow)}.kpi-card.c-purple::before{background:var(--purple)}
+.kpi-num{font-size:1.75rem;font-weight:800;color:var(--text-main)}
+.kpi-label{font-size:.72rem;color:var(--text-muted);margin-top:.1rem}
+.kpi-sub{font-size:.65rem;color:var(--text-light);margin-top:.2rem}
+
+/* CONTENT */
+.content-area{padding:1.25rem 2rem 3rem}
+h2.section-title{font-size:1.1rem;font-weight:800;margin:2.5rem 0 1rem;padding-bottom:.35rem;border-bottom:2px solid var(--border)}
+h3{font-size:1rem;font-weight:700;margin:1.75rem 0 .6rem}
+p{margin-bottom:1rem;color:var(--text-muted);font-size:.92rem}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;color:var(--text-muted);font-size:.92rem}
+li{margin-bottom:.5rem}
+
+/* CHART CARD */
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem}
+.chart-card .title{font-size:.82rem;font-weight:700;color:var(--text-main);margin-bottom:.6rem}
+.insight-box{background:#eff6ff;border-left:4px solid var(--blue);padding:.6rem .85rem;border-radius:0 8px 8px 0;margin-top:.85rem;font-size:.8rem;color:#1e3a8a;line-height:1.5}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+
+/* CALLOUTS */
+.callout-blue{background:#eff6ff;border:1px solid #bfdbfe;padding:1rem;border-radius:10px;margin:1.25rem 0}
+.callout-blue h4{color:#1e40af;font-size:.88rem;margin-bottom:.3rem}
+.callout-blue p{color:#1e3a8a;font-size:.85rem;margin-bottom:.3rem}
+.callout-orange{background:#f8fafc;border:1px dashed var(--primary);padding:1rem;border-radius:10px;margin:1.25rem 0}
+.callout-orange h4{color:#0f172a;font-size:.88rem;margin-bottom:.3rem}
+.callout-orange p{color:#334155;font-size:.85rem;margin-bottom:.3rem}
+.callout-green{background:#f0fdf4;border:1px solid #bbf7d0;padding:1rem;border-radius:10px;margin:1.25rem 0}
+.callout-green h4{color:#166534;font-size:.88rem;margin-bottom:.3rem}
+.callout-green p{color:#14532d;font-size:.85rem;margin-bottom:.3rem}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin:1rem 0}
+thead th{background:#f8fafc;padding:.55rem .75rem;text-align:left;font-weight:700;color:var(--text-muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:2px solid var(--border)}
+tbody td{padding:.5rem .75rem;border-bottom:1px solid var(--border);color:var(--text-main)}
+tbody tr:hover{background:#f8fafc}
+td code,p code,li code,h3 code{background:#f1f5f9;color:#be123c;padding:.15rem .35rem;border-radius:4px;font-size:.83em;font-family:'Fira Code',monospace}
+
+/* BADGES */
+.badge-ch{display:inline-block;padding:.12rem .45rem;border-radius:4px;font-size:.7rem;font-weight:700}
+.b-red{background:#fee2e2;color:#991b1b}.b-green{background:#dcfce7;color:#166534}.b-blue{background:#dbeafe;color:#1e40af}.b-yellow{background:#fef3c7;color:#92400e}.b-purple{background:#ede9fe;color:#5b21b6}
+
+/* CODE BLOCKS */
+pre{background:#1e1e1e;border-radius:10px;padding:1.25rem;overflow-x:auto;margin:1rem 0;border:1px solid #334155}
+pre code{font-family:'Fira Code',monospace;font-size:.78rem;color:#e2e8f0;line-height:1.6;background:none;padding:0}
+
+/* FORMULA BOX */
+.formula-box{background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:1.25rem;margin:1.25rem 0;text-align:center}
+.formula-box .formula{font-size:1rem;font-family:'Fira Code',monospace;color:var(--text-main);margin:.5rem 0}
+.formula-box .explain{font-size:.8rem;color:var(--text-muted)}
+
+/* DEMO TABLE — mini spreadsheet simulation */
+.demo{border:2px solid var(--border);border-radius:10px;overflow:hidden;margin:1rem 0}
+.demo-label{background:var(--primary-light);color:var(--primary);padding:.4rem .75rem;font-size:.72rem;font-weight:700;border-bottom:1px solid var(--border)}
+.demo table{margin:0;font-size:.78rem}
+.demo thead th{background:#eef2ff;color:#4338ca;font-size:.68rem;padding:.4rem .6rem}
+.demo tbody td{padding:.35rem .6rem;font-family:'Fira Code',monospace;font-size:.75rem}
+.demo .formula-cell{background:#fffbeb;color:#92400e;font-weight:600}
+.demo .result-cell{background:#f0fdf4;color:#166534;font-weight:700}
+.demo .header-cell{background:#f8fafc;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
+
+/* BUSINESS BOX */
+.biz-box{background:linear-gradient(135deg,#fdf2f8,#fce7f3);border:1px solid #f9a8d4;padding:1rem;border-radius:10px;margin:1.25rem 0}
+.biz-box h4{color:#9d174d;font-size:.88rem;margin-bottom:.3rem}
+.biz-box p{color:#831843;font-size:.85rem;margin-bottom:.3rem}
+
+/* LEVEL BADGES */
+.level{display:inline-block;padding:.2rem .6rem;border-radius:5px;font-size:.68rem;font-weight:700;margin-left:.5rem}
+.level-1{background:#dcfce7;color:#166534}
+.level-2{background:#dbeafe;color:#1e40af}
+.level-3{background:#fef3c7;color:#92400e}
+
+/* SCROLL OFFSET for anchors under sticky topbar */
+[id]{scroll-margin-top:60px}
+
+/* PROGRESS BAR */
+.progress-bar{position:fixed;top:0;left:var(--sidebar-w);right:0;height:3px;z-index:60;background:var(--border)}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));width:0%;transition:width .15s}
+
+/* BACK TO TOP */
+.back-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--primary);color:white;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 14px rgba(15,23,42,.3);z-index:60;display:none;align-items:center;justify-content:center;transition:transform .15s,opacity .15s}
+.back-top:hover{transform:scale(1.1)}
+.back-top.show{display:flex}
+
+/* COPY BUTTON on code blocks */
+.code-wrap{position:relative}
+.code-wrap .copy-btn{position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#94a3b8;padding:.25rem .55rem;border-radius:6px;font-size:.65rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s;z-index:2}
+.code-wrap .copy-btn:hover{background:rgba(255,255,255,.25);color:white}
+.code-wrap .copy-btn.copied{background:var(--green);color:white;border-color:var(--green)}
+
+/* TRY-IT CTA */
+.try-it{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:2px solid #fdba74;border-radius:12px;padding:1.15rem;margin:1.5rem 0;display:flex;align-items:center;gap:.85rem}
+.try-it .try-icon{font-size:1.5rem;flex-shrink:0}
+.try-it .try-text{font-size:.85rem;color:#9a3412}
+.try-it .try-text strong{color:#7c2d12}
+
+/* SECTION DIVIDER */
+.section-divider{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:3rem 0 0}
+
+/* PRINT STYLES — each section starts on new page */
+@media print{
+    .sidebar,.progress-bar,.back-top,.mobile-menu{display:none!important}
+    .main{margin-left:0!important}
+    .hero-banner,.kpi-row,.content-area{margin-left:0!important;margin-right:0!important;padding-left:1rem!important;padding-right:1rem!important}
+    .topbar{position:static;border-bottom:2px solid #000;margin-bottom:1rem}
+    h2.section-title{page-break-before:always;padding-top:1rem}
+    .content-area > div[id="sec-overview"] + h2.section-title{page-break-before:avoid}
+    .live-sheet,.chart-card,.demo,.callout-blue,.callout-orange,.callout-green,.biz-box,.try-it,.formula-box,.two-col{page-break-inside:avoid}
+    pre{page-break-inside:avoid;white-space:pre-wrap;word-wrap:break-word}
+    .hero-banner{background:#1e293b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .kpi-card::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .live-sheet-bar,.computed,.formula-display,.editable,.result-cell,.formula-cell,.header-cell,.badge-ch,.level,.insight-box,.biz-box,.try-it,.callout-blue,.callout-green{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{font-size:11pt;line-height:1.5}
+    .section-divider{display:none}
+    .site-footer{position:static;border-top:1px solid #ccc;padding:.5rem 1rem;font-size:9pt}
+}
+
+/* SIDEBAR PROGRESS DOTS */
+.sidebar-nav a .dot{width:6px;height:6px;border-radius:50%;background:var(--border);flex-shrink:0;margin-left:auto;transition:background .2s}
+.sidebar-nav a.visited .dot{background:var(--green)}
+.sidebar-nav a.active .dot{background:var(--primary)}
+
+/* MOBILE HAMBURGER */
+.mobile-menu{display:none;position:fixed;top:.7rem;left:.7rem;z-index:200;width:40px;height:40px;border-radius:10px;background:var(--primary);color:white;border:none;font-size:1.2rem;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(15,23,42,.2)}
+.sidebar.open{display:flex!important}
+
+/* FORMULA KEYWORD HIGHLIGHT in code */
+.kw{color:#f59e0b}
+.fn{color:#60a5fa}
+.cm{color:#6b7280;font-style:italic}
+.str{color:#34d399}
+.num{color:#f472b6}
+
+/* INTERACTIVE SPREADSHEET */
+.live-sheet{border:2px solid #6366f1;border-radius:12px;overflow:hidden;margin:1.25rem 0;background:white}
+.live-sheet-bar{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:.5rem .85rem;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:space-between}
+.live-sheet-bar .reset-btn{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:white;padding:.2rem .55rem;border-radius:5px;font-size:.65rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.live-sheet-bar .reset-btn:hover{background:rgba(255,255,255,.35)}
+.live-sheet table{margin:0;font-size:.78rem;border-collapse:collapse;width:100%}
+.live-sheet thead th{background:#eef2ff;color:#4338ca;font-size:.68rem;padding:.45rem .65rem;border-bottom:2px solid #c7d2fe;text-align:center;font-weight:700}
+.live-sheet tbody td{padding:.4rem .65rem;border-bottom:1px solid #e2e8f0;font-family:'Fira Code',monospace;font-size:.78rem;text-align:center}
+.live-sheet .row-num{background:#f8fafc;color:var(--text-light);font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;width:32px;text-align:center;font-size:.7rem}
+.live-sheet .editable{background:#fffbeb;border:1.5px dashed #f59e0b;border-radius:4px;cursor:text;min-width:60px;padding:.3rem .5rem;outline:none;transition:all .15s}
+.live-sheet .editable:focus{background:#fef3c7;border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.15)}
+.live-sheet .editable:hover{background:#fef9ee}
+.live-sheet .computed{background:#f0fdf4;color:#166534;font-weight:700;border-radius:4px;padding:.3rem .5rem;min-width:60px}
+.live-sheet .formula-display{background:#eef2ff;color:#4338ca;font-size:.7rem;font-weight:600;padding:.3rem .5rem;border-radius:4px;min-width:80px}
+.live-sheet .label-cell{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;color:var(--text-main);text-align:left;font-size:.78rem}
+.live-sheet-hint{background:#f5f3ff;border-top:1px solid #e0e7ff;padding:.45rem .85rem;font-size:.7rem;color:#6366f1;display:flex;align-items:center;gap:.4rem}
+.live-sheet-hint .hint-icon{font-size:.85rem}
+
+/* SITE FOOTER */
+.site-footer{background:#f8fafc;border-top:1px solid var(--border);padding:.6rem 2rem;display:flex;align-items:center;justify-content:space-between;font-size:.72rem;color:var(--text-light)}
+.site-footer a{color:var(--text-muted);text-decoration:none;font-weight:600;transition:color .15s}
+.site-footer a:hover{color:var(--primary)}
+.site-footer .footer-brand{display:flex;align-items:center;gap:.4rem}
+.site-footer .footer-brand img{width:16px;height:16px;opacity:.6}
+
+/* SIDEBAR SEARCH */
+.sidebar-search{padding:.5rem 1rem;flex-shrink:0}
+.sidebar-search input{width:100%;padding:.4rem .65rem;border:1.5px solid var(--border);border-radius:6px;font-size:.75rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .15s;background:var(--bg);color:var(--text-main)}
+.sidebar-search input:focus{border-color:var(--primary)}
+.sidebar-search input::placeholder{color:var(--text-light)}
+.sidebar-nav a.search-hidden{display:none}
+
+/* READING TIME */
+.reading-time{display:inline-block;font-size:.62rem;color:var(--text-light);font-weight:500;margin-left:.4rem;opacity:.7}
+
+/* FLASH ANIMATION on computed cells */
+@keyframes flash-green{0%{background:#bbf7d0}100%{background:#f0fdf4}}
+.computed.flash{animation:flash-green .5s ease-out}
+
+/* TOC CARDS in overview */
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin:1.25rem 0}
+.toc-card{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:.85rem;text-decoration:none;color:inherit;transition:all .15s;display:flex;flex-direction:column;gap:.35rem}
+.toc-card:hover{border-color:var(--primary);box-shadow:0 3px 12px rgba(15,23,42,.06);transform:translateY(-1px)}
+.toc-card .toc-num{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.65rem;color:white;flex-shrink:0}
+.toc-card .toc-num.n-green{background:#22c55e}.toc-card .toc-num.n-blue{background:#3b82f6}.toc-card .toc-num.n-amber{background:#f59e0b}.toc-card .toc-num.n-slate{background:#64748b}
+.toc-card h4{font-size:.78rem;font-weight:700;margin:0;line-height:1.3}
+.toc-card p{font-size:.65rem;color:var(--text-muted);margin:0;line-height:1.35}
+
+/* COLLAPSIBLE CODE */
+.collapsible-toggle{display:inline-flex;align-items:center;gap:.35rem;background:none;border:1px solid var(--border);color:var(--text-muted);padding:.25rem .6rem;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:.5rem;transition:all .15s}
+.collapsible-toggle:hover{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
+.collapsible-toggle .arrow{transition:transform .2s;font-size:.6rem}
+.collapsible-toggle.open .arrow{transform:rotate(90deg)}
+.collapsible-content{max-height:0;overflow:hidden;transition:max-height .3s ease-out}
+.collapsible-content.open{max-height:2000px}
+
+/* DARK MODE */
+body.dark{--bg:#0f172a;--card:#1e293b;--border:#334155;--text-main:#e2e8f0;--text-muted:#94a3b8;--text-light:#64748b;--primary:#e2e8f0;--primary-light:#1e293b;--primary-dark:#f1f5f9}
+body.dark pre{background:#0c0c0c;border-color:#1e293b}
+body.dark .live-sheet{border-color:#4f46e5}
+body.dark .editable{background:#292524;border-color:#78716c;color:#e2e8f0}
+body.dark .computed{background:#14532d;color:#bbf7d0}
+body.dark .formula-display{background:#1e1b4b;color:#a5b4fc}
+body.dark .live-sheet-hint{background:#1e1b4b;color:#a5b4fc}
+body.dark .live-sheet thead th{background:#1e1b4b;color:#a5b4fc}
+body.dark .live-sheet .row-num{background:#1e293b;color:#64748b}
+body.dark .site-footer{background:#1e293b}
+body.dark .hero-banner{background:linear-gradient(135deg,#000,#0f172a)}
+body.dark .biz-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-color:#4a1942}
+body.dark .biz-box h4{color:#f9a8d4}body.dark .biz-box p{color:#f472b6}
+body.dark .try-it{background:linear-gradient(135deg,#1c1917,#292524);border-color:#78716c}
+body.dark .try-it .try-text{color:#d6d3d1}body.dark .try-it .try-text strong{color:#fafaf9}
+body.dark .callout-blue{background:#172554;border-color:#1e3a8a}body.dark .callout-blue h4,.dark .callout-blue p{color:#93c5fd}
+body.dark .callout-green{background:#052e16;border-color:#166534}body.dark .callout-green h4,.dark .callout-green p{color:#86efac}
+body.dark .callout-orange{background:#1e293b;border-color:#475569}body.dark .callout-orange h4{color:#e2e8f0}body.dark .callout-orange p{color:#cbd5e1}
+body.dark .insight-box{background:#172554;border-color:#3b82f6;color:#93c5fd}
+body.dark .formula-box{background:#1e293b;border-color:#475569}
+body.dark .kpi-card{background:#1e293b;border-color:#334155}
+body.dark td code,body.dark p code,body.dark li code{background:#334155;color:#fca5a5}
+body.dark thead th{background:#1e293b;color:#94a3b8}
+body.dark tbody td{border-color:#334155;color:#e2e8f0}
+body.dark tbody tr:hover{background:#334155}
+body.dark .sidebar-search input{background:#0f172a;border-color:#334155;color:#e2e8f0}
+body.dark .toc-card{background:#1e293b;border-color:#334155}
+body.dark .toc-card:hover{border-color:#e2e8f0}
+body.dark img[src*="logo black"]{filter:brightness(0) invert(1)}
+
+/* DARK MODE TOGGLE */
+.dark-toggle{background:none;border:1.5px solid var(--border);color:var(--text-muted);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;flex-shrink:0;transition:all .15s;margin-left:.5rem}
+.dark-toggle:hover{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
+
+/* KEYBOARD HINT */
+.kbd-hint{padding:.35rem 1rem;font-size:.6rem;color:var(--text-light);border-top:1px solid var(--border);text-align:center;flex-shrink:0}
+.kbd-hint kbd{background:var(--primary-light);border:1px solid var(--border);padding:.1rem .3rem;border-radius:3px;font-family:'Fira Code',monospace;font-size:.55rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .sidebar{display:none}
+    .main{margin-left:0}
+    .kpi-row{grid-template-columns:repeat(2,1fr)}
+    .two-col{grid-template-columns:1fr}
+    .hero-banner,.content-area,.kpi-row{margin-left:1rem;margin-right:1rem;padding-left:1rem;padding-right:1rem}
+    .mobile-menu{display:flex}
+    .progress-bar{left:0}
+    .back-top{bottom:1.2rem;right:1.2rem}
+    .toc-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<script>
+// Password protection — redirect to gate if not authenticated
+(function() {
+  if (sessionStorage.getItem('tutorial_formula_auth') !== 'granted') {
+    window.location.replace('/tutorial-formula');
+  }
+})();
+</script>
+<div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+<button class="mobile-menu" id="mobileMenu" aria-label="Menu">☰</button>
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <img src="windata logo black.svg" alt="Windata" style="width:28px;height:28px;">
+        Windata Academy
+    </div>
+    <div class="sidebar-search">
+        <input type="text" id="sidebarSearch" placeholder="🔍 Cari formula..." autocomplete="off">
+    </div>
+    <div class="sidebar-nav">
+        <div class="sidebar-section">Fondasi</div>
+        <a href="#sec-overview" class="active"><span class="icon">🏠</span> Overview<span class="dot"></span></a>
+        <a href="#sec-counta"><span class="icon">🔢</span> COUNTA<span class="dot"></span></a>
+        <a href="#sec-countif"><span class="icon">🔍</span> COUNTIF<span class="dot"></span></a>
+        <a href="#sec-countifs"><span class="icon">🔎</span> COUNTIFS<span class="dot"></span></a>
+        <a href="#sec-countblank"><span class="icon">⬜</span> COUNTBLANK<span class="dot"></span></a>
+        <a href="#sec-sum"><span class="icon">➕</span> SUM<span class="dot"></span></a>
+        <div class="sidebar-section">Cleaning</div>
+        <a href="#sec-unique"><span class="icon">🧹</span> UNIQUE<span class="dot"></span></a>
+        <a href="#sec-filter"><span class="icon">🔬</span> FILTER<span class="dot"></span></a>
+        <a href="#sec-let"><span class="icon">📦</span> LET<span class="dot"></span></a>
+        <a href="#sec-index"><span class="icon">📌</span> INDEX<span class="dot"></span></a>
+        <a href="#sec-pipeline"><span class="icon">🔗</span> Pipeline Cleaning<span class="dot"></span></a>
+        <div class="sidebar-section">Aggregasi</div>
+        <a href="#sec-sumifs"><span class="icon">📊</span> SUMIFS<span class="dot"></span></a>
+        <a href="#sec-sumproduct"><span class="icon">⚡</span> SUMPRODUCT<span class="dot"></span></a>
+        <a href="#sec-average"><span class="icon">📈</span> AVERAGE<span class="dot"></span></a>
+        <div class="sidebar-section">Date &amp; Logic</div>
+        <a href="#sec-date"><span class="icon">📅</span> DATE Functions<span class="dot"></span></a>
+        <a href="#sec-logic"><span class="icon">🧠</span> IF / IFERROR<span class="dot"></span></a>
+        <a href="#sec-advanced"><span class="icon">🚀</span> Advanced Combos<span class="dot"></span></a>
+        <div class="sidebar-section">Appendix</div>
+        <a href="#sec-cheatsheet"><span class="icon">📋</span> Cheat Sheet<span class="dot"></span></a>
+        <a href="#sec-progression"><span class="icon">🗺️</span> Learning Path<span class="dot"></span></a>
+    </div>
+    <div class="kbd-hint"><kbd>↑</kbd> <kbd>↓</kbd> navigate &nbsp;·&nbsp; <kbd>/</kbd> search &nbsp;·&nbsp; <kbd>D</kbd> dark mode</div>
+    <div class="sidebar-contact">
+        <div class="contact-label">Windata Academy</div>
+        <a href="https://www.linkedin.com/in/winata-syahputra/" target="_blank"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a href="mailto:winatasyputra@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+    </div>
+</nav>
+
+<div class="main">
+<div class="topbar">
+    <h2>Tutorial Formula Spreadsheet</h2>
+    <span class="badge">Windata · 30 Case Studies</span>
+    <a href="https://www.windata.id/" target="_blank" style="color:var(--text-light);text-decoration:none;font-size:.7rem;font-weight:600;flex-shrink:0;transition:color .15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-light)'">windata.id ↗</a>
+    <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+</div>
+
+<div class="hero-banner">
+    <img src="windata logo black.svg" alt="Windata" style="width:48px;height:48px;filter:brightness(0) invert(1);flex-shrink:0;">
+    <div>
+        <h1>📐 Semua Formula yang Kamu Butuhkan</h1>
+        <p>Panduan lengkap 27 formula spreadsheet dari Day 01–07. Dari data cleaning sampai forecasting — dengan contoh bisnis nyata.</p>
+    </div>
+</div>
+
+<div class="kpi-row" style="padding-top:1.25rem;">
+    <div class="kpi-card c-blue"><div class="kpi-num">27</div><div class="kpi-label">Formula Unik</div><div class="kpi-sub">Google Sheets & Excel</div></div>
+    <div class="kpi-card c-green"><div class="kpi-num">7</div><div class="kpi-label">Case Studies</div><div class="kpi-sub">Day 01 – Day 07</div></div>
+    <div class="kpi-card c-yellow"><div class="kpi-num">6</div><div class="kpi-label">Tab Types</div><div class="kpi-sub">Raw → Clean → Analysis</div></div>
+    <div class="kpi-card c-red"><div class="kpi-num">15+</div><div class="kpi-label">Konsep Logika</div><div class="kpi-sub">Patterns & combos</div></div>
+    <div class="kpi-card c-purple"><div class="kpi-num">3</div><div class="kpi-label">Level</div><div class="kpi-sub">Fondasi → Advanced</div></div>
+</div>
+
+<div class="content-area">
+
+<!-- ============================================================ -->
+<div id="sec-overview"></div>
+<h2 class="section-title">🏠 Overview — Kenapa Formula Ini Penting?</h2>
+<p>Di dunia kerja Data Analyst, spreadsheet (Google Sheets / Excel) masih jadi tool utama. Bukan karena paling canggih — tapi karena <strong>semua orang bisa buka</strong>. CEO, CFO, Head of Sales — mereka nggak buka Python notebook. Mereka buka spreadsheet.</p>
+<p>Tutorial ini merangkum <strong>semua formula yang dipakai di Day 01–07</strong> dari 30 Case Studies. Setiap formula punya: penjelasan, syntax, <strong>manfaat bisnis</strong>, dan <strong>demo mini spreadsheet</strong> biar langsung kebayang.</p>
+
+<div class="callout-orange">
+    <h4>⚠️ Google Sheets vs Excel</h4>
+    <p>Semua formula compatible dengan keduanya. Satu perbedaan penting: cross-sheet reference. Google Sheets: <code>'Sheet'!A1:'Sheet'!Z100</code>. Excel: <code>'Sheet'!A1:Z100</code>. Tutorial ini pakai syntax Google Sheets.</p>
+</div>
+
+<h3>📑 Daftar Formula — Quick Jump</h3>
+<div class="toc-grid">
+    <a href="#sec-counta" class="toc-card"><div class="toc-num n-green">1</div><h4>COUNTA</h4><p>Hitung sel non-kosong</p></a>
+    <a href="#sec-countif" class="toc-card"><div class="toc-num n-green">2</div><h4>COUNTIF</h4><p>Hitung dengan 1 kondisi</p></a>
+    <a href="#sec-countifs" class="toc-card"><div class="toc-num n-green">3</div><h4>COUNTIFS</h4><p>Hitung multi-kondisi</p></a>
+    <a href="#sec-countblank" class="toc-card"><div class="toc-num n-green">4</div><h4>COUNTBLANK</h4><p>Deteksi missing values</p></a>
+    <a href="#sec-sum" class="toc-card"><div class="toc-num n-green">5</div><h4>SUM</h4><p>Jumlahkan range</p></a>
+    <a href="#sec-unique" class="toc-card"><div class="toc-num n-blue">6</div><h4>UNIQUE</h4><p>Hapus duplikat</p></a>
+    <a href="#sec-filter" class="toc-card"><div class="toc-num n-blue">7</div><h4>FILTER</h4><p>Saring data</p></a>
+    <a href="#sec-let" class="toc-card"><div class="toc-num n-blue">8</div><h4>LET</h4><p>Variabel dalam formula</p></a>
+    <a href="#sec-index" class="toc-card"><div class="toc-num n-blue">9</div><h4>INDEX</h4><p>Akses kolom array</p></a>
+    <a href="#sec-pipeline" class="toc-card"><div class="toc-num n-blue">10</div><h4>Pipeline</h4><p>LET+UNIQUE+FILTER combo</p></a>
+    <a href="#sec-sumifs" class="toc-card"><div class="toc-num n-blue">11</div><h4>SUMIFS</h4><p>Sum multi-kondisi</p></a>
+    <a href="#sec-sumproduct" class="toc-card"><div class="toc-num n-amber">12</div><h4>SUMPRODUCT</h4><p>Array multiplication</p></a>
+    <a href="#sec-average" class="toc-card"><div class="toc-num n-blue">13</div><h4>AVERAGE</h4><p>Moving average & forecast</p></a>
+    <a href="#sec-date" class="toc-card"><div class="toc-num n-amber">14</div><h4>DATE Functions</h4><p>WEEKDAY, DAY, YEAR, MONTH</p></a>
+    <a href="#sec-logic" class="toc-card"><div class="toc-num n-amber">15</div><h4>IF / IFERROR</h4><p>Logic & error handling</p></a>
+    <a href="#sec-advanced" class="toc-card"><div class="toc-num n-amber">16</div><h4>Advanced</h4><p>RoAS, Inventory, Cohort, THR</p></a>
+    <a href="#sec-cheatsheet" class="toc-card"><div class="toc-num n-slate">📋</div><h4>Cheat Sheet</h4><p>Semua formula 1 tabel</p></a>
+    <a href="#sec-progression" class="toc-card"><div class="toc-num n-slate">🗺️</div><h4>Learning Path</h4><p>Urutan belajar</p></a>
+</div>
+
+<!-- ============================================================ -->
+<div id="sec-counta"></div>
+<h2 class="section-title">🔢 COUNTA — Menghitung Sel yang Tidak Kosong <span class="level level-1">Level 1</span></h2>
+<p><code>COUNTA</code> menghitung berapa sel dalam range yang <strong>ada isinya</strong> (bukan kosong). Muncul di <strong>semua 7 case study</strong>.</p>
+
+<div class="formula-box">
+    <div class="formula">=COUNTA(range)</div>
+    <div class="explain">Menghitung semua sel yang tidak kosong dalam range</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Sebelum analisis apapun, kamu harus tahu: <strong>"Ada berapa data yang gua punya?"</strong> COUNTA jawab itu. Kalau bos tanya "datanya berapa baris?", kamu nggak perlu scroll ke bawah — formula ini kasih jawaban instan. Juga dipakai untuk cross-check setelah cleaning: "Dari 5,145 baris, setelah di-clean tersisa 5,098 — berarti 47 anomali berhasil dibuang."</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Coba Ubah Angkanya!</h3>
+<p>Klik cell <strong>kuning</strong> di bawah untuk edit. Hasil formula otomatis berubah.</p>
+<div class="live-sheet" id="demo-counta">
+    <div class="live-sheet-bar"><span>📊 COUNTA — Live Demo</span><button class="reset-btn" onclick="resetDemo('counta')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Nama)</th><th>B (Kota)</th><th>C (Sales)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="counta" data-col="a" data-row="1">Andi</td><td class="editable" data-demo="counta" data-col="b" data-row="1">Jakarta</td><td class="editable" data-demo="counta" data-col="c" data-row="1">5000000</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="counta" data-col="a" data-row="2">Budi</td><td class="editable" data-demo="counta" data-col="b" data-row="2">Surabaya</td><td class="editable" data-demo="counta" data-col="c" data-row="2">3200000</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="counta" data-col="a" data-row="3">Citra</td><td class="editable" data-demo="counta" data-col="b" data-row="3">Bandung</td><td class="editable" data-demo="counta" data-col="c" data-row="3">4100000</td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="counta" data-col="a" data-row="4"></td><td class="editable" data-demo="counta" data-col="b" data-row="4"></td><td class="editable" data-demo="counta" data-col="c" data-row="4"></td></tr>
+            <tr><td class="row-num">5</td><td class="editable" data-demo="counta" data-col="a" data-row="5">Eka</td><td class="editable" data-demo="counta" data-col="b" data-row="5"></td><td class="editable" data-demo="counta" data-col="c" data-row="5">6800000</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">=COUNTA(A1:A5)</td><td class="computed" id="counta-result-a">4</td><td style="font-size:.7rem;color:var(--text-muted)">sel non-kosong di kolom A</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTA(B1:B5)</td><td class="computed" id="counta-result-b">3</td><td style="font-size:.7rem;color:var(--text-muted)">sel non-kosong di kolom B</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=SUM(C1:C5)</td><td class="computed" id="counta-result-sum">19,100,000</td><td style="font-size:.7rem;color:var(--text-muted)">total sales (bonus: SUM)</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Coba kosongkan atau isi cell kuning — lihat angka hijau berubah otomatis. Kosongkan "Andi" → COUNTA turun jadi 3.</div>
+</div>
+
+<h3>Contoh dari Case Study</h3>
+<table>
+    <thead><tr><th>Formula</th><th>Konteks</th><th>Day</th></tr></thead>
+    <tbody>
+        <tr><td><code>=COUNTA(A5:A99999)&amp;" baris"</code></td><td>Row counter → "5145 baris"</td><td>01–07</td></tr>
+        <tr><td><code>=COUNTA(UNIQUE(I5:I5102))</code></td><td>Berapa salesperson unik? → 10</td><td>01</td></tr>
+        <tr><td><code>=COUNTA(UNIQUE(C5:C1984))</code></td><td>Berapa departemen unik? → 7</td><td>02</td></tr>
+    </tbody>
+</table>
+
+<div class="insight-box"><strong>Pattern:</strong> <code>COUNTA(range)</code> = hitung non-kosong. <code>COUNTA(UNIQUE(range))</code> = hitung distinct values. Dua pattern ini bakal kamu pakai terus.</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Buka Google Sheets baru, isi 10 baris data (beberapa kosong), lalu ketik <code>=COUNTA(A1:A10)</code>. Bandingkan hasilnya dengan yang kamu hitung manual.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-countif"></div>
+<h2 class="section-title">🔍 COUNTIF — Menghitung dengan Satu Kondisi <span class="level level-1">Level 1</span></h2>
+<p><code>COUNTIF</code> menghitung sel yang memenuhi <strong>satu kondisi</strong>. Paling sering dipakai untuk deteksi anomali.</p>
+
+<div class="formula-box">
+    <div class="formula">=COUNTIF(range, criteria)</div>
+    <div class="explain">Menghitung sel dalam range yang memenuhi criteria</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Data dari sistem POS, ERP, atau CRM sering punya anomali: harga negatif (refund yang salah input), stok minus, atau revenue nol. Sebelum analisis, kamu <strong>harus tahu berapa banyak data yang rusak</strong>. COUNTIF kasih angka exact — "ada 10 baris dengan harga negatif" — yang bisa kamu laporkan ke tim IT atau data engineer.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Deteksi Anomali</h3>
+<p>Ubah angka di bawah — lihat berapa anomali yang terdeteksi secara live.</p>
+<div class="live-sheet" id="demo-countif">
+    <div class="live-sheet-bar"><span>📊 COUNTIF — Deteksi Anomali</span><button class="reset-btn" onclick="resetDemo('countif')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Price)</th><th>B (Qty)</th><th>Status</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="countif" data-col="a" data-row="1">50000</td><td class="editable" data-demo="countif" data-col="b" data-row="1">3</td><td id="countif-status-1" style="font-size:.72rem">✅ OK</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="countif" data-col="a" data-row="2">-25000</td><td class="editable" data-demo="countif" data-col="b" data-row="2">1</td><td id="countif-status-2" style="font-size:.72rem">❌ Price negatif</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="countif" data-col="a" data-row="3">75000</td><td class="editable" data-demo="countif" data-col="b" data-row="3">-2</td><td id="countif-status-3" style="font-size:.72rem">❌ Qty negatif</td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="countif" data-col="a" data-row="4">0</td><td class="editable" data-demo="countif" data-col="b" data-row="4">5</td><td id="countif-status-4" style="font-size:.72rem">⚠️ Price zero</td></tr>
+            <tr><td class="row-num">5</td><td class="editable" data-demo="countif" data-col="a" data-row="5">120000</td><td class="editable" data-demo="countif" data-col="b" data-row="5">2</td><td id="countif-status-5" style="font-size:.72rem">✅ OK</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">=COUNTIF(A,"&lt;0")</td><td class="computed" id="countif-neg-a">1</td><td style="font-size:.7rem;color:var(--text-muted)">harga negatif</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTIF(B,"&lt;0")</td><td class="computed" id="countif-neg-b">1</td><td style="font-size:.7rem;color:var(--text-muted)">qty negatif</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTIF(A,0)</td><td class="computed" id="countif-zero-a">1</td><td style="font-size:.7rem;color:var(--text-muted)">harga zero</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Total Anomali</td><td class="computed" id="countif-total" style="background:#fee2e2;color:#991b1b">3</td><td style="font-size:.7rem;color:var(--text-muted)">baris bermasalah</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Coba ubah -25000 jadi 25000 — lihat anomali berkurang. Atau ubah 120000 jadi -5 — lihat anomali bertambah.</div>
+</div>
+
+<div class="callout-green">
+    <h4>✅ Criteria yang Sering Dipakai</h4>
+    <p><code>"&lt;0"</code> → negatif &nbsp;|&nbsp; <code>0</code> → zero &nbsp;|&nbsp; <code>"&gt;100"</code> → lebih dari 100 &nbsp;|&nbsp; <code>"Jakarta"</code> → exact match text</p>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Isi kolom A dengan angka: 50, -25, 75, 0, -10, 120. Lalu coba <code>=COUNTIF(A1:A6,"&lt;0")</code> dan <code>=COUNTIF(A1:A6,0)</code>. Harusnya dapat 2 dan 1.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-countifs"></div>
+<h2 class="section-title">🔎 COUNTIFS — Menghitung dengan Multiple Kondisi <span class="level level-1">Level 1</span></h2>
+<p><code>COUNTIFS</code> = <code>COUNTIF</code> versi multi-kondisi. Semua kondisi harus terpenuhi (AND). Dipakai di <strong>semua 7 case study</strong>.</p>
+
+<div class="formula-box">
+    <div class="formula">=COUNTIFS(range1, criteria1, range2, criteria2, ...)</div>
+    <div class="explain">Menghitung sel yang memenuhi SEMUA kondisi sekaligus</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Pertanyaan bisnis jarang sesederhana "berapa total?". Biasanya: "Berapa karyawan di departemen <em>Marketing</em> yang <em>resign</em>?" atau "Berapa transaksi di tanggal <em>setelah 31 Maret</em>?". COUNTIFS menjawab pertanyaan multi-dimensi ini. Ini formula yang bikin kamu bisa bikin <strong>breakdown per kategori, per periode, per status</strong> — inti dari reporting.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Attrition per Departemen</h3>
+<p>Ubah departemen atau status resign — lihat breakdown otomatis berubah.</p>
+<div class="live-sheet" id="demo-countifs">
+    <div class="live-sheet-bar"><span>📊 COUNTIFS — Multi-Condition Count</span><button class="reset-btn" onclick="resetDemo('countifs')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Nama)</th><th>B (Dept)</th><th>C (Resigned?)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td>Andi</td><td class="editable" data-demo="countifs" data-col="b" data-row="1">Marketing</td><td class="editable" data-demo="countifs" data-col="c" data-row="1">Yes</td></tr>
+            <tr><td class="row-num">2</td><td>Budi</td><td class="editable" data-demo="countifs" data-col="b" data-row="2">Marketing</td><td class="editable" data-demo="countifs" data-col="c" data-row="2">No</td></tr>
+            <tr><td class="row-num">3</td><td>Citra</td><td class="editable" data-demo="countifs" data-col="b" data-row="3">Sales</td><td class="editable" data-demo="countifs" data-col="c" data-row="3">Yes</td></tr>
+            <tr><td class="row-num">4</td><td>Dewi</td><td class="editable" data-demo="countifs" data-col="b" data-row="4">Sales</td><td class="editable" data-demo="countifs" data-col="c" data-row="4">No</td></tr>
+            <tr><td class="row-num">5</td><td>Eka</td><td class="editable" data-demo="countifs" data-col="b" data-row="5">Marketing</td><td class="editable" data-demo="countifs" data-col="c" data-row="5">Yes</td></tr>
+            <tr><td class="row-num">6</td><td>Fajar</td><td class="editable" data-demo="countifs" data-col="b" data-row="6">Sales</td><td class="editable" data-demo="countifs" data-col="c" data-row="6">No</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">=COUNTIFS(B,"Marketing")</td><td class="computed" id="countifs-mkt-total">3</td><td style="font-size:.7rem;color:var(--text-muted)">total Marketing</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTIFS(B,"Marketing",C,"Yes")</td><td class="computed" id="countifs-mkt-yes">2</td><td style="font-size:.7rem;color:var(--text-muted)">Marketing yang resign</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Attrition Rate Marketing</td><td class="computed" id="countifs-mkt-rate" style="background:#fee2e2;color:#991b1b">66.7%</td><td style="font-size:.7rem;color:var(--text-muted)">= resigned / total</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTIFS(B,"Sales",C,"Yes")</td><td class="computed" id="countifs-sales-yes">1</td><td style="font-size:.7rem;color:var(--text-muted)">Sales yang resign</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Coba ubah "No" jadi "Yes" atau ganti departemen — lihat attrition rate berubah real-time.</div>
+</div>
+
+<h3>Use Case: Range/Bucket Counting (Day 02)</h3>
+<pre><code>// Satisfaction score 1-2 (floor grouping)
+=COUNTIFS(sat_range,"&gt;="&amp;A5, sat_range,"&lt;"&amp;(A5+1))
+
+// Tenure bucket: 2-3 tahun
+=COUNTIFS(join_range,"&lt;="&amp;DATE(2026,3,31)-2*365,
+          join_range,"&gt;"&amp;DATE(2026,3,31)-3*365)</code></pre>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Bikin tabel kecil: kolom A = Departemen (Marketing, Sales, Marketing, Sales), kolom B = Status (Yes, No, No, Yes). Lalu coba <code>=COUNTIFS(A1:A4,"Marketing",B1:B4,"Yes")</code>. Harusnya dapat 1.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-countblank"></div>
+<h2 class="section-title">⬜ COUNTBLANK — Menghitung Sel Kosong <span class="level level-1">Level 1</span></h2>
+<p>Kebalikan dari <code>COUNTA</code>. Menghitung sel yang <strong>kosong</strong>. Dipakai untuk deteksi missing values.</p>
+
+<div class="formula-box">
+    <div class="formula">=COUNTBLANK(range)</div>
+    <div class="explain">Menghitung sel kosong dalam range</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Missing data = keputusan yang salah. Kalau 20 dari 2,000 karyawan nggak punya data salary, rata-rata salary kamu <strong>pasti meleset</strong>. COUNTBLANK kasih tahu berapa banyak data yang hilang — supaya kamu bisa decide: exclude, impute, atau minta data ulang ke tim.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Deteksi Missing Values</h3>
+<p>Kosongkan atau isi cell — lihat jumlah missing berubah otomatis.</p>
+<div class="live-sheet" id="demo-countblank">
+    <div class="live-sheet-bar"><span>📊 COUNTBLANK — Missing Values</span><button class="reset-btn" onclick="resetDemo('countblank')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Nama)</th><th>B (Salary)</th><th>C (Score)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="countblank" data-col="a" data-row="1">Andi</td><td class="editable" data-demo="countblank" data-col="b" data-row="1">8500000</td><td class="editable" data-demo="countblank" data-col="c" data-row="1">4.2</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="countblank" data-col="a" data-row="2">Budi</td><td class="editable" data-demo="countblank" data-col="b" data-row="2"></td><td class="editable" data-demo="countblank" data-col="c" data-row="2">3.8</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="countblank" data-col="a" data-row="3">Citra</td><td class="editable" data-demo="countblank" data-col="b" data-row="3">7200000</td><td class="editable" data-demo="countblank" data-col="c" data-row="3"></td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="countblank" data-col="a" data-row="4">Dewi</td><td class="editable" data-demo="countblank" data-col="b" data-row="4">9100000</td><td class="editable" data-demo="countblank" data-col="c" data-row="4">4.5</td></tr>
+            <tr><td class="row-num">5</td><td class="editable" data-demo="countblank" data-col="a" data-row="5"></td><td class="editable" data-demo="countblank" data-col="b" data-row="5"></td><td class="editable" data-demo="countblank" data-col="c" data-row="5">3.1</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">=COUNTBLANK(A)</td><td class="computed" id="cblank-a">1</td><td style="font-size:.7rem;color:var(--text-muted)">nama kosong</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTBLANK(B)</td><td class="computed" id="cblank-b">2</td><td style="font-size:.7rem;color:var(--text-muted)">salary kosong</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTBLANK(C)</td><td class="computed" id="cblank-c">1</td><td style="font-size:.7rem;color:var(--text-muted)">score kosong</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Total Missing</td><td class="computed" id="cblank-total" style="background:#fee2e2;color:#991b1b">4</td><td style="font-size:.7rem;color:var(--text-muted)">total sel kosong</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Coba kosongkan "Dewi" di row 4 — missing naik. Atau isi cell kosong di row 2 — missing turun.</div>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Bikin tabel 5 baris × 3 kolom, kosongin beberapa sel secara acak. Pakai <code>=COUNTBLANK(A1:A5)+COUNTBLANK(B1:B5)+COUNTBLANK(C1:C5)</code> untuk hitung total missing.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-sum"></div>
+<h2 class="section-title">➕ SUM — Menjumlahkan Range <span class="level level-1">Level 1</span></h2>
+<p>Menjumlahkan semua angka dalam range. Dipakai di <strong>semua 7 case study</strong>.</p>
+
+<div class="formula-box">
+    <div class="formula">=SUM(range)</div>
+    <div class="explain">Menjumlahkan semua angka dalam range</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>"Berapa total revenue bulan ini?" "Berapa total stok di gudang?" "Berapa total anomali yang ditemukan?" — semua pertanyaan ini dijawab SUM. Ini formula yang paling sering muncul di dashboard dan laporan ke manajemen.</p>
+</div>
+
+<h3>🧪 Demo Interaktif</h3>
+<p>Ubah angka sales — lihat total otomatis berubah.</p>
+<div class="live-sheet" id="demo-sum">
+    <div class="live-sheet-bar"><span>📊 SUM — Total Sales</span><button class="reset-btn" onclick="resetDemo('sum')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Branch)</th><th>B (Sales)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">Jakarta South</td><td class="editable" data-demo="sum" data-col="b" data-row="1">2889080000</td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">Surabaya Central</td><td class="editable" data-demo="sum" data-col="b" data-row="2">2721450000</td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">Bandung Main</td><td class="editable" data-demo="sum" data-col="b" data-row="3">2333780000</td></tr>
+            <tr><td class="row-num">4</td><td class="label-cell">Semarang</td><td class="editable" data-demo="sum" data-col="b" data-row="4">2150000000</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">=SUM(B1:B4)</td><td class="computed" id="sum-total">10,094,310,000</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=COUNTA(B1:B4)</td><td class="computed" id="sum-count">4</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Coba ubah angka sales atau kosongkan satu cell — SUM dan COUNTA otomatis update.</div>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Ketik 5 angka di kolom A, lalu <code>=SUM(A1:A5)</code>. Coba juga <code>=SUM(A1:A3,A5)</code> — SUM bisa terima multiple ranges!</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-unique"></div>
+<h2 class="section-title">🧹 UNIQUE — Menghapus Duplikat <span class="level level-1">Level 1</span></h2>
+<p><code>UNIQUE</code> mengembalikan array tanpa baris duplikat. <strong>Langkah pertama</strong> di pipeline cleaning.</p>
+
+<div class="formula-box">
+    <div class="formula">=UNIQUE(range)</div>
+    <div class="explain">Return array tanpa baris duplikat</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Sistem POS sering double-submit transaksi (lag jaringan, user klik 2x). Kalau nggak di-clean, revenue kamu <strong>inflated</strong> — bisa bikin keputusan stok yang salah. UNIQUE otomatis buang duplikat. Di Day 01, ada 24 duplicate rows dari 5,145 — kalau nggak dibuang, total sales meleset Rp ratusan juta.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Hitung Duplikat</h3>
+<p>Ubah data — bikin baris identik atau beda — lihat jumlah duplikat berubah.</p>
+<div class="live-sheet" id="demo-unique">
+    <div class="live-sheet-bar"><span>📊 UNIQUE — Duplicate Detection</span><button class="reset-btn" onclick="resetDemo('unique')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Date)</th><th>B (Branch)</th><th>C (Sales)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="unique" data-col="a" data-row="1">2025-01-01</td><td class="editable" data-demo="unique" data-col="b" data-row="1">Jakarta</td><td class="editable" data-demo="unique" data-col="c" data-row="1">5000000</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="unique" data-col="a" data-row="2">2025-01-01</td><td class="editable" data-demo="unique" data-col="b" data-row="2">Jakarta</td><td class="editable" data-demo="unique" data-col="c" data-row="2">5000000</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="unique" data-col="a" data-row="3">2025-01-02</td><td class="editable" data-demo="unique" data-col="b" data-row="3">Surabaya</td><td class="editable" data-demo="unique" data-col="c" data-row="3">3200000</td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="unique" data-col="a" data-row="4">2025-01-03</td><td class="editable" data-demo="unique" data-col="b" data-row="4">Bandung</td><td class="editable" data-demo="unique" data-col="c" data-row="4">4100000</td></tr>
+            <tr><td class="row-num">5</td><td class="editable" data-demo="unique" data-col="a" data-row="5">2025-01-02</td><td class="editable" data-demo="unique" data-col="b" data-row="5">Surabaya</td><td class="editable" data-demo="unique" data-col="c" data-row="5">3200000</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Total Rows</td><td class="computed" id="unique-total">5</td><td style="font-size:.7rem;color:var(--text-muted)">COUNTA</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Unique Rows</td><td class="computed" id="unique-uniq">3</td><td style="font-size:.7rem;color:var(--text-muted)">ROWS(UNIQUE)</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Duplicates</td><td class="computed" id="unique-dups" style="background:#fee2e2;color:#991b1b">2</td><td style="font-size:.7rem;color:var(--text-muted)">Total - Unique</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Distinct Branches</td><td class="computed" id="unique-branches">3</td><td style="font-size:.7rem;color:var(--text-muted)">COUNTA(UNIQUE(B))</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Coba ubah row 2 supaya beda dari row 1 — duplikat berkurang. Atau bikin row 4 sama dengan row 3 — duplikat bertambah.</div>
+</div>
+
+<div class="two-col">
+    <div class="chart-card">
+        <div class="title">Pattern: Hitung Distinct Values</div>
+<pre><code>=COUNTA(UNIQUE(I5:I5102))  → 10 salesperson
+=COUNTA(UNIQUE(C5:C1984))  → 7 departemen</code></pre>
+        <div class="insight-box">Mirip <code>COUNT(DISTINCT col)</code> di SQL.</div>
+    </div>
+    <div class="chart-card">
+        <div class="title">Pattern: Bagian Pipeline Cleaning</div>
+<pre><code>=LET(d, UNIQUE(raw_range),
+  FILTER(d, conditions...)
+)</code></pre>
+        <div class="insight-box">UNIQUE selalu jadi step 1 sebelum FILTER.</div>
+    </div>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Isi A1:C5 dengan data (beberapa baris identik). Ketik <code>=UNIQUE(A1:C5)</code> di cell E1. Lihat hasilnya auto-spill tanpa duplikat. Lalu coba <code>=COUNTA(A1:A5)-ROWS(UNIQUE(A1:C5))</code> untuk hitung jumlah duplikat.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-filter"></div>
+<h2 class="section-title">🔬 FILTER — Menyaring Data Berdasarkan Kondisi <span class="level level-2">Level 2</span></h2>
+<p><code>FILTER</code> menyaring baris berdasarkan kondisi. Multiple kondisi dipisah koma = AND logic. Ini formula <strong>paling penting</strong> di seluruh materi.</p>
+
+<div class="formula-box">
+    <div class="formula">=FILTER(array, condition1, condition2, ...)</div>
+    <div class="explain">Return baris dari array yang memenuhi SEMUA kondisi</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Bayangkan kamu punya 5,145 baris data penjualan. Di dalamnya ada tanggal masa depan (data entry error), harga negatif (refund salah input), dan harga nol (placeholder). Kalau kamu analisis data mentah ini, <strong>semua angka kamu salah</strong>. FILTER bikin satu formula di cell A5 yang otomatis buang semua anomali — hasilnya: data bersih yang bisa dipercaya untuk keputusan bisnis.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Clean Data Pipeline</h3>
+<p>Ubah angka — lihat baris mana yang lolos filter dan mana yang dibuang, secara real-time.</p>
+<div class="live-sheet" id="demo-filter">
+    <div class="live-sheet-bar"><span>📊 FILTER — Data Cleaning Live</span><button class="reset-btn" onclick="resetDemo('filter')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Qty)</th><th>B (Price)</th><th>C (Total)</th><th>Status</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="filter" data-col="a" data-row="1">3</td><td class="editable" data-demo="filter" data-col="b" data-row="1">50000</td><td id="filter-total-1" class="computed">150,000</td><td id="filter-status-1" style="font-size:.72rem">✅ Keep</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="filter" data-col="a" data-row="2">-1</td><td class="editable" data-demo="filter" data-col="b" data-row="2">30000</td><td id="filter-total-2" class="computed">-30,000</td><td id="filter-status-2" style="font-size:.72rem">❌ Qty negatif</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="filter" data-col="a" data-row="3">5</td><td class="editable" data-demo="filter" data-col="b" data-row="3">0</td><td id="filter-total-3" class="computed">0</td><td id="filter-status-3" style="font-size:.72rem">❌ Price=0 &amp; Qty&gt;0</td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="filter" data-col="a" data-row="4">2</td><td class="editable" data-demo="filter" data-col="b" data-row="4">75000</td><td id="filter-total-4" class="computed">150,000</td><td id="filter-status-4" style="font-size:.72rem">✅ Keep</td></tr>
+            <tr><td class="row-num">5</td><td class="editable" data-demo="filter" data-col="a" data-row="5">4</td><td class="editable" data-demo="filter" data-col="b" data-row="5">-5000</td><td id="filter-total-5" class="computed">-20,000</td><td id="filter-status-5" style="font-size:.72rem">❌ Price negatif</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Raw Rows</td><td class="computed" id="filter-raw">5</td><td class="formula-display">Clean Rows</td><td class="computed" id="filter-clean" style="background:#f0fdf4;color:#166534">2</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Removed</td><td class="computed" id="filter-removed" style="background:#fee2e2;color:#991b1b">3</td><td class="formula-display">Clean Total Sales</td><td class="computed" id="filter-cleansum" style="background:#f0fdf4;color:#166534">300,000</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah -1 jadi 1 → row 2 jadi ✅ Keep. Ubah price 0 jadi 25000 → row 3 lolos. Lihat clean rows & total berubah.</div>
+</div>
+<pre><code>=LET(d, UNIQUE(raw_range),
+  FILTER(d,
+    INDEX(d,,1)&lt;=DATE(2026,3,31),          // tanggal ≤ period end
+    INDEX(d,,2)&gt;=0,                         // quantity ≥ 0
+    INDEX(d,,3)&gt;=0,                         // price ≥ 0
+    NOT((INDEX(d,,3)=0)*(INDEX(d,,2)&gt;0))   // bukan zero price + ada qty
+  ))
+// Hasil: hanya Row 1 dan Row 5 yang lolos → 2 clean rows</code></pre>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Bikin data 5 baris: kolom A = angka (include 1 negatif), kolom B = angka (include 1 nol). Ketik <code>=FILTER(A1:B5, A1:A5>=0, B1:B5>0)</code>. Lihat baris yang negatif/nol otomatis hilang.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-let"></div>
+<h2 class="section-title">📦 LET — Mendefinisikan Variabel dalam Formula <span class="level level-2">Level 2</span></h2>
+<p><code>LET</code> menyimpan hasil kalkulasi ke variabel supaya nggak dihitung ulang. Bikin formula lebih <strong>cepat</strong> dan <strong>readable</strong>.</p>
+
+<div class="formula-box">
+    <div class="formula">=LET(name, value, ..., calculation)</div>
+    <div class="explain">Definisikan variabel, lalu pakai di calculation terakhir</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Dataset 5,000+ baris itu berat. Tanpa LET, formula UNIQUE dihitung berkali-kali — spreadsheet jadi <strong>lambat</strong> dan bisa hang. Dengan LET, UNIQUE dihitung sekali saja. Ini bukan cuma soal kecepatan — ini soal <strong>spreadsheet yang masih bisa dibuka</strong> oleh bos kamu yang pakai laptop kentang.</p>
+</div>
+
+<div class="two-col">
+    <div class="chart-card">
+        <div class="title">❌ Tanpa LET (lambat)</div>
+<pre><code>=FILTER(UNIQUE(raw),
+  INDEX(UNIQUE(raw),,1)&gt;=0,
+  INDEX(UNIQUE(raw),,6)&gt;=0)
+// UNIQUE dihitung 3x!</code></pre>
+    </div>
+    <div class="chart-card">
+        <div class="title">✅ Dengan LET (cepat)</div>
+<pre><code>=LET(d, UNIQUE(raw),
+  FILTER(d,
+    INDEX(d,,1)&gt;=0,
+    INDEX(d,,6)&gt;=0))
+// UNIQUE dihitung 1x saja</code></pre>
+    </div>
+</div>
+
+<h3>🧪 Demo Interaktif — Variabel dalam Formula</h3>
+<p>LET menyimpan nilai ke variabel. Ubah variabel — lihat hasil kalkulasi berubah.</p>
+<div class="live-sheet" id="demo-let">
+    <div class="live-sheet-bar"><span>📊 LET — Variable Demo</span><button class="reset-btn" onclick="resetDemo('let')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Variabel</th><th>Nilai</th><th>Formula</th><th>Hasil</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">harga</td><td class="editable" data-demo="let" data-col="a" data-row="1">50000</td><td rowspan="3" class="formula-display" style="vertical-align:middle;font-size:.7rem">=LET(<br>harga, A1,<br>qty, A2,<br>diskon, A3,<br>harga*qty*(1-diskon))</td><td rowspan="3" class="computed" id="let-result" style="vertical-align:middle;font-size:1.1rem">225,000</td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">qty</td><td class="editable" data-demo="let" data-col="a" data-row="2">5</td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">diskon</td><td class="editable" data-demo="let" data-col="a" data-row="3">0.1</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">harga × qty</td><td class="computed" id="let-subtotal">250,000</td><td class="formula-display">diskon amount</td><td class="computed" id="let-diskon">25,000</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah harga jadi 100000, qty jadi 3, diskon jadi 0.2 — lihat semua angka recalculate. Ini cara kerja LET: definisikan variabel, pakai di kalkulasi.</div>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Ketik <code>=LET(x, 10, y, 20, x+y)</code> di cell manapun. Hasilnya 30. Sekarang kamu paham konsepnya — <code>x</code> dan <code>y</code> itu variabel.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-index"></div>
+<h2 class="section-title">📌 INDEX — Mengakses Kolom dari Array <span class="level level-2">Level 2</span></h2>
+<p><code>INDEX(array,,N)</code> mengambil seluruh kolom ke-N dari array. Selalu dipakai di dalam <code>FILTER</code> untuk reference kolom dari variabel <code>d</code>.</p>
+
+<div class="formula-box">
+    <div class="formula">=INDEX(array, , column_num)</div>
+    <div class="explain">row kosong = semua baris. column_num = kolom ke-N</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Ketika data kamu punya 9-15 kolom, kamu perlu cara untuk bilang "filter berdasarkan kolom ke-6" tanpa harus bikin range terpisah. INDEX bikin kamu bisa <strong>reference kolom manapun dari array</strong> — ini yang bikin satu formula di A5 bisa handle semua cleaning sekaligus.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Akses Kolom dari Array</h3>
+<p>Pilih nomor kolom — lihat kolom mana yang diakses dan hasilnya.</p>
+<div class="live-sheet" id="demo-index">
+    <div class="live-sheet-bar"><span>📊 INDEX — Column Access</span><button class="reset-btn" onclick="resetDemo('index')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Col 1 (Date)</th><th>Col 2 (Branch)</th><th>Col 3 (Qty)</th><th>Col 4 (Price)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="index" data-col="a" data-row="1">2025-01-01</td><td class="editable" data-demo="index" data-col="b" data-row="1">Jakarta</td><td class="editable" data-demo="index" data-col="c" data-row="1">3</td><td class="editable" data-demo="index" data-col="d" data-row="1">50000</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="index" data-col="a" data-row="2">2025-01-02</td><td class="editable" data-demo="index" data-col="b" data-row="2">Surabaya</td><td class="editable" data-demo="index" data-col="c" data-row="2">5</td><td class="editable" data-demo="index" data-col="d" data-row="2">75000</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="index" data-col="a" data-row="3">2025-01-03</td><td class="editable" data-demo="index" data-col="b" data-row="3">Bandung</td><td class="editable" data-demo="index" data-col="c" data-row="3">-2</td><td class="editable" data-demo="index" data-col="d" data-row="3">0</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Pilih kolom:</td><td><select id="index-col-select" style="padding:.3rem;border-radius:4px;border:1px solid #c7d2fe;font-family:'Fira Code',monospace;font-size:.75rem"><option value="1">1 (Date)</option><option value="2">2 (Branch)</option><option value="3" selected>3 (Qty)</option><option value="4">4 (Price)</option></select></td><td class="formula-display">INDEX(d,,<span id="index-col-num">3</span>)</td><td></td></tr>
+            <tr><td class="row-num">→</td><td class="label-cell">Row 1:</td><td class="computed" id="index-r1">3</td><td class="label-cell">Row 2:</td><td class="computed" id="index-r2">5</td></tr>
+            <tr><td class="row-num">→</td><td class="label-cell">Row 3:</td><td class="computed" id="index-r3">-2</td><td class="formula-display">SUM kolom ini:</td><td class="computed" id="index-sum">6</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">FILTER: kolom ≥ 0</td><td class="computed" id="index-filter-count" style="background:#f0fdf4;color:#166534">2 rows pass</td><td class="formula-display">FILTER: kolom &lt; 0</td><td class="computed" id="index-filter-neg" style="background:#fee2e2;color:#991b1b">1 row fail</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ganti dropdown ke kolom lain — lihat INDEX mengembalikan kolom yang berbeda. Ubah data — lihat SUM dan FILTER count berubah.</div>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Bikin data 3 kolom × 5 baris di A1:C5. Di E1 ketik <code>=LET(d,A1:C5,INDEX(d,,2))</code> — hasilnya seluruh kolom B muncul di E. Sekarang coba <code>=LET(d,A1:C5,FILTER(d,INDEX(d,,2)>0))</code>.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-pipeline"></div>
+<h2 class="section-title">🔗 Pipeline Cleaning — Menggabungkan Semuanya <span class="level level-2">Level 2</span></h2>
+<p>Ini pattern yang dipakai di <strong>semua 7 case study</strong>. Satu formula di cell A5 tab Clean Data yang otomatis membersihkan seluruh dataset.</p>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Tanpa pipeline ini, kamu harus manual delete baris satu-satu — error-prone dan nggak reproducible. Dengan satu formula, cleaning kamu <strong>otomatis, konsisten, dan bisa di-audit</strong>. Kalau ada data baru masuk, tinggal refresh — nggak perlu cleaning ulang dari nol.</p>
+</div>
+
+<div class="chart-card">
+    <div class="title">🔗 Universal Cleaning Pipeline (Cell A5)</div>
+<pre><code>=LET(
+  d, UNIQUE('Raw Data'!A5:'Raw Data'![last_col][last_row]),
+  FILTER(d,
+    [condition 1: remove anomaly type A],
+    [condition 2: remove anomaly type B],
+    ...
+  )
+)
+// Step 1: UNIQUE() → hapus duplikat
+// Step 2: FILTER() → hapus negatives, future dates, zero, missing
+// Hasil: Data bersih auto-spill ke bawah</code></pre>
+</div>
+
+<h3>Cross-check Pattern (Wajib!)</h3>
+<h3>🧪 Demo Interaktif — Cross-check Cleaning</h3>
+<p>Ubah jumlah anomali — lihat apakah Cara 1 dan Cara 2 masih match.</p>
+<div class="live-sheet" id="demo-pipeline">
+    <div class="live-sheet-bar"><span>📊 Pipeline — Cross-check Demo</span><button class="reset-btn" onclick="resetDemo('pipeline')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Anomali</th><th>Jumlah</th><th></th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">Raw Rows</td><td class="editable" data-demo="pipeline" data-col="a" data-row="1">5145</td><td></td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">Duplicates</td><td class="editable" data-demo="pipeline" data-col="a" data-row="2">24</td><td></td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">Negatives</td><td class="editable" data-demo="pipeline" data-col="a" data-row="3">10</td><td></td></tr>
+            <tr><td class="row-num">4</td><td class="label-cell">Future Dates</td><td class="editable" data-demo="pipeline" data-col="a" data-row="4">5</td><td></td></tr>
+            <tr><td class="row-num">5</td><td class="label-cell">Zero Prices</td><td class="editable" data-demo="pipeline" data-col="a" data-row="5">8</td><td></td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Total Anomali</td><td class="computed" id="pipe-anomali">47</td><td></td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Cara 1: Raw - Anomali</td><td class="computed" id="pipe-cara1" style="background:#dbeafe;color:#1e40af">5,098</td><td></td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Cara 2: COUNTA Clean</td><td class="editable" data-demo="pipeline" data-col="a" data-row="6" style="background:#fffbeb">5098</td><td></td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Match?</td><td class="computed" id="pipe-match" style="background:#f0fdf4;color:#166534;font-size:.9rem">✅ Match!</td><td></td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah "Cara 2" jadi 5099 — lihat status jadi ❌ Mismatch. Ini artinya ada anomali yang kelewat. Ubah balik ke 5098 — ✅ Match.</div>
+</div>
+<div class="callout-green">
+    <h4>✅ Kedua angka HARUS sama</h4>
+    <p>Kalau Cara 1 ≠ Cara 2, berarti ada anomali yang kelewat atau formula cleaning salah.</p>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Bikin Raw Data 10 baris (include 2 duplikat, 1 negatif). Di sheet baru, ketik formula <code>=LET(d,UNIQUE('Sheet1'!A1:C10),FILTER(d,INDEX(d,,2)>=0))</code>. Verifikasi: 10 - 2 - 1 = 7 clean rows.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-sumifs"></div>
+<h2 class="section-title">📊 SUMIFS — Menjumlahkan dengan Kondisi <span class="level level-2">Level 2</span></h2>
+<p><code>SUMIFS</code> = <code>SUM</code> + kondisi. Menjumlahkan range hanya untuk baris yang memenuhi semua kondisi.</p>
+
+<div class="formula-box">
+    <div class="formula">=SUMIFS(sum_range, criteria_range1, criteria1, ...)</div>
+    <div class="explain">Jumlahkan sum_range untuk baris yang memenuhi semua criteria</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>"Berapa total sales cabang Jakarta?" "Berapa revenue bulan Maret?" "Berapa pengeluaran kategori Tagihan?" — ini pertanyaan yang dijawab SUMIFS. Tanpa SUMIFS, kamu harus bikin pivot table atau filter manual. Dengan SUMIFS, <strong>satu formula = satu jawaban</strong>, dan otomatis update kalau data berubah.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Total Sales per Branch</h3>
+<p>Ubah nama cabang atau angka sales — lihat total per cabang otomatis recalculate.</p>
+<div class="live-sheet" id="demo-sumifs">
+    <div class="live-sheet-bar"><span>📊 SUMIFS — Conditional Sum</span><button class="reset-btn" onclick="resetDemo('sumifs')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Branch)</th><th>B (Sales)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="sumifs" data-col="a" data-row="1">Jakarta</td><td class="editable" data-demo="sumifs" data-col="b" data-row="1">5000000</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="sumifs" data-col="a" data-row="2">Surabaya</td><td class="editable" data-demo="sumifs" data-col="b" data-row="2">3200000</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="sumifs" data-col="a" data-row="3">Jakarta</td><td class="editable" data-demo="sumifs" data-col="b" data-row="3">4100000</td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="sumifs" data-col="a" data-row="4">Bandung</td><td class="editable" data-demo="sumifs" data-col="b" data-row="4">2800000</td></tr>
+            <tr><td class="row-num">5</td><td class="editable" data-demo="sumifs" data-col="a" data-row="5">Jakarta</td><td class="editable" data-demo="sumifs" data-col="b" data-row="5">6000000</td></tr>
+            <tr><td class="row-num">6</td><td class="editable" data-demo="sumifs" data-col="a" data-row="6">Surabaya</td><td class="editable" data-demo="sumifs" data-col="b" data-row="6">4500000</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">=SUMIFS(B,A,"Jakarta")</td><td class="computed" id="sumifs-jakarta">15,100,000</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=SUMIFS(B,A,"Surabaya")</td><td class="computed" id="sumifs-surabaya">7,700,000</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=SUMIFS(B,A,"Bandung")</td><td class="computed" id="sumifs-bandung">2,800,000</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=SUM(B) — Grand Total</td><td class="computed" id="sumifs-total" style="background:#dbeafe;color:#1e40af">25,600,000</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Coba ubah "Bandung" jadi "Jakarta" — lihat total Jakarta naik dan Bandung jadi 0. Atau ubah angka sales.</div>
+</div>
+
+<h3>Use Case: Revenue per Bulan (Date Range)</h3>
+<pre><code>// Revenue Januari 2025 (Day 03)
+=SUMIFS(rev_range,
+        date_range, "&gt;="&amp;DATE(2025,1,1),
+        date_range, "&lt;"&amp;DATE(2025,2,1))</code></pre>
+
+<div class="callout-blue">
+    <h4>💡 Pattern Date Range</h4>
+    <p><code>&gt;=</code> awal bulan DAN <code>&lt;</code> awal bulan berikutnya. Cara paling aman filter per bulan — nggak perlu khawatir jumlah hari.</p>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Bikin data: kolom A = nama cabang (Jakarta, Surabaya, Jakarta), kolom B = sales (100, 200, 150). Ketik <code>=SUMIFS(B1:B3,A1:A3,"Jakarta")</code>. Harusnya dapat 250.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-sumproduct"></div>
+<h2 class="section-title">⚡ SUMPRODUCT — Array Multiplication Power <span class="level level-3">Level 3</span></h2>
+<p><code>SUMPRODUCT</code> mengalikan array element-by-element lalu menjumlahkan. Formula <strong>paling powerful</strong> — bisa handle kondisi yang SUMIFS nggak bisa.</p>
+
+<div class="formula-box">
+    <div class="formula">=SUMPRODUCT((condition1) * (condition2) * values)</div>
+    <div class="explain">TRUE=1, FALSE=0. Multiply conditions × values, lalu sum.</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>"Berapa rata-rata penjualan di hari Sabtu?" — SUMIFS nggak bisa jawab ini karena nggak support WEEKDAY. SUMPRODUCT bisa. "Berapa total expense di bulan Januari 2025 untuk kategori Makanan?" — 3 kondisi sekaligus (YEAR + MONTH + Category). Ini formula yang bikin kamu bisa analisis <strong>pola waktu</strong> (weekend effect, payday effect, seasonal trend) yang jadi insight paling valuable buat bisnis.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Weekend vs Weekday Sales</h3>
+<p>Ubah hari atau angka sales — lihat total weekend/weekday dan boost % berubah otomatis.</p>
+<div class="live-sheet" id="demo-sumproduct">
+    <div class="live-sheet-bar"><span>📊 SUMPRODUCT — Weekend Effect</span><button class="reset-btn" onclick="resetDemo('sumproduct')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Hari)</th><th>B (Sales)</th><th>Tipe</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="sumproduct" data-col="a" data-row="1">Monday</td><td class="editable" data-demo="sumproduct" data-col="b" data-row="1">52000000</td><td id="sp-type-1" style="font-size:.72rem">📅 Weekday</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="sumproduct" data-col="a" data-row="2">Tuesday</td><td class="editable" data-demo="sumproduct" data-col="b" data-row="2">48000000</td><td id="sp-type-2" style="font-size:.72rem">📅 Weekday</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="sumproduct" data-col="a" data-row="3">Wednesday</td><td class="editable" data-demo="sumproduct" data-col="b" data-row="3">55000000</td><td id="sp-type-3" style="font-size:.72rem">📅 Weekday</td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="sumproduct" data-col="a" data-row="4">Saturday</td><td class="editable" data-demo="sumproduct" data-col="b" data-row="4">71000000</td><td id="sp-type-4" style="font-size:.72rem">🎉 Weekend</td></tr>
+            <tr><td class="row-num">5</td><td class="editable" data-demo="sumproduct" data-col="a" data-row="5">Sunday</td><td class="editable" data-demo="sumproduct" data-col="b" data-row="5">68000000</td><td id="sp-type-5" style="font-size:.72rem">🎉 Weekend</td></tr>
+            <tr><td class="row-num">6</td><td class="editable" data-demo="sumproduct" data-col="a" data-row="6">Friday</td><td class="editable" data-demo="sumproduct" data-col="b" data-row="6">58000000</td><td id="sp-type-6" style="font-size:.72rem">📅 Weekday</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Weekday Avg</td><td class="computed" id="sp-weekday-avg">53,250,000</td><td></td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Weekend Avg</td><td class="computed" id="sp-weekend-avg">69,500,000</td><td></td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Weekend Boost</td><td class="computed" id="sp-boost" style="background:#f0fdf4;color:#166534;font-size:.95rem">+30.5%</td><td></td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah "Monday" jadi "Saturday" — lihat weekend avg naik. Atau naikkan sales weekday — lihat boost % turun.</div>
+</div>
+<div class="insight-box"><strong>Weekend Boost = (71M / 52M) - 1 = +35.4%</strong> — Sabtu-Minggu sales 35% lebih tinggi. Insight ini langsung actionable: push promo di weekend.</div>
+
+<h3>Use Case Lain</h3>
+<pre><code>// Payday effect: tanggal 1-5 vs 6-31 (Day 01)
+=SUMPRODUCT((DAY(dates)&lt;=5) * sales)
+
+// Monthly trend: expense per bulan (Day 07)
+=SUMPRODUCT((YEAR(dates)=2025)*(MONTH(dates)=1)*(type="Expense")*amount)
+
+// Inventory value: stock × price (Day 04)
+=SUMPRODUCT(stock_range, price_range)
+
+// OR logic: any negative (Day 05)
+=SUMPRODUCT(((spend&lt;0)+(revenue&lt;0)+(clicks&lt;0))&gt;0)</code></pre>
+
+<div class="callout-orange">
+    <h4>⚠️ SUMPRODUCT vs SUMIFS</h4>
+    <p><strong>SUMIFS:</strong> Kondisi sederhana (exact match, &gt;, &lt;). Lebih cepat.<br>
+    <strong>SUMPRODUCT:</strong> Kondisi complex (WEEKDAY, MONTH, OR logic). Lebih fleksibel.<br>
+    Rule: Kalau SUMIFS bisa → pakai SUMIFS. Kalau nggak bisa → SUMPRODUCT.</p>
+</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Bikin data: kolom A = tanggal (pakai DATE), kolom B = sales. Ketik <code>=SUMPRODUCT((WEEKDAY(A1:A7,2)>=6)*B1:B7)</code> untuk total sales weekend. Bandingkan dengan weekday.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-average"></div>
+<h2 class="section-title">📈 AVERAGE — Rata-rata & Moving Average <span class="level level-2">Level 2</span></h2>
+<p><code>AVERAGE</code> menghitung rata-rata. Dipakai untuk <strong>3-month moving average</strong> (forecasting) dan rata-rata bulanan.</p>
+
+<div class="formula-box">
+    <div class="formula">=AVERAGE(value1, value2, value3)</div>
+    <div class="explain">Rata-rata dari values yang diberikan</div>
+</div>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>CFO tanya: "Prediksi revenue Q2 2026 berapa?" Kamu nggak bisa jawab "nggak tahu". Dengan 3-month moving average, kamu bisa kasih <strong>3 skenario</strong>: base, optimistic (+20%), pessimistic (-15%). Ini bukan crystal ball — tapi ini <strong>data-driven estimate</strong> yang jauh lebih baik dari tebakan.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — Forecast Q2 2026</h3>
+<p>Ubah revenue 3 bulan terakhir — lihat forecast base, optimistic, pessimistic otomatis berubah.</p>
+<div class="live-sheet" id="demo-average">
+    <div class="live-sheet-bar"><span>📊 AVERAGE — 3-Month Moving Average Forecast</span><button class="reset-btn" onclick="resetDemo('average')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Month</th><th>Revenue (Rp)</th><th>Optimistic (+20%)</th><th>Pessimistic (-15%)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">Data</td><td class="label-cell">Jan 2026</td><td class="editable" data-demo="average" data-col="b" data-row="1">575424723</td><td></td><td></td></tr>
+            <tr><td class="row-num">Data</td><td class="label-cell">Feb 2026</td><td class="editable" data-demo="average" data-col="b" data-row="2">573963889</td><td></td><td></td></tr>
+            <tr><td class="row-num">Data</td><td class="label-cell">Mar 2026</td><td class="editable" data-demo="average" data-col="b" data-row="3">563476507</td><td></td><td></td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">FC</td><td class="label-cell">Apr 2026</td><td class="computed" id="avg-apr">570,955,040</td><td class="computed" id="avg-apr-opt">685,146,048</td><td class="computed" id="avg-apr-pes">485,311,784</td></tr>
+            <tr><td class="row-num">FC</td><td class="label-cell">May 2026</td><td class="computed" id="avg-may">569,465,145</td><td class="computed" id="avg-may-opt">683,358,174</td><td class="computed" id="avg-may-pes">484,045,373</td></tr>
+            <tr><td class="row-num">FC</td><td class="label-cell">Jun 2026</td><td class="computed" id="avg-jun">567,965,564</td><td class="computed" id="avg-jun-opt">681,558,677</td><td class="computed" id="avg-jun-pes">482,770,729</td></tr>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">Σ</td><td class="label-cell" style="font-weight:800">Q2 Total</td><td class="computed" id="avg-q2" style="background:#dbeafe;color:#1e40af">1,708,385,749</td><td class="computed" id="avg-q2-opt" style="background:#f0fdf4;color:#166534">2,050,062,899</td><td class="computed" id="avg-q2-pes" style="background:#fee2e2;color:#991b1b">1,452,127,887</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Naikkan revenue Maret jadi 600M — lihat semua forecast naik. Atau turunkan Januari — lihat Q2 total turun.</div>
+</div>
+<div class="insight-box"><strong>Rolling MA:</strong> Setiap bulan baru, window geser — include forecast sebelumnya. Q2 total base: Rp 1.71B, optimistic: Rp 2.05B, pessimistic: Rp 1.45B.</div>
+
+<div class="try-it">
+    <div class="try-icon">🎯</div>
+    <div class="try-text"><strong>Coba Sendiri:</strong> Ketik 6 angka di A1:A6 (simulasi revenue 6 bulan). Di B7 ketik <code>=AVERAGE(A4:A6)</code> untuk forecast bulan ke-7. Di B8 ketik <code>=AVERAGE(A5,A6,B7)</code> untuk bulan ke-8. Lihat rolling effect-nya.</div>
+</div>
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div id="sec-date"></div>
+<h2 class="section-title">📅 DATE Functions — DATE, WEEKDAY, DAY, YEAR, MONTH, SEQUENCE <span class="level level-2">Level 2</span></h2>
+<p>Date functions dipakai untuk manipulasi tanggal. Ada 6 yang dipakai di materi.</p>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Bisnis bergerak berdasarkan waktu: "Revenue bulan apa yang tertinggi?", "Hari apa paling ramai?", "Tanggal gajian (1-5) sales naik berapa persen?". Tanpa date functions, kamu nggak bisa jawab pertanyaan temporal ini. Ini yang membedakan <strong>laporan statis</strong> (cuma total) dari <strong>analisis dinamis</strong> (trend, pattern, seasonality).</p>
+</div>
+
+<h3><code>DATE(year, month, day)</code> — Membuat Tanggal</h3>
+
+<h3>🧪 Demo Interaktif — Date Functions</h3>
+<p>Ubah year/month/day — lihat tanggal yang dihasilkan dan fungsi turunannya.</p>
+<div class="live-sheet" id="demo-date">
+    <div class="live-sheet-bar"><span>📊 DATE — Date Functions Live</span><button class="reset-btn" onclick="resetDemo('date')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Parameter</th><th>Nilai</th><th>Formula</th><th>Hasil</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">Year</td><td class="editable" data-demo="date" data-col="a" data-row="1">2025</td><td class="formula-display" rowspan="3" style="vertical-align:middle">=DATE(year,month,day)</td><td class="computed" id="date-result" rowspan="3" style="vertical-align:middle;font-size:1rem">2025-06-15</td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">Month</td><td class="editable" data-demo="date" data-col="a" data-row="2">6</td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">Day</td><td class="editable" data-demo="date" data-col="a" data-row="3">15</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">=WEEKDAY(date,2)</td><td class="computed" id="date-weekday">7</td><td class="formula-display">Nama Hari</td><td class="computed" id="date-dayname">Sunday</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=DAY(date)</td><td class="computed" id="date-day">15</td><td class="formula-display">Payday?</td><td class="computed" id="date-payday">❌ Non-payday (tgl 6-31)</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">=YEAR(date)</td><td class="computed" id="date-year">2025</td><td class="formula-display">=MONTH(date)</td><td class="computed" id="date-month">6</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Future date?</td><td class="computed" id="date-future" colspan="3">✅ Dalam periode (≤ 2026-03-31)</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah year jadi 2027 — lihat "Future date" jadi ❌. Ubah day jadi 3 — lihat "Payday?" jadi ✅. Ubah month jadi 1 dan day jadi 4 — lihat hari berubah jadi Saturday.</div>
+</div>
+
+<h3><code>WEEKDAY(date, 2)</code> — Hari dalam Seminggu (Day 01)</h3>
+<p>Sudah bisa dicoba di demo DATE di atas — ubah tanggal dan lihat WEEKDAY berubah. <code>WEEKDAY(date,2)</code> return 1=Monday s/d 7=Sunday.</p>
+
+<h3><code>DAY(date)</code> — Tanggal 1-31 (Day 01)</h3>
+<p>Juga sudah di demo DATE — ubah day jadi 1-5 untuk lihat "✅ Payday", atau 6-31 untuk "❌ Non-payday".</p>
+
+<h3><code>YEAR(date)</code> + <code>MONTH(date)</code> — Ekstrak Tahun/Bulan (Day 07)</h3>
+<p>Demo DATE di atas juga menampilkan YEAR dan MONTH. Ubah year/month — lihat hasilnya.</p>
+
+<h3><code>SEQUENCE</code> + <code>MATCH</code> + <code>ISNA</code> — Missing Date Detection (Day 01)</h3>
+<p>Formula paling advanced di seluruh materi. Mendeteksi tanggal yang <strong>nggak ada</strong> di data.</p>
+
+<h3>🧪 Demo Interaktif — Missing Date Detector</h3>
+<p>Kosongkan tanggal — lihat berapa yang "missing" terdeteksi.</p>
+<div class="live-sheet" id="demo-sequence">
+    <div class="live-sheet-bar"><span>📊 SEQUENCE+MATCH+ISNA — Missing Dates</span><button class="reset-btn" onclick="resetDemo('sequence')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Semua Tanggal (SEQUENCE)</th><th>Data yang Ada</th><th>MATCH</th><th>ISNA?</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">2025-01-01</td><td class="editable" data-demo="sequence" data-col="a" data-row="1">2025-01-01</td><td id="seq-match-1" class="computed">Found</td><td id="seq-isna-1">FALSE</td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">2025-01-02</td><td class="editable" data-demo="sequence" data-col="a" data-row="2">2025-01-02</td><td id="seq-match-2" class="computed">Found</td><td id="seq-isna-2">FALSE</td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">2025-01-03</td><td class="editable" data-demo="sequence" data-col="a" data-row="3"></td><td id="seq-match-3" class="computed" style="background:#fee2e2;color:#991b1b">#N/A</td><td id="seq-isna-3" style="color:#991b1b;font-weight:700">TRUE</td></tr>
+            <tr><td class="row-num">4</td><td class="label-cell">2025-01-04</td><td class="editable" data-demo="sequence" data-col="a" data-row="4">2025-01-04</td><td id="seq-match-4" class="computed">Found</td><td id="seq-isna-4">FALSE</td></tr>
+            <tr><td class="row-num">5</td><td class="label-cell">2025-01-05</td><td class="editable" data-demo="sequence" data-col="a" data-row="5"></td><td id="seq-match-5" class="computed" style="background:#fee2e2;color:#991b1b">#N/A</td><td id="seq-isna-5" style="color:#991b1b;font-weight:700">TRUE</td></tr>
+            <tr><td class="row-num">6</td><td class="label-cell">2025-01-06</td><td class="editable" data-demo="sequence" data-col="a" data-row="6">2025-01-06</td><td id="seq-match-6" class="computed">Found</td><td id="seq-isna-6">FALSE</td></tr>
+            <tr><td class="row-num">7</td><td class="label-cell">2025-01-07</td><td class="editable" data-demo="sequence" data-col="a" data-row="7">2025-01-07</td><td id="seq-match-7" class="computed">Found</td><td id="seq-isna-7">FALSE</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Expected dates</td><td class="computed">7</td><td class="formula-display">Missing dates</td><td class="computed" id="seq-missing" style="background:#fee2e2;color:#991b1b;font-size:1rem">2</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Kosongkan "2025-01-02" → missing naik jadi 3. Isi "2025-01-03" → missing turun jadi 1. Ini cara SEQUENCE+MATCH+ISNA bekerja.</div>
+</div>
+
+<!-- ============================================================ -->
+<div id="sec-logic"></div>
+<h2 class="section-title">🧠 IF, IFERROR, NOT — Logic & Error Handling <span class="level level-1">Level 1</span></h2>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Spreadsheet yang bagus nggak cuma angka — tapi juga <strong>label dan status otomatis</strong>. "✅ Under budget" vs "❌ Over budget" langsung keliatan tanpa harus baca angka. Dan IFERROR mencegah error #DIV/0! yang bikin spreadsheet kamu keliatan <strong>nggak profesional</strong> di depan stakeholder.</p>
+</div>
+
+<h3><code>IF(condition, true, false)</code></h3>
+<h3>🧪 Demo Interaktif — Status Labels & Safe Division</h3>
+<p>Ubah angka — lihat status emoji dan safe division berubah otomatis.</p>
+<div class="live-sheet" id="demo-logic">
+    <div class="live-sheet-bar"><span>📊 IF + IFERROR — Logic Demo</span><button class="reset-btn" onclick="resetDemo('logic')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Kategori)</th><th>B (Budget)</th><th>C (Actual)</th><th>D (Selisih)</th><th>E (Status)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">Makanan</td><td class="editable" data-demo="logic" data-col="b" data-row="1">1500000</td><td class="editable" data-demo="logic" data-col="c" data-row="1">1200000</td><td class="computed" id="logic-diff-1">300,000</td><td id="logic-status-1" style="font-size:.75rem">✅ Under budget</td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">Transport</td><td class="editable" data-demo="logic" data-col="b" data-row="2">500000</td><td class="editable" data-demo="logic" data-col="c" data-row="2">650000</td><td class="computed" id="logic-diff-2">-150,000</td><td id="logic-status-2" style="font-size:.75rem">❌ Over budget</td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">Hiburan</td><td class="editable" data-demo="logic" data-col="b" data-row="3">500000</td><td class="editable" data-demo="logic" data-col="c" data-row="3">500000</td><td class="computed" id="logic-diff-3">0</td><td id="logic-status-3" style="font-size:.75rem">➖ Exact</td></tr>
+            <tr><td class="row-num">4</td><td class="label-cell">Tagihan</td><td class="editable" data-demo="logic" data-col="b" data-row="4">3500000</td><td class="editable" data-demo="logic" data-col="c" data-row="4">3200000</td><td class="computed" id="logic-diff-4">300,000</td><td id="logic-status-4" style="font-size:.75rem">✅ Under budget</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Total Budget</td><td class="computed" id="logic-budget-total">6,000,000</td><td class="formula-display">Total Actual</td><td class="computed" id="logic-actual-total">5,550,000</td><td></td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Variance %</td><td class="computed" id="logic-variance" style="background:#f0fdf4;color:#166534">-7.5%</td><td class="formula-display" colspan="2">=IFERROR((Actual/Budget)-1, 0)</td><td></td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Naikkan actual Transport jadi 800000 — status jadi ❌. Atau set budget Hiburan ke 0 — IFERROR mencegah #DIV/0!.</div>
+</div>
+
+<h3><code>IFERROR(formula, fallback)</code></h3>
+<h3>🧪 Demo Interaktif — Safe Division</h3>
+<p>Ubah penyebut jadi 0 — lihat IFERROR mencegah error.</p>
+<div class="live-sheet" id="demo-iferror">
+    <div class="live-sheet-bar"><span>📊 IFERROR — Safe Division</span><button class="reset-btn" onclick="resetDemo('iferror')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Pembilang)</th><th>B (Penyebut)</th><th>A/B (tanpa IFERROR)</th><th>IFERROR(A/B, 0)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="iferror" data-col="a" data-row="1">100</td><td class="editable" data-demo="iferror" data-col="b" data-row="1">25</td><td id="iferr-raw-1" class="computed">4</td><td id="iferr-safe-1" class="computed">4</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="iferror" data-col="a" data-row="2">57</td><td class="editable" data-demo="iferror" data-col="b" data-row="2">270</td><td id="iferr-raw-2" class="computed">0.211</td><td id="iferr-safe-2" class="computed">0.211</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="iferror" data-col="a" data-row="3">45</td><td class="editable" data-demo="iferror" data-col="b" data-row="3">0</td><td id="iferr-raw-3" style="background:#fee2e2;color:#991b1b;font-weight:700">#DIV/0!</td><td id="iferr-safe-3" class="computed">0</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display" colspan="2">Percentage change: IFERROR(A/B-1, 0)</td><td id="iferr-pct-raw" style="background:#fee2e2;color:#991b1b">#DIV/0!</td><td id="iferr-pct-safe" class="computed">0%</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah penyebut row 3 dari 0 ke 263 — #DIV/0! hilang. Ubah penyebut row 1 ke 0 — lihat IFERROR menyelamatkan.</div>
+</div>
+
+<h3><code>NOT(condition)</code> — Negasi di FILTER</h3>
+<h3>🧪 Demo Interaktif — NOT Logic</h3>
+<p>NOT membalik TRUE jadi FALSE. Dipakai di FILTER untuk exclude pattern spesifik.</p>
+<div class="live-sheet" id="demo-not">
+    <div class="live-sheet-bar"><span>📊 NOT — Exclude Anomaly Pattern</span><button class="reset-btn" onclick="resetDemo('not')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>A (Price)</th><th>B (Qty)</th><th>Price=0?</th><th>Qty&gt;0?</th><th>BOTH true?</th><th>NOT → Keep?</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="editable" data-demo="not" data-col="a" data-row="1">50000</td><td class="editable" data-demo="not" data-col="b" data-row="1">3</td><td id="not-pz-1">FALSE</td><td id="not-qp-1">TRUE</td><td id="not-both-1">FALSE</td><td id="not-keep-1" class="computed" style="background:#f0fdf4;color:#166534">✅ Keep</td></tr>
+            <tr><td class="row-num">2</td><td class="editable" data-demo="not" data-col="a" data-row="2">0</td><td class="editable" data-demo="not" data-col="b" data-row="2">5</td><td id="not-pz-2" style="color:#991b1b;font-weight:600">TRUE</td><td id="not-qp-2" style="color:#991b1b;font-weight:600">TRUE</td><td id="not-both-2" style="color:#991b1b;font-weight:600">TRUE</td><td id="not-keep-2" style="background:#fee2e2;color:#991b1b;font-weight:700">❌ Remove</td></tr>
+            <tr><td class="row-num">3</td><td class="editable" data-demo="not" data-col="a" data-row="3">0</td><td class="editable" data-demo="not" data-col="b" data-row="3">0</td><td id="not-pz-3">TRUE</td><td id="not-qp-3">FALSE</td><td id="not-both-3">FALSE</td><td id="not-keep-3" class="computed" style="background:#f0fdf4;color:#166534">✅ Keep</td></tr>
+            <tr><td class="row-num">4</td><td class="editable" data-demo="not" data-col="a" data-row="4">75000</td><td class="editable" data-demo="not" data-col="b" data-row="4">2</td><td id="not-pz-4">FALSE</td><td id="not-qp-4">TRUE</td><td id="not-both-4">FALSE</td><td id="not-keep-4" class="computed" style="background:#f0fdf4;color:#166534">✅ Keep</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display" colspan="4">NOT((Price=0)*(Qty&gt;0)) → hanya remove kalau KEDUA kondisi true</td><td class="formula-display">Removed</td><td class="computed" id="not-removed" style="background:#fee2e2;color:#991b1b">1</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah price row 2 dari 0 ke 25000 — row jadi ✅ Keep. Ubah price row 1 ke 0 — lihat apakah jadi ❌ (tergantung qty).</div>
+</div>
+
+<!-- ============================================================ -->
+<div id="sec-advanced"></div>
+<h2 class="section-title">🚀 Advanced Combos & Business Metrics <span class="level level-3">Level 3</span></h2>
+
+<div class="biz-box">
+    <h4>💼 Manfaat Bisnis</h4>
+    <p>Ini formula-formula yang bikin kamu naik level dari "bisa bikin laporan" ke "bisa kasih rekomendasi". Percentage share, RoAS, retention rate — ini bahasa yang dipakai di meeting C-level. Kalau kamu bisa present angka-angka ini, kamu bukan cuma Data Analyst — kamu <strong>business partner</strong>.</p>
+</div>
+
+<h3>🧪 Demo Interaktif — RoAS Calculator</h3>
+<p>Ubah spend dan revenue per channel — lihat RoAS dan status otomatis berubah.</p>
+<div class="live-sheet" id="demo-advanced">
+    <div class="live-sheet-bar"><span>📊 Advanced — RoAS + Inventory + Share</span><button class="reset-btn" onclick="resetDemo('advanced')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Channel</th><th>Spend (Rp M)</th><th>Revenue (Rp M)</th><th>RoAS</th><th>% Share</th><th>Status</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">Facebook</td><td class="editable" data-demo="advanced" data-col="a" data-row="1">934</td><td class="editable" data-demo="advanced" data-col="b" data-row="1">4260</td><td class="computed" id="adv-roas-1">4.56×</td><td class="computed" id="adv-share-1">54.7%</td><td id="adv-status-1" style="font-size:.72rem"><span class="badge-ch b-green">Above 3×</span></td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">TikTok</td><td class="editable" data-demo="advanced" data-col="a" data-row="2">592</td><td class="editable" data-demo="advanced" data-col="b" data-row="2">1830</td><td class="computed" id="adv-roas-2">3.09×</td><td class="computed" id="adv-share-2">23.5%</td><td id="adv-status-2" style="font-size:.72rem"><span class="badge-ch b-green">Above 3×</span></td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">Instagram</td><td class="editable" data-demo="advanced" data-col="a" data-row="3">878</td><td class="editable" data-demo="advanced" data-col="b" data-row="3">1696</td><td class="computed" id="adv-roas-3">1.93×</td><td class="computed" id="adv-share-3">21.8%</td><td id="adv-status-3" style="font-size:.72rem"><span class="badge-ch b-red">Below 3×</span></td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Overall</td><td class="computed" id="adv-spend-total">2,404</td><td class="computed" id="adv-rev-total">7,786</td><td class="computed" id="adv-roas-total" style="background:#dbeafe;color:#1e40af">3.24×</td><td class="computed">100%</td><td></td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Naikkan revenue Instagram jadi 3000 — lihat RoAS naik dan status jadi hijau. Atau turunkan spend Facebook — lihat RoAS-nya melonjak.</div>
+</div>
+<pre><code>RoAS = Revenue / Spend     // Format: 0.00"×"
+CTR  = Clicks / Impressions × 100
+CVR  = Conversions / Clicks × 100
+CPC  = Spend / Clicks</code></pre>
+
+<h3>Inventory Metrics (Day 04)</h3>
+<h3>🧪 Demo Interaktif — Stock Alert System</h3>
+<p>Ubah stock, ROP, safety — lihat alert status berubah otomatis.</p>
+<div class="live-sheet" id="demo-inventory">
+    <div class="live-sheet-bar"><span>📊 Inventory — Stock Alert</span><button class="reset-btn" onclick="resetDemo('inventory')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>SKU</th><th>Stock</th><th>ROP</th><th>Safety</th><th>Max</th><th>Ratio</th><th>Alert</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">SKU-0281</td><td class="editable" data-demo="inventory" data-col="a" data-row="1">5</td><td class="editable" data-demo="inventory" data-col="b" data-row="1">96</td><td class="editable" data-demo="inventory" data-col="c" data-row="1">48</td><td class="editable" data-demo="inventory" data-col="d" data-row="1">200</td><td class="computed" id="inv-ratio-1">0.05</td><td id="inv-alert-1"><span class="badge-ch b-red">🔴 CRITICAL</span></td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">SKU-0142</td><td class="editable" data-demo="inventory" data-col="a" data-row="2">72</td><td class="editable" data-demo="inventory" data-col="b" data-row="2">80</td><td class="editable" data-demo="inventory" data-col="c" data-row="2">40</td><td class="editable" data-demo="inventory" data-col="d" data-row="2">200</td><td class="computed" id="inv-ratio-2">0.90</td><td id="inv-alert-2"><span class="badge-ch b-yellow">🟡 WARNING</span></td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">SKU-0055</td><td class="editable" data-demo="inventory" data-col="a" data-row="3">150</td><td class="editable" data-demo="inventory" data-col="b" data-row="3">60</td><td class="editable" data-demo="inventory" data-col="c" data-row="3">30</td><td class="editable" data-demo="inventory" data-col="d" data-row="3">200</td><td class="computed" id="inv-ratio-3">2.50</td><td id="inv-alert-3"><span class="badge-ch b-green">🟢 OK</span></td></tr>
+            <tr><td class="row-num">4</td><td class="label-cell">SKU-0099</td><td class="editable" data-demo="inventory" data-col="a" data-row="4">250</td><td class="editable" data-demo="inventory" data-col="b" data-row="4">60</td><td class="editable" data-demo="inventory" data-col="c" data-row="4">30</td><td class="editable" data-demo="inventory" data-col="d" data-row="4">200</td><td class="computed" id="inv-ratio-4">4.17</td><td id="inv-alert-4"><span class="badge-ch b-blue">🔵 OVERSTOCK</span></td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">🔴 Critical</td><td class="computed" id="inv-cnt-crit">1</td><td class="formula-display">🟡 Warning</td><td class="computed" id="inv-cnt-warn">1</td><td class="formula-display">🟢 OK</td><td class="computed" id="inv-cnt-ok">1</td><td class="computed" id="inv-cnt-over">🔵 1</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Naikkan stock SKU-0281 dari 5 ke 100 — alert berubah dari 🔴 ke 🟢. Turunkan stock SKU-0055 ke 25 — jadi 🔴 CRITICAL.</div>
+</div>
+
+<h3>Cohort Retention (Day 06)</h3>
+<h3>🧪 Demo Interaktif — Retention Calculator</h3>
+<p>Ubah jumlah user yang retained — lihat retention rate berubah.</p>
+<div class="live-sheet" id="demo-cohort">
+    <div class="live-sheet-bar"><span>📊 Cohort — Retention Rate</span><button class="reset-btn" onclick="resetDemo('cohort')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Cohort</th><th>Signup (M0)</th><th>Active M1</th><th>M1 Rate</th><th>Active M3</th><th>M3 Rate</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">1</td><td class="label-cell">Jan 2025</td><td class="editable" data-demo="cohort" data-col="a" data-row="1">652</td><td class="editable" data-demo="cohort" data-col="b" data-row="1">607</td><td class="computed" id="coh-m1r-1">93.1%</td><td class="editable" data-demo="cohort" data-col="c" data-row="1">537</td><td class="computed" id="coh-m3r-1">82.4%</td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">Apr 2025</td><td class="editable" data-demo="cohort" data-col="a" data-row="2">701</td><td class="editable" data-demo="cohort" data-col="b" data-row="2">688</td><td class="computed" id="coh-m1r-2">98.1%</td><td class="editable" data-demo="cohort" data-col="c" data-row="2">596</td><td class="computed" id="coh-m3r-2">85.0%</td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">Feb 2026</td><td class="editable" data-demo="cohort" data-col="a" data-row="3">648</td><td class="editable" data-demo="cohort" data-col="b" data-row="3">460</td><td class="computed" id="coh-m1r-3">71.0%</td><td class="editable" data-demo="cohort" data-col="c" data-row="3">0</td><td class="computed" id="coh-m3r-3">—</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Overall M1</td><td class="computed" id="coh-overall-m1" style="background:#dbeafe;color:#1e40af">87.6%</td><td class="formula-display" colspan="2">Overall M3</td><td class="computed" id="coh-overall-m3" style="background:#dbeafe;color:#1e40af">83.7%</td><td></td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Turunkan Active M1 cohort Feb 2026 ke 300 — lihat overall M1 turun. Naikkan ke 640 — overall M1 naik drastis.</div>
+</div>
+
+<h3>Budget & THR (Day 07)</h3>
+<h3>🧪 Demo Interaktif — THR Allocation</h3>
+<div class="live-sheet" id="demo-thr">
+    <div class="live-sheet-bar"><span>📊 THR — Allocation Calculator</span><button class="reset-btn" onclick="resetDemo('thr')">↺ Reset</button></div>
+    <table>
+        <thead><tr><th style="width:32px"></th><th>Alokasi</th><th>Persentase</th><th>Jumlah (Rp)</th></tr></thead>
+        <tbody>
+            <tr><td class="row-num">THR</td><td class="label-cell">Total THR</td><td></td><td class="editable" data-demo="thr" data-col="a" data-row="0" style="font-weight:800;font-size:.9rem">7500000</td></tr>
+            <tr><td class="row-num">1</td><td class="label-cell">Tabungan</td><td class="editable" data-demo="thr" data-col="b" data-row="1">30</td><td class="computed" id="thr-amt-1">2,250,000</td></tr>
+            <tr><td class="row-num">2</td><td class="label-cell">Zakat & Sedekah</td><td class="editable" data-demo="thr" data-col="b" data-row="2">10</td><td class="computed" id="thr-amt-2">750,000</td></tr>
+            <tr><td class="row-num">3</td><td class="label-cell">Mudik</td><td class="editable" data-demo="thr" data-col="b" data-row="3">20</td><td class="computed" id="thr-amt-3">1,500,000</td></tr>
+            <tr><td class="row-num">4</td><td class="label-cell">Baju & Hampers</td><td class="editable" data-demo="thr" data-col="b" data-row="4">15</td><td class="computed" id="thr-amt-4">1,125,000</td></tr>
+            <tr><td class="row-num">5</td><td class="label-cell">Angpao</td><td class="editable" data-demo="thr" data-col="b" data-row="5">10</td><td class="computed" id="thr-amt-5">750,000</td></tr>
+            <tr><td class="row-num">6</td><td class="label-cell">Buffer</td><td class="editable" data-demo="thr" data-col="b" data-row="6">15</td><td class="computed" id="thr-amt-6">1,125,000</td></tr>
+        </tbody>
+        <tfoot>
+            <tr style="border-top:2px solid #c7d2fe"><td class="row-num">→</td><td class="formula-display">Total %</td><td class="computed" id="thr-pct-total">100%</td><td class="computed" id="thr-amt-total">7,500,000</td></tr>
+            <tr><td class="row-num">→</td><td class="formula-display">Status</td><td class="computed" id="thr-status" colspan="2" style="background:#f0fdf4;color:#166534">✅ Pas 100%</td></tr>
+        </tfoot>
+    </table>
+    <div class="live-sheet-hint"><span class="hint-icon">✏️</span> Ubah Tabungan ke 40% — total jadi 110% (❌ Over). Atau ubah THR total jadi 10000000 — semua jumlah naik.</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CROSS-SHEET REFERENCE -->
+<!-- ============================================================ -->
+<div class="callout-orange" style="margin-top:2.5rem;">
+    <h4>⚠️ CRITICAL: Cross-Sheet Reference Syntax</h4>
+    <p>Semua formula analisis reference ke sheet lain.</p>
+</div>
+<div class="two-col">
+    <div class="chart-card">
+        <div class="title">✅ Google Sheets (BENAR)</div>
+<pre><code>'Clean Data'!A5:'Clean Data'!I5102
+'Raw Data'!F5:'Raw Data'!F5149</code></pre>
+    </div>
+    <div class="chart-card">
+        <div class="title">❌ Excel Syntax (SALAH di GSheets)</div>
+<pre><code>'Clean Data'!A5:I5102
+'Raw Data'!F5:F5149</code></pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<div id="sec-cheatsheet"></div>
+<h2 class="section-title">📋 Cheat Sheet — Semua Formula dalam Satu Tabel</h2>
+
+<table>
+    <thead><tr><th>Formula</th><th>Fungsi</th><th>Freq</th><th>Contoh Singkat</th></tr></thead>
+    <tbody>
+        <tr><td><code>COUNTA</code></td><td>Hitung sel non-kosong</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=COUNTA(A5:A5102)</code></td></tr>
+        <tr><td><code>SUM</code></td><td>Jumlahkan range</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=SUM(H5:H5102)</code></td></tr>
+        <tr><td><code>UNIQUE</code></td><td>Hapus duplikat</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=UNIQUE(A5:I5149)</code></td></tr>
+        <tr><td><code>FILTER</code></td><td>Saring data</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=FILTER(d, INDEX(d,,1)&gt;=0)</code></td></tr>
+        <tr><td><code>LET</code></td><td>Definisikan variabel</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=LET(d, UNIQUE(range), ...)</code></td></tr>
+        <tr><td><code>INDEX</code></td><td>Akses kolom array</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=INDEX(d,,6)</code></td></tr>
+        <tr><td><code>COUNTIFS</code></td><td>Hitung multi-kondisi</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=COUNTIFS(range,"&gt;"&amp;DATE(...))</code></td></tr>
+        <tr><td><code>ROWS</code></td><td>Hitung baris array</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=ROWS(UNIQUE(range))</code></td></tr>
+        <tr><td><code>DATE</code></td><td>Buat tanggal</td><td><span class="badge-ch b-green">7/7</span></td><td><code>=DATE(2026,3,31)</code></td></tr>
+        <tr><td><code>COUNTIF</code></td><td>Hitung satu kondisi</td><td><span class="badge-ch b-blue">6/7</span></td><td><code>=COUNTIF(range,"&lt;0")</code></td></tr>
+        <tr><td><code>SUMPRODUCT</code></td><td>Array multiply + sum</td><td><span class="badge-ch b-blue">4/7</span></td><td><code>=SUMPRODUCT((cond)*values)</code></td></tr>
+        <tr><td><code>IF</code></td><td>Kondisi if-then-else</td><td><span class="badge-ch b-blue">4/7</span></td><td><code>=IF(A&gt;0,"✅","❌")</code></td></tr>
+        <tr><td><code>SUMIFS</code></td><td>Sum multi-kondisi</td><td><span class="badge-ch b-yellow">3/7</span></td><td><code>=SUMIFS(sum,crit_r,crit)</code></td></tr>
+        <tr><td><code>COUNTBLANK</code></td><td>Hitung sel kosong</td><td><span class="badge-ch b-yellow">3/7</span></td><td><code>=COUNTBLANK(F5:F2014)</code></td></tr>
+        <tr><td><code>IFERROR</code></td><td>Handle error</td><td><span class="badge-ch b-yellow">2/7</span></td><td><code>=IFERROR(A/B,0)</code></td></tr>
+        <tr><td><code>NOT</code></td><td>Negasi kondisi</td><td><span class="badge-ch b-yellow">2/7</span></td><td><code>=NOT((col=0)*(col2&gt;0))</code></td></tr>
+        <tr><td><code>AVERAGE</code></td><td>Rata-rata</td><td><span class="badge-ch b-yellow">2/7</span></td><td><code>=AVERAGE(B14,B15,B16)</code></td></tr>
+        <tr><td><code>WEEKDAY</code></td><td>Hari dalam minggu</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=WEEKDAY(A5,2)</code></td></tr>
+        <tr><td><code>DAY</code></td><td>Tanggal 1-31</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=DAY(A5)</code></td></tr>
+        <tr><td><code>YEAR</code></td><td>Tahun dari date</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=YEAR(A5)</code></td></tr>
+        <tr><td><code>MONTH</code></td><td>Bulan dari date</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=MONTH(A5)</code></td></tr>
+        <tr><td><code>SEQUENCE</code></td><td>Generate array</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=SEQUENCE(456,1,start)</code></td></tr>
+        <tr><td><code>MATCH</code></td><td>Cari posisi value</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=MATCH(val,range,0)</code></td></tr>
+        <tr><td><code>ISNA</code></td><td>Cek #N/A</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=ISNA(MATCH(...))</code></td></tr>
+        <tr><td><code>MAX / MIN</code></td><td>Tertinggi / terendah</td><td><span class="badge-ch b-red">1/7</span></td><td><code>=MAX(E6:E12)</code></td></tr>
+    </tbody>
+</table>
+
+<!-- ============================================================ -->
+<div id="sec-progression"></div>
+<h2 class="section-title">🗺️ Learning Path — Urutan Belajar</h2>
+
+<div class="chart-card" style="background:linear-gradient(135deg,#0f172a,#1e293b);color:white;border:none;">
+    <div class="title" style="color:#94a3b8;">Progression Map — Dari Nol Sampai Dashboard</div>
+    <p style="color:#64748b;font-size:.85rem;">Ikutin urutan ini. Jangan loncat.</p>
+</div>
+
+<h3><span class="level level-1">Level 1</span> Fondasi (Day 01–02)</h3>
+<table>
+    <thead><tr><th>Formula</th><th>Skill</th><th>Latihan di</th></tr></thead>
+    <tbody>
+        <tr><td><code>COUNTA</code>, <code>SUM</code></td><td>Hitung baris, total values</td><td>Day 01, 02</td></tr>
+        <tr><td><code>COUNTIF</code>, <code>COUNTIFS</code>, <code>COUNTBLANK</code></td><td>Deteksi anomali, hitung per kategori</td><td>Day 01, 02</td></tr>
+        <tr><td><code>UNIQUE</code>, <code>ROWS</code></td><td>Hapus duplikat, hitung baris unik</td><td>Day 01, 02</td></tr>
+        <tr><td><code>FILTER</code>, <code>LET</code>, <code>INDEX</code></td><td>Pipeline cleaning (A5 formula)</td><td>Day 01, 02</td></tr>
+        <tr><td><code>IF</code>, <code>IFERROR</code>, <code>DATE</code></td><td>Labels, safe division, date comparison</td><td>Day 01, 02</td></tr>
+    </tbody>
+</table>
+
+<h3><span class="level level-2">Level 2</span> Intermediate (Day 03–04)</h3>
+<table>
+    <thead><tr><th>Formula</th><th>Skill</th><th>Latihan di</th></tr></thead>
+    <tbody>
+        <tr><td><code>SUMIFS</code> + date ranges</td><td>Sum per bulan, per entity</td><td>Day 03</td></tr>
+        <tr><td><code>AVERAGE</code></td><td>Moving average, forecast, scenario</td><td>Day 03</td></tr>
+        <tr><td><code>SUMPRODUCT</code> (basic)</td><td>Array × array (inventory value)</td><td>Day 04</td></tr>
+        <tr><td><code>FILTER</code> + blank check</td><td>Remove missing values</td><td>Day 04</td></tr>
+    </tbody>
+</table>
+
+<h3><span class="level level-3">Level 3</span> Advanced (Day 05–07)</h3>
+<table>
+    <thead><tr><th>Formula</th><th>Skill</th><th>Latihan di</th></tr></thead>
+    <tbody>
+        <tr><td><code>SUMPRODUCT</code> + <code>WEEKDAY</code>/<code>DAY</code></td><td>Weekend effect, payday effect</td><td>Day 01 (revisit)</td></tr>
+        <tr><td><code>SUMPRODUCT</code> + <code>YEAR</code>/<code>MONTH</code></td><td>Monthly trend analysis</td><td>Day 07</td></tr>
+        <tr><td><code>SEQUENCE</code>+<code>MATCH</code>+<code>ISNA</code></td><td>Missing date detection</td><td>Day 01</td></tr>
+        <tr><td>Marketing metrics</td><td>RoAS, CTR, CVR, CPC</td><td>Day 05</td></tr>
+        <tr><td>Cohort retention</td><td>Retention matrix, M1/M3/M6</td><td>Day 06</td></tr>
+        <tr><td>Budget variance</td><td>Budget vs actual, THR allocation</td><td>Day 07</td></tr>
+    </tbody>
+</table>
+
+<div class="callout-green" style="margin-top:2rem;">
+    <h4>✅ Setelah Menguasai Semua Level</h4>
+    <p>Kamu bisa bikin spreadsheet dashboard dari nol: import data mentah → clean → analyze → visualize → present. Ini skill yang langsung applicable di dunia kerja sebagai Data Analyst.</p>
+</div>
+
+<div class="callout-blue">
+    <h4>💡 Formula yang Belum Dicover (Tapi Worth Learning)</h4>
+    <p><strong>VLOOKUP / XLOOKUP</strong> — lookup value dari tabel lain. Masih banyak dipakai di dunia kerja.<br>
+    <strong>Pivot Table</strong> — bukan formula, tapi fitur. Skill #1 yang dicari recruiter untuk DA.<br>
+    <strong>Conditional Formatting</strong> — bikin data lebih readable secara visual.<br>
+    <strong>ARRAYFORMULA</strong> — Google Sheets specific, apply formula ke seluruh kolom.</p>
+</div>
+
+<div class="site-footer">
+    <div class="footer-brand">
+        <img src="windata logo black.svg" alt="W">
+        <span>© 2026 Windata Academy</span>
+    </div>
+    <a href="https://www.windata.id/" target="_blank">www.windata.id ↗</a>
+</div>
+
+</div><!-- /content-area -->
+</div><!-- /main -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // ============================================================
+    // INTERACTIVE SPREADSHEET ENGINE
+    // ============================================================
+    const demoDefaults = {};
+
+    function initEditables() {
+        document.querySelectorAll('.live-sheet .editable').forEach(cell => {
+            cell.contentEditable = 'true';
+            cell.spellcheck = false;
+            const demo = cell.dataset.demo;
+            const key = demo + '-' + cell.dataset.col + '-' + cell.dataset.row;
+            demoDefaults[key] = cell.textContent;
+            cell.addEventListener('input', () => recalcDemo(demo));
+            cell.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); cell.blur(); }});
+        });
+    }
+
+    function getEditableValues(demo, col) {
+        const cells = document.querySelectorAll(`.editable[data-demo="${demo}"][data-col="${col}"]`);
+        return Array.from(cells).map(c => c.textContent.trim());
+    }
+
+    function fmt(n) {
+        if (n === null || n === undefined || isNaN(n)) return '0';
+        return Math.round(n).toLocaleString('id-ID');
+    }
+    function parseNum(s) {
+        if (typeof s !== 'string') s = String(s);
+        s = s.replace(/\./g, '').replace(/,/g, '.').trim();
+        const n = parseFloat(s);
+        return isNaN(n) ? 0 : n;
+    }
+    function pct(n, d) { return d === 0 ? '0%' : (n / d * 100).toFixed(1) + '%'; }
+
+    function getNumValues(demo, col) {
+        return getEditableValues(demo, col).map(v => parseNum(v));
+    }
+
+    // Format numeric cells on blur (add dots)
+    function formatEditableNumbers() {
+        document.querySelectorAll('.live-sheet .editable').forEach(cell => {
+            cell.addEventListener('blur', function() {
+                const raw = this.textContent.replace(/\./g, '').replace(/,/g, '.').trim();
+                const n = parseFloat(raw);
+                if (!isNaN(n) && raw !== '' && !/[a-zA-Z]/.test(raw)) {
+                    this.textContent = fmt(n);
+                }
+            });
+        });
+    }
+
+    // Format initial numeric values in editable cells
+    function formatInitialNumbers() {
+        document.querySelectorAll('.live-sheet .editable').forEach(cell => {
+            const raw = cell.textContent.trim();
+            const n = parseFloat(raw);
+            if (!isNaN(n) && raw !== '' && !/[a-zA-Z]/.test(raw) && raw.length > 3) {
+                cell.textContent = fmt(n);
+            }
+        });
+    }
+
+    window.resetDemo = function(demo) {
+        document.querySelectorAll(`.editable[data-demo="${demo}"]`).forEach(cell => {
+            const key = demo + '-' + cell.dataset.col + '-' + cell.dataset.row;
+            cell.textContent = demoDefaults[key] || '';
+        });
+        recalcDemo(demo);
+    };
+
+    function recalcDemo(demo) {
+        if (demo === 'counta') recalcCounta();
+        else if (demo === 'countif') recalcCountif();
+        else if (demo === 'countifs') recalcCountifs();
+        else if (demo === 'countblank') recalcCountblank();
+        else if (demo === 'sum') recalcSum();
+        else if (demo === 'unique') recalcUnique();
+        else if (demo === 'filter') recalcFilter();
+        else if (demo === 'let') recalcLet();
+        else if (demo === 'index') recalcIndex();
+        else if (demo === 'pipeline') recalcPipeline();
+        else if (demo === 'sumifs') recalcSumifs();
+        else if (demo === 'sumproduct') recalcSumproduct();
+        else if (demo === 'average') recalcAverage();
+        else if (demo === 'date') recalcDate();
+        else if (demo === 'logic') recalcLogic();
+        else if (demo === 'advanced') recalcAdvanced();
+        else if (demo === 'sequence') recalcSequence();
+        else if (demo === 'iferror') recalcIferror();
+        else if (demo === 'not') recalcNot();
+        else if (demo === 'inventory') recalcInventory();
+        else if (demo === 'cohort') recalcCohort();
+        else if (demo === 'thr') recalcThr();
+    }
+
+    function recalcCounta() {
+        const a = getEditableValues('counta', 'a');
+        const b = getEditableValues('counta', 'b');
+        const c = getEditableValues('counta', 'c');
+        document.getElementById('counta-result-a').textContent = a.filter(v => v !== '').length;
+        document.getElementById('counta-result-b').textContent = b.filter(v => v !== '').length;
+        const sum = c.reduce((s, v) => s + (parseNum(v) || 0), 0);
+        document.getElementById('counta-result-sum').textContent = fmt(sum);
+    }
+
+    function recalcCountif() {
+        const a = getEditableValues('countif', 'a').map(v => parseNum(v));
+        const b = getEditableValues('countif', 'b').map(v => parseNum(v));
+        const negA = a.filter(v => v < 0).length;
+        const negB = b.filter(v => v < 0).length;
+        const zeroA = a.filter(v => v === 0).length;
+        document.getElementById('countif-neg-a').textContent = negA;
+        document.getElementById('countif-neg-b').textContent = negB;
+        document.getElementById('countif-zero-a').textContent = zeroA;
+        document.getElementById('countif-total').textContent = negA + negB + zeroA;
+        // Update status per row
+        for (let i = 0; i < a.length; i++) {
+            const el = document.getElementById('countif-status-' + (i + 1));
+            if (!el) continue;
+            if (a[i] < 0) el.textContent = '❌ Price negatif';
+            else if (b[i] < 0) el.textContent = '❌ Qty negatif';
+            else if (a[i] === 0 && b[i] > 0) el.textContent = '⚠️ Price zero';
+            else el.textContent = '✅ OK';
+        }
+    }
+
+    function recalcCountifs() {
+        const depts = getEditableValues('countifs', 'b');
+        const statuses = getEditableValues('countifs', 'c');
+        const mktTotal = depts.filter(d => d.toLowerCase() === 'marketing').length;
+        let mktYes = 0;
+        let salesYes = 0;
+        for (let i = 0; i < depts.length; i++) {
+            const d = depts[i].toLowerCase();
+            const s = statuses[i].toLowerCase();
+            if (d === 'marketing' && s === 'yes') mktYes++;
+            if (d === 'sales' && s === 'yes') salesYes++;
+        }
+        document.getElementById('countifs-mkt-total').textContent = mktTotal;
+        document.getElementById('countifs-mkt-yes').textContent = mktYes;
+        document.getElementById('countifs-mkt-rate').textContent = pct(mktYes, mktTotal);
+        document.getElementById('countifs-sales-yes').textContent = salesYes;
+    }
+
+    function recalcSumifs() {
+        const branches = getEditableValues('sumifs', 'a');
+        const sales = getEditableValues('sumifs', 'b').map(v => parseNum(v));
+        const totals = {};
+        for (let i = 0; i < branches.length; i++) {
+            const b = branches[i].trim();
+            if (!b) continue;
+            totals[b] = (totals[b] || 0) + sales[i];
+        }
+        document.getElementById('sumifs-jakarta').textContent = fmt(totals['Jakarta'] || 0);
+        document.getElementById('sumifs-surabaya').textContent = fmt(totals['Surabaya'] || 0);
+        document.getElementById('sumifs-bandung').textContent = fmt(totals['Bandung'] || 0);
+        const grand = sales.reduce((s, v) => s + v, 0);
+        document.getElementById('sumifs-total').textContent = fmt(grand);
+    }
+
+    function recalcCountblank() {
+        const a = getEditableValues('countblank', 'a');
+        const b = getEditableValues('countblank', 'b');
+        const c = getEditableValues('countblank', 'c');
+        const ba = a.filter(v => v === '').length;
+        const bb = b.filter(v => v === '').length;
+        const bc = c.filter(v => v === '').length;
+        document.getElementById('cblank-a').textContent = ba;
+        document.getElementById('cblank-b').textContent = bb;
+        document.getElementById('cblank-c').textContent = bc;
+        document.getElementById('cblank-total').textContent = ba + bb + bc;
+    }
+
+    function recalcSum() {
+        const vals = getEditableValues('sum', 'b').map(v => parseNum(v));
+        const nonEmpty = getEditableValues('sum', 'b').filter(v => v !== '').length;
+        document.getElementById('sum-total').textContent = fmt(vals.reduce((s, v) => s + v, 0));
+        document.getElementById('sum-count').textContent = nonEmpty;
+    }
+
+    function recalcUnique() {
+        const a = getEditableValues('unique', 'a');
+        const b = getEditableValues('unique', 'b');
+        const c = getEditableValues('unique', 'c');
+        const rows = [];
+        for (let i = 0; i < a.length; i++) rows.push(a[i] + '|' + b[i] + '|' + c[i]);
+        const total = rows.length;
+        const uniq = new Set(rows).size;
+        const branches = new Set(b.filter(v => v !== '')).size;
+        document.getElementById('unique-total').textContent = total;
+        document.getElementById('unique-uniq').textContent = uniq;
+        document.getElementById('unique-dups').textContent = total - uniq;
+        document.getElementById('unique-branches').textContent = branches;
+    }
+
+    function recalcFilter() {
+        const qtys = getEditableValues('filter', 'a').map(v => parseNum(v));
+        const prices = getEditableValues('filter', 'b').map(v => parseNum(v));
+        let clean = 0, cleanSum = 0;
+        for (let i = 0; i < qtys.length; i++) {
+            const q = qtys[i], p = prices[i];
+            const total = q * p;
+            document.getElementById('filter-total-' + (i+1)).textContent = fmt(total);
+            let status, keep = false;
+            if (q < 0) status = '❌ Qty negatif';
+            else if (p < 0) status = '❌ Price negatif';
+            else if (p === 0 && q > 0) status = '❌ Price=0 & Qty>0';
+            else { status = '✅ Keep'; keep = true; }
+            document.getElementById('filter-status-' + (i+1)).textContent = status;
+            if (keep) { clean++; cleanSum += total; }
+        }
+        document.getElementById('filter-raw').textContent = qtys.length;
+        document.getElementById('filter-clean').textContent = clean;
+        document.getElementById('filter-removed').textContent = qtys.length - clean;
+        document.getElementById('filter-cleansum').textContent = fmt(cleanSum);
+    }
+
+    function recalcSumproduct() {
+        const weekendDays = ['saturday', 'sunday'];
+        const days = getEditableValues('sumproduct', 'a');
+        const sales = getEditableValues('sumproduct', 'b').map(v => parseNum(v));
+        let wdTotal = 0, wdCount = 0, weTotal = 0, weCount = 0;
+        for (let i = 0; i < days.length; i++) {
+            const isWeekend = weekendDays.includes(days[i].trim().toLowerCase());
+            const el = document.getElementById('sp-type-' + (i+1));
+            if (el) el.textContent = isWeekend ? '🎉 Weekend' : '📅 Weekday';
+            if (isWeekend) { weTotal += sales[i]; weCount++; }
+            else { wdTotal += sales[i]; wdCount++; }
+        }
+        const wdAvg = wdCount > 0 ? wdTotal / wdCount : 0;
+        const weAvg = weCount > 0 ? weTotal / weCount : 0;
+        const boost = wdAvg > 0 ? ((weAvg / wdAvg) - 1) * 100 : 0;
+        document.getElementById('sp-weekday-avg').textContent = fmt(Math.round(wdAvg));
+        document.getElementById('sp-weekend-avg').textContent = fmt(Math.round(weAvg));
+        document.getElementById('sp-boost').textContent = (boost >= 0 ? '+' : '') + boost.toFixed(1) + '%';
+    }
+
+    function recalcAverage() {
+        const vals = getEditableValues('average', 'b').map(v => parseNum(v));
+        const jan = vals[0], feb = vals[1], mar = vals[2];
+        const apr = (jan + feb + mar) / 3;
+        const may = (feb + mar + apr) / 3;
+        const jun = (mar + apr + may) / 3;
+        const q2 = apr + may + jun;
+        document.getElementById('avg-apr').textContent = fmt(Math.round(apr));
+        document.getElementById('avg-may').textContent = fmt(Math.round(may));
+        document.getElementById('avg-jun').textContent = fmt(Math.round(jun));
+        document.getElementById('avg-q2').textContent = fmt(Math.round(q2));
+        document.getElementById('avg-apr-opt').textContent = fmt(Math.round(apr * 1.2));
+        document.getElementById('avg-may-opt').textContent = fmt(Math.round(may * 1.2));
+        document.getElementById('avg-jun-opt').textContent = fmt(Math.round(jun * 1.2));
+        document.getElementById('avg-q2-opt').textContent = fmt(Math.round(q2 * 1.2));
+        document.getElementById('avg-apr-pes').textContent = fmt(Math.round(apr * 0.85));
+        document.getElementById('avg-may-pes').textContent = fmt(Math.round(may * 0.85));
+        document.getElementById('avg-jun-pes').textContent = fmt(Math.round(jun * 0.85));
+        document.getElementById('avg-q2-pes').textContent = fmt(Math.round(q2 * 0.85));
+    }
+
+    function recalcLogic() {
+        const budgets = getEditableValues('logic', 'b').map(v => parseNum(v));
+        const actuals = getEditableValues('logic', 'c').map(v => parseNum(v));
+        let totalB = 0, totalA = 0;
+        for (let i = 0; i < budgets.length; i++) {
+            const diff = budgets[i] - actuals[i];
+            document.getElementById('logic-diff-' + (i+1)).textContent = fmt(diff);
+            const el = document.getElementById('logic-status-' + (i+1));
+            if (diff > 0) el.textContent = '✅ Under budget';
+            else if (diff < 0) el.textContent = '❌ Over budget';
+            else el.textContent = '➖ Exact';
+            totalB += budgets[i]; totalA += actuals[i];
+        }
+        document.getElementById('logic-budget-total').textContent = fmt(totalB);
+        document.getElementById('logic-actual-total').textContent = fmt(totalA);
+        const variance = totalB > 0 ? ((totalA / totalB) - 1) * 100 : 0;
+        document.getElementById('logic-variance').textContent = (variance >= 0 ? '+' : '') + variance.toFixed(1) + '%';
+        const vEl = document.getElementById('logic-variance');
+        if (variance <= 0) { vEl.style.background = '#f0fdf4'; vEl.style.color = '#166534'; }
+        else { vEl.style.background = '#fee2e2'; vEl.style.color = '#991b1b'; }
+    }
+
+    function recalcLet() {
+        const vals = getEditableValues('let', 'a').map(v => parseNum(v));
+        const harga = vals[0], qty = vals[1], diskon = vals[2];
+        const subtotal = harga * qty;
+        const diskonAmt = subtotal * diskon;
+        const result = subtotal - diskonAmt;
+        document.getElementById('let-subtotal').textContent = fmt(subtotal);
+        document.getElementById('let-diskon').textContent = fmt(Math.round(diskonAmt));
+        document.getElementById('let-result').textContent = fmt(Math.round(result));
+    }
+
+    function recalcIndex() {
+        const colMap = {a:1, b:2, c:3, d:4};
+        const cols = ['a','b','c','d'];
+        const sel = document.getElementById('index-col-select');
+        const colIdx = parseInt(sel.value) - 1;
+        const colKey = cols[colIdx];
+        document.getElementById('index-col-num').textContent = sel.value;
+        const vals = getEditableValues('index', colKey);
+        document.getElementById('index-r1').textContent = vals[0] || '';
+        document.getElementById('index-r2').textContent = vals[1] || '';
+        document.getElementById('index-r3').textContent = vals[2] || '';
+        const nums = vals.map(v => parseNum(v));
+        const hasNums = nums.some(v => !isNaN(v));
+        if (hasNums) {
+            const validNums = nums.filter(v => !isNaN(v));
+            document.getElementById('index-sum').textContent = fmt(validNums.reduce((s,v) => s+v, 0));
+            const pass = validNums.filter(v => v >= 0).length;
+            const fail = validNums.filter(v => v < 0).length;
+            document.getElementById('index-filter-count').textContent = pass + ' rows pass';
+            document.getElementById('index-filter-neg').textContent = fail + ' row fail';
+        } else {
+            document.getElementById('index-sum').textContent = 'N/A (text)';
+            document.getElementById('index-filter-count').textContent = 'N/A';
+            document.getElementById('index-filter-neg').textContent = 'N/A';
+        }
+    }
+
+    function recalcPipeline() {
+        const vals = getEditableValues('pipeline', 'a').map(v => parseNum(v));
+        const raw = vals[0], dup = vals[1], neg = vals[2], fut = vals[3], zero = vals[4], clean2 = vals[5];
+        const anomali = dup + neg + fut + zero;
+        const cara1 = raw - anomali;
+        document.getElementById('pipe-anomali').textContent = fmt(anomali);
+        document.getElementById('pipe-cara1').textContent = fmt(cara1);
+        const matchEl = document.getElementById('pipe-match');
+        if (cara1 === clean2) {
+            matchEl.textContent = '✅ Match!';
+            matchEl.style.background = '#f0fdf4'; matchEl.style.color = '#166534';
+        } else {
+            matchEl.textContent = '❌ Mismatch! (selisih ' + fmt(Math.abs(cara1 - clean2)) + ')';
+            matchEl.style.background = '#fee2e2'; matchEl.style.color = '#991b1b';
+        }
+    }
+
+    function recalcDate() {
+        const vals = getEditableValues('date', 'a').map(v => parseInt(v) || 0);
+        const y = vals[0], m = vals[1], d = vals[2];
+        const dt = new Date(y, m - 1, d);
+        const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const pad = n => String(n).padStart(2, '0');
+        if (isNaN(dt.getTime()) || y < 1900) {
+            document.getElementById('date-result').textContent = 'Invalid date';
+            return;
+        }
+        document.getElementById('date-result').textContent = dt.getFullYear() + '-' + pad(dt.getMonth()+1) + '-' + pad(dt.getDate());
+        const jsDay = dt.getDay(); // 0=Sun
+        const isoDay = jsDay === 0 ? 7 : jsDay; // 1=Mon, 7=Sun
+        document.getElementById('date-weekday').textContent = isoDay;
+        document.getElementById('date-dayname').textContent = dayNames[jsDay];
+        document.getElementById('date-day').textContent = dt.getDate();
+        document.getElementById('date-payday').textContent = dt.getDate() <= 5 ? '✅ Payday (tgl 1-5)' : '❌ Non-payday (tgl 6-31)';
+        document.getElementById('date-year').textContent = dt.getFullYear();
+        document.getElementById('date-month').textContent = dt.getMonth() + 1;
+        const periodEnd = new Date(2026, 2, 31);
+        const periodStart = new Date(2025, 0, 1);
+        const futEl = document.getElementById('date-future');
+        if (dt > periodEnd) { futEl.textContent = '❌ Future date! (> 2026-03-31)'; futEl.style.color = '#991b1b'; }
+        else if (dt < periodStart) { futEl.textContent = '⚠️ Before period (< 2025-01-01)'; futEl.style.color = '#92400e'; }
+        else { futEl.textContent = '✅ Dalam periode (2025-01-01 s/d 2026-03-31)'; futEl.style.color = '#166534'; }
+    }
+
+    function recalcAdvanced() {
+        const spends = getEditableValues('advanced', 'a').map(v => parseNum(v));
+        const revs = getEditableValues('advanced', 'b').map(v => parseNum(v));
+        const totalRev = revs.reduce((s,v) => s+v, 0);
+        const totalSpend = spends.reduce((s,v) => s+v, 0);
+        for (let i = 0; i < spends.length; i++) {
+            const roas = spends[i] > 0 ? revs[i] / spends[i] : 0;
+            const share = totalRev > 0 ? (revs[i] / totalRev * 100) : 0;
+            document.getElementById('adv-roas-' + (i+1)).textContent = roas.toFixed(2) + '×';
+            document.getElementById('adv-share-' + (i+1)).textContent = share.toFixed(1) + '%';
+            const stEl = document.getElementById('adv-status-' + (i+1));
+            if (roas >= 3) stEl.innerHTML = '<span class="badge-ch b-green">Above 3×</span>';
+            else if (roas >= 2) stEl.innerHTML = '<span class="badge-ch b-yellow">2-3×</span>';
+            else stEl.innerHTML = '<span class="badge-ch b-red">Below 2×</span>';
+        }
+        document.getElementById('adv-spend-total').textContent = fmt(totalSpend);
+        document.getElementById('adv-rev-total').textContent = fmt(totalRev);
+        const overallRoas = totalSpend > 0 ? totalRev / totalSpend : 0;
+        document.getElementById('adv-roas-total').textContent = overallRoas.toFixed(2) + '×';
+    }
+
+    function recalcSequence() {
+        const expected = ['2025-01-01','2025-01-02','2025-01-03','2025-01-04','2025-01-05','2025-01-06','2025-01-07'];
+        const data = getEditableValues('sequence', 'a');
+        let missing = 0;
+        for (let i = 0; i < expected.length; i++) {
+            const found = data.some(d => d.trim() === expected[i]);
+            const mEl = document.getElementById('seq-match-' + (i+1));
+            const iEl = document.getElementById('seq-isna-' + (i+1));
+            if (found) {
+                mEl.textContent = 'Found'; mEl.style.background = '#f0fdf4'; mEl.style.color = '#166534';
+                iEl.textContent = 'FALSE'; iEl.style.color = 'var(--text-muted)'; iEl.style.fontWeight = '400';
+            } else {
+                mEl.textContent = '#N/A'; mEl.style.background = '#fee2e2'; mEl.style.color = '#991b1b';
+                iEl.textContent = 'TRUE'; iEl.style.color = '#991b1b'; iEl.style.fontWeight = '700';
+                missing++;
+            }
+        }
+        document.getElementById('seq-missing').textContent = missing;
+    }
+
+    function recalcIferror() {
+        const as = getEditableValues('iferror', 'a').map(v => parseNum(v));
+        const bs = getEditableValues('iferror', 'b').map(v => parseNum(v));
+        for (let i = 0; i < as.length; i++) {
+            const rawEl = document.getElementById('iferr-raw-' + (i+1));
+            const safeEl = document.getElementById('iferr-safe-' + (i+1));
+            const b = bs[i];
+            if (isNaN(b) || b === 0) {
+                rawEl.textContent = '#DIV/0!'; rawEl.style.background = '#fee2e2'; rawEl.style.color = '#991b1b'; rawEl.style.fontWeight = '700';
+                safeEl.textContent = '0';
+            } else {
+                const r = as[i] / b;
+                rawEl.textContent = Number.isInteger(r) ? r : r.toFixed(3);
+                rawEl.style.background = '#f0fdf4'; rawEl.style.color = '#166534'; rawEl.style.fontWeight = '700';
+                safeEl.textContent = Number.isInteger(r) ? r : r.toFixed(3);
+            }
+        }
+        // Percentage change row (last row)
+        const lastB = bs[bs.length - 1];
+        const lastA = as[as.length - 1];
+        const pctRaw = document.getElementById('iferr-pct-raw');
+        const pctSafe = document.getElementById('iferr-pct-safe');
+        if (isNaN(lastB) || lastB === 0) {
+            pctRaw.textContent = '#DIV/0!'; pctRaw.style.background = '#fee2e2'; pctRaw.style.color = '#991b1b';
+            pctSafe.textContent = '0%';
+        } else {
+            const p = ((lastA / lastB) - 1) * 100;
+            pctRaw.textContent = p.toFixed(1) + '%'; pctRaw.style.background = '#f0fdf4'; pctRaw.style.color = '#166534';
+            pctSafe.textContent = p.toFixed(1) + '%';
+        }
+    }
+
+    function recalcNot() {
+        const prices = getEditableValues('not', 'a').map(v => parseNum(v));
+        const qtys = getEditableValues('not', 'b').map(v => parseNum(v));
+        let removed = 0;
+        for (let i = 0; i < prices.length; i++) {
+            const pz = prices[i] === 0;
+            const qp = qtys[i] > 0;
+            const both = pz && qp;
+            const keep = !both;
+            document.getElementById('not-pz-' + (i+1)).textContent = pz ? 'TRUE' : 'FALSE';
+            document.getElementById('not-pz-' + (i+1)).style.color = pz ? '#991b1b' : 'var(--text-muted)';
+            document.getElementById('not-pz-' + (i+1)).style.fontWeight = pz ? '600' : '400';
+            document.getElementById('not-qp-' + (i+1)).textContent = qp ? 'TRUE' : 'FALSE';
+            document.getElementById('not-qp-' + (i+1)).style.color = qp ? '#991b1b' : 'var(--text-muted)';
+            document.getElementById('not-qp-' + (i+1)).style.fontWeight = qp ? '600' : '400';
+            document.getElementById('not-both-' + (i+1)).textContent = both ? 'TRUE' : 'FALSE';
+            document.getElementById('not-both-' + (i+1)).style.color = both ? '#991b1b' : 'var(--text-muted)';
+            document.getElementById('not-both-' + (i+1)).style.fontWeight = both ? '600' : '400';
+            const kEl = document.getElementById('not-keep-' + (i+1));
+            if (keep) { kEl.textContent = '✅ Keep'; kEl.style.background = '#f0fdf4'; kEl.style.color = '#166534'; }
+            else { kEl.textContent = '❌ Remove'; kEl.style.background = '#fee2e2'; kEl.style.color = '#991b1b'; removed++; }
+        }
+        document.getElementById('not-removed').textContent = removed;
+    }
+
+    function recalcInventory() {
+        const stocks = getEditableValues('inventory', 'a').map(v => parseNum(v));
+        const rops = getEditableValues('inventory', 'b').map(v => parseNum(v));
+        const safetys = getEditableValues('inventory', 'c').map(v => parseNum(v));
+        const maxs = getEditableValues('inventory', 'd').map(v => parseNum(v));
+        let crit=0, warn=0, ok=0, over=0;
+        for (let i = 0; i < stocks.length; i++) {
+            const ratio = rops[i] > 0 ? stocks[i] / rops[i] : 0;
+            document.getElementById('inv-ratio-' + (i+1)).textContent = ratio.toFixed(2);
+            const el = document.getElementById('inv-alert-' + (i+1));
+            if (stocks[i] < safetys[i]) { el.innerHTML = '<span class="badge-ch b-red">🔴 CRITICAL</span>'; crit++; }
+            else if (stocks[i] < rops[i]) { el.innerHTML = '<span class="badge-ch b-yellow">🟡 WARNING</span>'; warn++; }
+            else if (stocks[i] > maxs[i]) { el.innerHTML = '<span class="badge-ch b-blue">🔵 OVERSTOCK</span>'; over++; }
+            else { el.innerHTML = '<span class="badge-ch b-green">🟢 OK</span>'; ok++; }
+        }
+        document.getElementById('inv-cnt-crit').textContent = crit;
+        document.getElementById('inv-cnt-warn').textContent = warn;
+        document.getElementById('inv-cnt-ok').textContent = ok;
+        document.getElementById('inv-cnt-over').textContent = '🔵 ' + over;
+    }
+
+    function recalcCohort() {
+        const signups = getEditableValues('cohort', 'a').map(v => parseNum(v));
+        const m1s = getEditableValues('cohort', 'b').map(v => parseNum(v));
+        const m3s = getEditableValues('cohort', 'c').map(v => parseNum(v));
+        let totalSignup = 0, totalM1 = 0, totalM3Signup = 0, totalM3 = 0;
+        for (let i = 0; i < signups.length; i++) {
+            const m1r = signups[i] > 0 ? (m1s[i] / signups[i] * 100) : 0;
+            document.getElementById('coh-m1r-' + (i+1)).textContent = m1r.toFixed(1) + '%';
+            totalSignup += signups[i]; totalM1 += m1s[i];
+            if (m3s[i] > 0 || i < signups.length - 1) {
+                const m3r = signups[i] > 0 ? (m3s[i] / signups[i] * 100) : 0;
+                document.getElementById('coh-m3r-' + (i+1)).textContent = m3r.toFixed(1) + '%';
+                totalM3Signup += signups[i]; totalM3 += m3s[i];
+            } else {
+                document.getElementById('coh-m3r-' + (i+1)).textContent = '—';
+            }
+        }
+        document.getElementById('coh-overall-m1').textContent = totalSignup > 0 ? (totalM1/totalSignup*100).toFixed(1)+'%' : '0%';
+        document.getElementById('coh-overall-m3').textContent = totalM3Signup > 0 ? (totalM3/totalM3Signup*100).toFixed(1)+'%' : '—';
+    }
+
+    function recalcThr() {
+        const thrTotal = parseNum(getEditableValues('thr', 'a')[0]);
+        const pcts = getEditableValues('thr', 'b').map(v => parseNum(v));
+        let sumPct = 0, sumAmt = 0;
+        for (let i = 0; i < pcts.length; i++) {
+            const amt = thrTotal * (pcts[i] / 100);
+            document.getElementById('thr-amt-' + (i+1)).textContent = fmt(Math.round(amt));
+            sumPct += pcts[i]; sumAmt += amt;
+        }
+        document.getElementById('thr-pct-total').textContent = sumPct + '%';
+        document.getElementById('thr-amt-total').textContent = fmt(Math.round(sumAmt));
+        const stEl = document.getElementById('thr-status');
+        if (sumPct === 100) { stEl.textContent = '✅ Pas 100%'; stEl.style.background = '#f0fdf4'; stEl.style.color = '#166534'; }
+        else if (sumPct > 100) { stEl.textContent = '❌ Over ' + sumPct + '% — kurangi!'; stEl.style.background = '#fee2e2'; stEl.style.color = '#991b1b'; }
+        else { stEl.textContent = '⚠️ Baru ' + sumPct + '% — sisa ' + (100-sumPct) + '%'; stEl.style.background = '#fef3c7'; stEl.style.color = '#92400e'; }
+    }
+
+    // INDEX dropdown listener
+    const idxSel = document.getElementById('index-col-select');
+    if (idxSel) idxSel.addEventListener('change', () => recalcIndex());
+
+    initEditables();
+    formatInitialNumbers();
+    formatEditableNumbers();
+    ['counta','countif','countifs','countblank','sum','unique','filter','let','index','pipeline','sumifs','sumproduct','average','date','logic','advanced','sequence','iferror','not','inventory','cohort','thr'].forEach(recalcDemo);
+
+    // ============================================================
+    // NAVIGATION & UX
+    // ============================================================
+    const nav = document.querySelector('.sidebar-nav');
+    const links = nav.querySelectorAll('a[href^="#"]');
+    const sections = [];
+    const visited = new Set();
+    links.forEach(link => {
+        const id = link.getAttribute('href').substring(1);
+        const el = document.getElementById(id);
+        if (el) sections.push({ id, el, link });
+    });
+
+    const progressFill = document.getElementById('progressFill');
+    function updateProgress() {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        const pctVal = h > 0 ? (window.scrollY / h) * 100 : 0;
+        progressFill.style.width = Math.min(pctVal, 100) + '%';
+    }
+
+    const backTop = document.getElementById('backTop');
+    function updateBackTop() { backTop.classList.toggle('show', window.scrollY > 400); }
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    function updateActive() {
+        let current = sections[0];
+        for (const s of sections) {
+            if (s.el.getBoundingClientRect().top <= 120) { current = s; visited.add(s.id); }
+        }
+        links.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+        sections.forEach(s => { if (visited.has(s.id)) s.link.classList.add('visited'); });
+    }
+
+    window.addEventListener('scroll', () => { updateActive(); updateProgress(); updateBackTop(); });
+    updateActive(); updateProgress(); updateBackTop();
+
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.getAttribute('href').substring(1);
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('sidebar').classList.remove('open');
+        });
+    });
+
+    document.getElementById('mobileMenu').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    // Copy buttons on code blocks
+    document.querySelectorAll('pre').forEach(pre => {
+        const wrap = document.createElement('div');
+        wrap.className = 'code-wrap';
+        pre.parentNode.insertBefore(wrap, pre);
+        wrap.appendChild(pre);
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.textContent = 'Copy';
+        btn.addEventListener('click', function() {
+            const code = pre.querySelector('code') || pre;
+            navigator.clipboard.writeText(code.textContent).then(() => {
+                btn.textContent = '✓ Copied';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+            });
+        });
+        wrap.appendChild(btn);
+    });
+
+    // ============================================================
+    // SIDEBAR SEARCH
+    // ============================================================
+    const searchInput = document.getElementById('sidebarSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const q = this.value.toLowerCase().trim();
+            nav.querySelectorAll('a[href^="#"]').forEach(a => {
+                const text = a.textContent.toLowerCase();
+                a.classList.toggle('search-hidden', q.length > 0 && !text.includes(q));
+            });
+        });
+    }
+
+    // ============================================================
+    // KEYBOARD SHORTCUTS
+    // ============================================================
+    document.addEventListener('keydown', function(e) {
+        if (e.target.matches('input,textarea,[contenteditable]')) return;
+        if (e.key === '/') { e.preventDefault(); searchInput && searchInput.focus(); }
+        if (e.key === 'd' || e.key === 'D') { document.getElementById('darkToggle').click(); }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const activeLink = nav.querySelector('a.active');
+            const allLinks = Array.from(nav.querySelectorAll('a[href^="#"]:not(.search-hidden)'));
+            const idx = allLinks.indexOf(activeLink);
+            const next = e.key === 'ArrowDown' ? Math.min(idx + 1, allLinks.length - 1) : Math.max(idx - 1, 0);
+            if (allLinks[next]) {
+                const id = allLinks[next].getAttribute('href').substring(1);
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    });
+
+    // ============================================================
+    // DARK MODE
+    // ============================================================
+    const darkBtn = document.getElementById('darkToggle');
+    function setDark(on) {
+        document.body.classList.toggle('dark', on);
+        darkBtn.textContent = on ? '☀️' : '🌙';
+        try { localStorage.setItem('dark', on ? '1' : '0'); } catch(e) {}
+    }
+    darkBtn.addEventListener('click', () => setDark(!document.body.classList.contains('dark')));
+    try { if (localStorage.getItem('dark') === '1') setDark(true); } catch(e) {}
+
+    // ============================================================
+    // FLASH ANIMATION on computed cells
+    // ============================================================
+    const origRecalc = window.recalcDemo || function(){};
+    const observedCells = new Map();
+    function flashChanged() {
+        document.querySelectorAll('.live-sheet .computed').forEach(cell => {
+            const key = cell.id || cell.textContent;
+            const prev = observedCells.get(cell);
+            if (prev !== undefined && prev !== cell.textContent) {
+                cell.classList.remove('flash');
+                void cell.offsetWidth; // reflow
+                cell.classList.add('flash');
+            }
+            observedCells.set(cell, cell.textContent);
+        });
+    }
+    // Patch all recalc calls to trigger flash
+    const origDispatch = recalcDemo;
+    window.recalcDemoWithFlash = function(demo) {
+        origDispatch(demo);
+        flashChanged();
+    };
+    // Re-wire input events
+    document.querySelectorAll('.live-sheet .editable').forEach(cell => {
+        cell.addEventListener('input', () => {
+            const demo = cell.dataset.demo;
+            recalcDemo(demo);
+            flashChanged();
+        });
+    });
+});
+</script>
+</body>
+</html>
