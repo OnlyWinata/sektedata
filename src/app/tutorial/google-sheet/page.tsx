@@ -16,7 +16,7 @@ export default function TutorialFormulaGate() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (sessionStorage.getItem("tutorial_formula_auth") === "granted") {
-        window.location.href = "/tutorial-formula/content.html";
+        window.location.href = "/tutorial/google-sheet/content.html";
       }
     }
   }, []);
@@ -35,7 +35,7 @@ export default function TutorialFormulaGate() {
       setUnlocked(true);
       sessionStorage.setItem("tutorial_formula_auth", "granted");
       setTimeout(() => {
-        window.location.href = "/tutorial-formula/content.html";
+        window.location.href = "/tutorial/google-sheet/content.html";
       }, 800);
     } else {
       setError(true);

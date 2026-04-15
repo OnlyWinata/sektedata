@@ -288,7 +288,7 @@ body.dark img[src*="logo black"]{filter:brightness(0) invert(1)}
 // Password protection — redirect to gate if not authenticated
 (function() {
   if (sessionStorage.getItem('tutorial_formula_auth') !== 'granted') {
-    window.location.replace('/tutorial-formula');
+    window.location.replace('/tutorial/google-sheet');
   }
 })();
 </script>
