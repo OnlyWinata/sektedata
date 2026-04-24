@@ -105,6 +105,28 @@ const caseStudies = [
       { label: "Recommendations", value: "4" },
     ],
   },
+  {
+    slug: "forecoffee",
+    brand: "Fore Coffee",
+    logo: "https://fore.coffee/wp-content/uploads/2018/12/FORe-Pin-300x300.png",
+    role: "Operation Analyst Officer",
+    description:
+      "Store performance analytics across 350 real outlets scraped from Fore Coffee API. Transaction analysis, menu performance, channel mix optimization, and proximity analysis using Haversine distance. Anchored to IDX: FORE financial reports.",
+    tags: [
+      "350 Real Outlets (API)",
+      "IDX: FORE Financial Data",
+      "Haversine Proximity",
+      "6 Order Channels",
+    ],
+    color: "#00754a",
+    gradient: "linear-gradient(135deg, #064e3b, #00754a)",
+    metrics: [
+      { label: "Outlets Analyzed", value: "350" },
+      { label: "Clean Transactions", value: "16,229" },
+      { label: "Menu Items", value: "34" },
+      { label: "Recommendations", value: "4" },
+    ],
+  },
 ];
 
 const approach = [
