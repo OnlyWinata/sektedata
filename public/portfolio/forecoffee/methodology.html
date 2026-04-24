@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Kerja — Data Pipeline & Methodology</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo"><img src="https://fore.coffee/wp-content/uploads/2018/12/FORe-Pin-100x100.png" alt="Fore" style="width:24px;height:24px;border-radius:4px;"> Fore Coffee</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+        <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+        <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+        <a href="business-context.html"><span class="icon">🏢</span> <span data-i18n="sidebar.konteks">Konteks Bisnis</span></a>
+        <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+        <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+        <a href="visualization.html"><span class="icon">📊</span> <span data-i18n="sidebar.visual">Visualisasi</span></a>
+        <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+        <a href="report.html"><span class="icon">📋</span> <span data-i18n="sidebar.report">Report Data</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+        <a href="methodology.html" class="active"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+        <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+    <div class="sidebar-contact">
+        <div class="contact-label">Contact</div>
+        <a href="https://www.linkedin.com/in/winata-syahputra/" target="_blank"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a href="mailto:winatasyputra@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+    </div>
+</nav>
+<div class="main">
+    <div class="topbar">
+        <h2 data-i18n="p04cara.topbar">Cara Kerja</h2>
+    </div>
+    <div class="hero-banner">
+        <div>
+            <h1 data-i18n="p04cara.hero.title">Cara Kerja: Data Pipeline & Methodology</h1>
+            <p data-i18n="p04cara.hero.sub">Bagaimana data dikumpulkan, dibersihkan, dan dianalisis — dari scraping hingga visualisasi.</p>
+        </div>
+    </div>
+
+    <div class="content-area">
+
+        <h2 class="section-title" data-i18n="p04cara.sec.sources">Data Sources</h2>
+        <p data-i18n="p04cara.sources.intro">Analisis ini menggunakan 4 sumber data utama yang saling melengkapi — dari data outlet real hingga laporan keuangan publik.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p04cara.th.source">Sumber</th>
+                    <th data-i18n="p04cara.th.desc">Deskripsi</th>
+                    <th data-i18n="p04cara.th.volume">Volume</th>
+                    <th data-i18n="p04cara.th.usage">Penggunaan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Fore Coffee API</strong></td>
+                    <td data-i18n="p04cara.src.api">Endpoint outlet dengan koordinat lat/lng</td>
+                    <td>350 outlets</td>
+                    <td data-i18n="p04cara.src.api.use">Anchor data outlet, proximity analysis</td>
+                </tr>
+                <tr>
+                    <td><strong>Transaction Data</strong></td>
+                    <td data-i18n="p04cara.src.trx">Data transaksi sintetis (generated)</td>
+                    <td>16,323 rows</td>
+                    <td data-i18n="p04cara.src.trx.use">Revenue analysis, outlet ranking, menu performance</td>
+                </tr>
+                <tr>
+                    <td><strong>Menu Master</strong></td>
+                    <td data-i18n="p04cara.src.menu">Daftar menu + harga + kategori</td>
+                    <td>34 items</td>
+                    <td data-i18n="p04cara.src.menu.use">Price validation, category analysis</td>
+                </tr>
+                <tr>
+                    <td><strong>IDX Financial Reports</strong></td>
+                    <td data-i18n="p04cara.src.idx">Laporan keuangan publik FORE</td>
+                    <td>FY21–FY25</td>
+                    <td data-i18n="p04cara.src.idx.use">Revenue anchor, growth validation</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="p04cara.sec.scraping">Scraping Pipeline</h2>
+        <p data-i18n="p04cara.scraping.text">Data outlet di-scrape dari <code>api.fore.coffee/store/all_with_token</code> menggunakan autentikasi <code>wp-token</code>. Endpoint ini mengembalikan JSON array berisi semua outlet aktif beserta metadata: nama, alamat, kota, koordinat latitude/longitude, dan tipe outlet (Store, Leisure, Fore Go, Grab & Go).</p>
+        <p data-i18n="p04cara.scraping.text2">Dari scraping ini, didapatkan <strong>350 outlet</strong> dengan koordinat real — menjadi anchor untuk proximity analysis dan geographic distribution. Setiap outlet punya koordinat GPS yang akurat, memungkinkan perhitungan jarak antar outlet menggunakan Haversine formula.</p>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p04cara.callout.scraping.title">🔑 Autentikasi API</h4>
+            <p data-i18n="p04cara.callout.scraping.text">API Fore Coffee menggunakan WordPress-based token authentication. Request dikirim dengan header <code>wp-token</code> yang valid. Response berupa JSON array — tidak perlu pagination karena semua outlet dikembalikan dalam satu response.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p04cara.sec.haversine">Haversine Distance</h2>
+        <p data-i18n="p04cara.haversine.intro">Untuk mengukur jarak antar outlet, digunakan Haversine formula — menghitung jarak great-circle antara dua titik di permukaan bumi berdasarkan koordinat latitude dan longitude.</p>
+
+        <div class="chart-card" style="text-align:center; font-family:'Fira Code',monospace; font-size:.85rem; padding:1.5rem;">
+            <div class="title" data-i18n="p04cara.haversine.formula.title">Haversine Formula</div>
+            <p style="color:var(--text-main); margin:.75rem 0;">
+                a = sin²(Δφ/2) + cos(φ₁) · cos(φ₂) · sin²(Δλ/2)<br>
+                c = 2 · atan2(√a, √(1−a))<br>
+                d = R · c
+            </p>
+            <p style="font-size:.75rem; color:var(--text-muted); font-family:'Plus Jakarta Sans',sans-serif;">
+                R = 6,371 km (radius bumi) · φ = latitude · λ = longitude
+            </p>
+        </div>
+
+        <p data-i18n="p04cara.haversine.text">Dengan 350 outlet, total pasangan jarak yang dihitung: <strong>350 × 349 / 2 = 61,075 distance pairs</strong>. Dari perhitungan ini, bisa diidentifikasi outlet-outlet yang terlalu dekat satu sama lain (cannibalization risk) — khususnya outlet dalam radius 500m.</p>
+
+        <div class="callout-orange">
+            <h4 data-i18n="p04cara.callout.haversine.title">⚠️ Catatan Haversine</h4>
+            <p data-i18n="p04cara.callout.haversine.text">Haversine mengasumsikan bumi sebagai sphere sempurna dan mengukur jarak "as the crow flies" — bukan jarak jalan. Untuk analisis proximity outlet di area urban, ini cukup akurat sebagai screening tool. Untuk keputusan final, perlu validasi dengan actual driving distance.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p04cara.sec.cleaning">Data Cleaning Pipeline</h2>
+        <p data-i18n="p04cara.cleaning.intro">Pipeline cleaning berjalan sequential — setiap step bergantung pada output step sebelumnya.</p>
+
+        <div class="seg-grid" style="grid-template-columns: 1fr;">
+            <div class="chart-card" style="text-align:center;">
+                <div class="title" data-i18n="p04cara.cleaning.flow.title">Cleaning Flow</div>
+                <div style="display:flex; align-items:center; justify-content:center; gap:.75rem; flex-wrap:wrap; padding:.75rem 0; font-size:.82rem;">
+                    <div style="background:var(--primary-light); border:1.5px solid var(--primary); padding:.5rem 1rem; border-radius:8px; font-weight:700;">Raw: 16,323</div>
+                    <span style="font-size:1.2rem;">→</span>
+                    <div style="background:#fef3c7; border:1.5px solid #f59e0b; padding:.5rem 1rem; border-radius:8px; font-weight:600;" data-i18n="p04cara.flow.identify">Identifikasi 6 Jenis Anomali</div>
+                    <span style="font-size:1.2rem;">→</span>
+                    <div style="background:#fee2e2; border:1.5px solid #ef4444; padding:.5rem 1rem; border-radius:8px; font-weight:600;" data-i18n="p04cara.flow.remove">Remove 95 Anomali</div>
+                    <span style="font-size:1.2rem;">→</span>
+                    <div style="background:#dcfce7; border:1.5px solid #22c55e; padding:.5rem 1rem; border-radius:8px; font-weight:700;">Clean: 16,229</div>
+                    <span style="font-size:1.2rem;">→</span>
+                    <div style="background:#dbeafe; border:1.5px solid #3b82f6; padding:.5rem 1rem; border-radius:8px; font-weight:600;" data-i18n="p04cara.flow.validate">Cross-validate vs Master Data</div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th data-i18n="p04cara.th.anomaly">Jenis Anomali</th>
+                    <th data-i18n="p04cara.th.count">Jumlah</th>
+                    <th data-i18n="p04cara.th.method">Metode Deteksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Duplicate Rows</td><td>30</td><td data-i18n="p04cara.step.dup">Hash-based dedup, keep first occurrence</td></tr>
+                <tr><td>2</td><td>Price Mismatch</td><td>20</td><td data-i18n="p04cara.step.price">Compare unit_price vs menu master price list</td></tr>
+                <tr><td>3</td><td>Missing Outlet ID</td><td>15</td><td data-i18n="p04cara.step.missing">NULL/empty check pada kolom outlet_id</td></tr>
+                <tr><td>4</td><td>Negative Quantity</td><td>12</td><td data-i18n="p04cara.step.neg">quantity &lt; 0 filter</td></tr>
+                <tr><td>5</td><td>Zero Total</td><td>10</td><td data-i18n="p04cara.step.zero">total_amount = 0 filter</td></tr>
+                <tr><td>6</td><td>Future Dates</td><td>8</td><td data-i18n="p04cara.step.future">transaction_date &gt; max_period filter</td></tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box" data-i18n="p04cara.cleaning.insight">Total 95 anomali dari 16,323 rows = 0.58% error rate. Data retention 99.42%. Setiap anomali punya alasan realistis — ini bukan random noise, tapi masalah umum di POS system multi-outlet.</div>
+
+        <h2 class="section-title" data-i18n="p04cara.sec.tools">Tools & Stack</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tool</th>
+                    <th data-i18n="p04cara.th.role">Peran</th>
+                    <th data-i18n="p04cara.th.detail">Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Python</strong></td>
+                    <td data-i18n="p04cara.tool.python">Data generation & scraping</td>
+                    <td data-i18n="p04cara.tool.python.detail">requests, pandas, numpy, json — generate dataset + scrape API</td>
+                </tr>
+                <tr>
+                    <td><strong>Excel / Google Sheets</strong></td>
+                    <td data-i18n="p04cara.tool.excel">Analysis & reporting</td>
+                    <td data-i18n="p04cara.tool.excel.detail">Cleaning, pivot tables, ranking, formula-based analysis</td>
+                </tr>
+                <tr>
+                    <td><strong>Chart.js</strong></td>
+                    <td data-i18n="p04cara.tool.chartjs">Visualization</td>
+                    <td data-i18n="p04cara.tool.chartjs.detail">Bar, doughnut, scatter, line charts — canvas-based, responsive</td>
+                </tr>
+                <tr>
+                    <td><strong>HTML / CSS / JS</strong></td>
+                    <td data-i18n="p04cara.tool.web">Portfolio website</td>
+                    <td data-i18n="p04cara.tool.web.detail">Pure HTML5 + CSS3 + vanilla JS — no framework, self-contained</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" data-i18n="p04cara.sec.reproducibility">Reproducibility</h2>
+        <p data-i18n="p04cara.repro.text">Semua script data generation menggunakan <code>random.seed(42)</code> dan <code>np.random.seed(42)</code> — output deterministic dan reproducible. Setiap kali script dijalankan, dataset yang dihasilkan identik.</p>
+
+        <div class="kpi-row" style="padding:0; grid-template-columns: repeat(3, 1fr);">
+            <div class="kpi-card c-blue"><div class="kpi-num">seed=42</div><div class="kpi-label" data-i18n="p04cara.kpi.seed">Random Seed</div><div class="kpi-sub" data-i18n="p04cara.kpi.seed.sub">deterministic output</div></div>
+            <div class="kpi-card c-green"><div class="kpi-num">expected_values.json</div><div class="kpi-label" data-i18n="p04cara.kpi.expected">Source of Truth</div><div class="kpi-sub" data-i18n="p04cara.kpi.expected.sub">semua angka kunci</div></div>
+            <div class="kpi-card c-purple"><div class="kpi-num">checker.py</div><div class="kpi-label" data-i18n="p04cara.kpi.checker">Auto-Grader</div><div class="kpi-sub" data-i18n="p04cara.kpi.checker.sub">verifikasi otomatis</div></div>
+        </div>
+
+        <div class="callout-blue" style="margin-top:1.5rem;">
+            <h4 data-i18n="p04cara.callout.repro.title">🔄 Reproducibility Chain</h4>
+            <p data-i18n="p04cara.callout.repro.text"><code>generate_data.py</code> → dataset (CSV) → <code>build_answer_key.py</code> → answer key (XLSX) → <code>build_template.py</code> → template (XLSX) → <code>checker.py</code> verifikasi. Satu pipeline, satu source of truth. Semua angka di portfolio ini bisa di-trace balik ke <code>expected_values.json</code>.</p>
+        </div>
+
+        <div class="callout-orange">
+            <h4 data-i18n="p04cara.callout.limit.title">⚠️ Data Limitations</h4>
+            <p data-i18n="p04cara.callout.limit.text">Data transaksi adalah sintetis (generated) — bukan data internal Fore Coffee yang sebenarnya. Namun, data di-anchor ke informasi real: jumlah outlet dari API scraping, harga dari menu resmi, revenue scale dari laporan keuangan IDX. Framework analisis yang dibangun tetap applicable ke data real.</p>
+        </div>
+
+        <div class="disclaimer" data-i18n="p04cara.disclaimer">⚠️ Halaman ini menjelaskan methodology dan tools yang digunakan. Data transaksi bersifat sintetis untuk keperluan case study. Outlet data (350 lokasi + koordinat) berasal dari scraping API Fore Coffee yang real.</div>
+    </div>
+</div>
+<script src="lang.js"></script>
+</body>
+</html>

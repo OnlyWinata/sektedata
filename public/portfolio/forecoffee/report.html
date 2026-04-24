@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 — Report Data Detail</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo"><img src="https://fore.coffee/wp-content/uploads/2018/12/FORe-Pin-100x100.png" alt="Fore" style="width:24px;height:24px;border-radius:4px;"> Fore Coffee</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+        <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+        <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+        <a href="business-context.html"><span class="icon">🏢</span> <span data-i18n="sidebar.konteks">Konteks Bisnis</span></a>
+        <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+        <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+        <a href="visualization.html"><span class="icon">📊</span> <span data-i18n="sidebar.visual">Visualisasi</span></a>
+        <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+        <a href="report.html" class="active"><span class="icon">📋</span> <span data-i18n="sidebar.report">Report Data</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+        <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+        <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+    <div class="sidebar-contact">
+        <div class="contact-label">Contact</div>
+        <a href="https://www.linkedin.com/in/winata-syahputra/" target="_blank"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a href="mailto:winatasyputra@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+    </div>
+</nav>
+<div class="main">
+    <div class="topbar">
+        <h2 data-i18n="p05.topbar">Report Data</h2>
+    </div>
+    <div class="hero-banner">
+        <div>
+            <h1 data-i18n="p05.hero.title">Report Data Detail</h1>
+            <p data-i18n="p05.hero.sub">Cleaning log, exact numbers, full ranking, trend — halaman ini untuk verifikasi. Semua angka bisa di-cross-check.</p>
+        </div>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-card c-blue"><div class="kpi-num">16,323</div><div class="kpi-label" data-i18n="p05.kpi.raw">Raw Rows</div><div class="kpi-sub" data-i18n="p05.kpi.raw.sub">sebelum cleaning</div></div>
+        <div class="kpi-card c-red"><div class="kpi-num">95</div><div class="kpi-label" data-i18n="p05.kpi.anomali">Anomali</div><div class="kpi-sub">0.58% error rate</div></div>
+        <div class="kpi-card c-green"><div class="kpi-num">16,229</div><div class="kpi-label" data-i18n="p05.kpi.clean">Clean Rows</div><div class="kpi-sub" data-i18n="p05.kpi.clean.sub">siap analisis</div></div>
+        <div class="kpi-card c-yellow"><div class="kpi-num">99.42%</div><div class="kpi-label" data-i18n="p05.kpi.rate">Data Retention</div><div class="kpi-sub" data-i18n="p05.kpi.rate.sub">data yang lolos cleaning</div></div>
+    </div>
+
+    <div class="content-area">
+
+        <!-- ═══ CLEANING LOG ═══ -->
+        <h2 class="section-title" data-i18n="p05.sec.cleaning">Cleaning Log</h2>
+
+        <p data-i18n="p05.cleaning.intro">Berikut detail 95 anomali yang ditemukan dan di-remove dari dataset. Setiap jenis anomali punya alasan realistis — ini bukan random noise, tapi masalah yang umum terjadi di POS system multi-outlet.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p05.th.jenis">Jenis Anomali</th>
+                    <th data-i18n="p05.th.jumlah">Jumlah</th>
+                    <th data-i18n="p05.th.persen">% dari Total</th>
+                    <th data-i18n="p05.th.penyebab">Kemungkinan Penyebab</th>
+                    <th data-i18n="p05.th.aksi">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-i18n="p05.anom.dup">Duplicate Rows</td>
+                    <td><strong>30</strong></td>
+                    <td>31.6%</td>
+                    <td data-i18n="p05.anom.dup.cause">Double submission POS, sistem lag saat peak hours</td>
+                    <td data-i18n="p05.anom.dup.action">Remove duplikat, keep first occurrence</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p05.anom.price">Price Mismatch</td>
+                    <td><strong>20</strong></td>
+                    <td>21.1%</td>
+                    <td data-i18n="p05.anom.price.cause">Master price list belum di-sync ke semua outlet POS</td>
+                    <td data-i18n="p05.anom.price.action">Remove — harga tidak match master list</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p05.anom.missing">Missing Outlet ID</td>
+                    <td><strong>15</strong></td>
+                    <td>15.8%</td>
+                    <td data-i18n="p05.anom.missing.cause">Field outlet_id kosong — POS config error</td>
+                    <td data-i18n="p05.anom.missing.action">Remove — tidak bisa di-assign ke outlet manapun</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p05.anom.neg">Negative Quantity</td>
+                    <td><strong>12</strong></td>
+                    <td>12.6%</td>
+                    <td data-i18n="p05.anom.neg.cause">Refund/void yang masuk sebagai transaksi negatif</td>
+                    <td data-i18n="p05.anom.neg.action">Remove — refund bukan transaksi penjualan</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p05.anom.zero">Zero Total</td>
+                    <td><strong>10</strong></td>
+                    <td>10.5%</td>
+                    <td data-i18n="p05.anom.zero.cause">Transaksi test atau promo 100% discount</td>
+                    <td data-i18n="p05.anom.zero.action">Remove — tidak ada revenue contribution</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p05.anom.future">Future Dates</td>
+                    <td><strong>8</strong></td>
+                    <td>8.4%</td>
+                    <td data-i18n="p05.anom.future.cause">Tanggal di luar periode data — data entry error</td>
+                    <td data-i18n="p05.anom.future.action">Remove — tanggal tidak valid</td>
+                </tr>
+                <tr style="font-weight: 700; background: var(--primary-light);">
+                    <td data-i18n="p05.anom.total">TOTAL ANOMALI</td>
+                    <td><strong>95</strong></td>
+                    <td>100%</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ═══ KEY METRICS ═══ -->
+        <h2 class="section-title" data-i18n="p05.sec.metrics">Key Metrics (Data Bersih)</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p05.th.metrik">Metrik</th>
+                    <th data-i18n="p05.th.nilai">Nilai</th>
+                    <th data-i18n="p05.th.keterangan">Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Total Revenue</td><td><strong>Rp 874,701,000</strong></td><td data-i18n="p05.met.rev">Setelah cleaning 95 anomali</td></tr>
+                <tr><td>Total Quantity</td><td><strong>29,403</strong></td><td data-i18n="p05.met.qty">cups terjual</td></tr>
+                <tr><td>Total Transaksi</td><td><strong>16,229</strong></td><td data-i18n="p05.met.trx">clean rows</td></tr>
+                <tr><td>Unique Outlets</td><td><strong>346</strong></td><td data-i18n="p05.met.outlet">di 51 kota</td></tr>
+                <tr><td>Unique Menu Items</td><td><strong>34</strong></td><td data-i18n="p05.met.menu">di 7 kategori</td></tr>
+                <tr><td>Avg Revenue per Transaksi</td><td><strong>Rp 53,896</strong></td><td data-i18n="p05.met.avg">Rp 874.7M ÷ 16,229</td></tr>
+                <tr><td>Avg Quantity per Transaksi</td><td><strong>1.81</strong></td><td data-i18n="p05.met.avgqty">29,403 ÷ 16,229</td></tr>
+                <tr><td>Top City</td><td><strong>Jakarta Selatan</strong></td><td>Rp 78,098,000</td></tr>
+            </tbody>
+        </table>
+
+        <!-- ═══ CHANNEL REVENUE ═══ -->
+        <h2 class="section-title" data-i18n="p05.sec.channel">Channel Revenue Detail</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p05.th.channel">Channel</th>
+                    <th>Revenue</th>
+                    <th data-i18n="p05.th.share">Share</th>
+                    <th data-i18n="p05.th.margin">Margin Profile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><span class="badge-ch b-green">Dine-in</span></td><td>Rp 296,353,000</td><td>33.9%</td><td data-i18n="p05.ch.dinein.margin">Medium — no commission, tapi sewa + staff cost</td></tr>
+                <tr><td><span class="badge-ch b-blue">Pick-up (App)</span></td><td>Rp 222,654,000</td><td>25.5%</td><td data-i18n="p05.ch.pickup.margin">Highest — zero commission, zero delivery cost</td></tr>
+                <tr><td><span class="badge-ch b-yellow">GrabFood</span></td><td>Rp 162,124,000</td><td>18.5%</td><td data-i18n="p05.ch.grab.margin">Low — komisi 20-30% ke Grab</td></tr>
+                <tr><td><span class="badge-ch b-yellow">GoFood</span></td><td>Rp 104,906,000</td><td>12.0%</td><td data-i18n="p05.ch.gofood.margin">Low — komisi 20-30% ke Gojek</td></tr>
+                <tr><td><span class="badge-ch b-yellow">ShopeeFood</span></td><td>Rp 61,770,000</td><td>7.1%</td><td data-i18n="p05.ch.shopee.margin">Low — komisi serupa, growing channel</td></tr>
+                <tr><td><span class="badge-ch b-red">Walk-in Takeaway</span></td><td>Rp 26,894,000</td><td>3.1%</td><td data-i18n="p05.ch.walkin.margin">High — no commission, tapi volume kecil</td></tr>
+                <tr style="font-weight: 700; background: var(--primary-light);">
+                    <td>TOTAL</td><td>Rp 874,701,000</td><td>100%</td><td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ═══ CATEGORY REVENUE ═══ -->
+        <h2 class="section-title" data-i18n="p05.sec.category">Category Revenue Detail</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p05.th.kategori">Kategori</th>
+                    <th>Revenue</th>
+                    <th data-i18n="p05.th.share">Share</th>
+                    <th data-i18n="p05.th.contoh">Contoh Menu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Fore Signature</strong></td><td>Rp 441,376,000</td><td>50.5%</td><td data-i18n="p05.cat.sig">Iced Aren Latte, Butterscotch Latte, Pandan Latte</td></tr>
+                <tr><td><strong>Coffee</strong></td><td>Rp 201,701,000</td><td>23.1%</td><td data-i18n="p05.cat.coffee">Caramel Latte, Hazelnut Latte, Vanilla Latte</td></tr>
+                <tr><td><strong>Non Coffee</strong></td><td>Rp 94,255,000</td><td>10.8%</td><td data-i18n="p05.cat.noncoffee">Iced Chocolate, Matcha Latte, Taro Latte</td></tr>
+                <tr><td><strong>Americano</strong></td><td>Rp 57,417,000</td><td>6.6%</td><td data-i18n="p05.cat.americano">Americano Iced, Americano Hot</td></tr>
+                <tr><td><strong>Fore Deli</strong></td><td>Rp 35,205,000</td><td>4.0%</td><td data-i18n="p05.cat.deli">Croissant Butter, Banana Bread, Danish Pastry</td></tr>
+                <tr><td><strong>Refresher</strong></td><td>Rp 26,390,000</td><td>3.0%</td><td data-i18n="p05.cat.refresher">Lychee Refresher, Passion Fruit Refresher</td></tr>
+                <tr><td><strong>Tea</strong></td><td>Rp 18,357,000</td><td>2.1%</td><td data-i18n="p05.cat.tea">Iced Tea Latte, Jasmine Tea</td></tr>
+                <tr style="font-weight: 700; background: var(--primary-light);">
+                    <td>TOTAL</td><td>Rp 874,701,000</td><td>100%</td><td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ═══ TOP MENU ═══ -->
+        <h2 class="section-title" data-i18n="p05.sec.topmenu">Top Menu Detail</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th data-i18n="p05.th.menu">Menu</th>
+                    <th data-i18n="p05.th.kategori">Kategori</th>
+                    <th>Revenue</th>
+                    <th data-i18n="p05.th.qty">Quantity</th>
+                    <th data-i18n="p05.th.avgprice">Avg Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: var(--primary-light);"><td>1</td><td><strong>Iced Aren Latte</strong></td><td>Fore Signature</td><td>Rp 133,603,000</td><td>4,607</td><td>Rp 29,000</td></tr>
+                <tr><td>2</td><td>Iced Butterscotch Latte</td><td>Fore Signature</td><td>Rp 72,400,000</td><td>2,414</td><td>Rp 30,000</td></tr>
+                <tr><td>3</td><td>Iced Pandan Latte</td><td>Fore Signature</td><td>Rp 65,800,000</td><td>2,193</td><td>Rp 30,000</td></tr>
+                <tr><td>4</td><td>Iced Caramel Latte</td><td>Coffee</td><td>Rp 58,200,000</td><td>2,328</td><td>Rp 25,000</td></tr>
+                <tr><td>5</td><td>Americano Iced</td><td>Americano</td><td>Rp 57,417,000</td><td>2,734</td><td>Rp 21,000</td></tr>
+                <tr><td>6</td><td>Iced Chocolate</td><td>Non Coffee</td><td>Rp 48,600,000</td><td>1,944</td><td>Rp 25,000</td></tr>
+                <tr><td>7</td><td>Iced Matcha Latte</td><td>Non Coffee</td><td>Rp 45,700,000</td><td>1,523</td><td>Rp 30,000</td></tr>
+                <tr><td>8</td><td>Croissant Butter</td><td>Fore Deli</td><td>Rp 35,200,000</td><td>1,760</td><td>Rp 20,000</td></tr>
+                <tr><td>9</td><td>Iced Hazelnut Latte</td><td>Coffee</td><td>Rp 32,100,000</td><td>1,284</td><td>Rp 25,000</td></tr>
+                <tr><td>10</td><td>Iced Vanilla Latte</td><td>Coffee</td><td>Rp 28,900,000</td><td>1,156</td><td>Rp 25,000</td></tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box" data-i18n="p05.topmenu.insight">Iced Aren Latte = #1 by revenue DAN by quantity. Revenue-nya hampir 2x lipat menu #2. Top 3 semuanya Fore Signature — menunjukkan kategori ini bukan cuma revenue leader, tapi juga volume leader. Americano Iced punya volume tinggi (2,734) tapi revenue lebih rendah karena harga Rp 21K — ini value product yang drive traffic.</div>
+
+        <!-- ═══ OUTLET RANKING ═══ -->
+        <h2 class="section-title" data-i18n="p05.sec.outlet">Outlet Ranking (Extreme)</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p05.th.posisi">Posisi</th>
+                    <th>Outlet ID</th>
+                    <th data-i18n="p05.th.nama">Nama</th>
+                    <th>Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-good"><td data-i18n="p05.rank.top">🏆 Top 1</td><td><code>FC_0171</code></td><td>Fore Coffee Location 2</td><td><strong>Rp 4,171,000</strong></td></tr>
+                <tr class="row-bad"><td data-i18n="p05.rank.bottom">⚠️ Bottom 1</td><td><code>FC_0155</code></td><td>Fore Coffee Bintaro Jaya Xchange</td><td><strong>Rp 1,468,000</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box" data-i18n="p05.outlet.insight">Gap antara top dan bottom outlet: 2.84x (Rp 4.17M vs Rp 1.47M). Ini menunjukkan variasi performa yang signifikan. VP Ops perlu investigate: apakah bottom outlet punya masalah lokasi, staffing, atau channel mix? Apakah top outlet bisa di-replicate pattern-nya?</div>
+
+        <!-- ═══ TREND ANALYSIS ═══ -->
+        <h2 class="section-title" data-i18n="p05.sec.trend">Trend Analysis</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p05.th.metrik">Metrik</th>
+                    <th data-i18n="p05.th.nilai">Nilai</th>
+                    <th data-i18n="p05.th.keterangan">Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td data-i18n="p05.trend.wknd">Weekend Avg Daily Revenue</td><td><strong>Rp 2,209,184</strong></td><td data-i18n="p05.trend.wknd.note">Sabtu + Minggu rata-rata</td></tr>
+                <tr><td data-i18n="p05.trend.wkday">Weekday Avg Daily Revenue</td><td><strong>Rp 1,824,555</strong></td><td data-i18n="p05.trend.wkday.note">Senin – Jumat rata-rata</td></tr>
+                <tr style="background: var(--primary-light);"><td data-i18n="p05.trend.boost">Weekend Boost</td><td><strong>+21.1%</strong></td><td data-i18n="p05.trend.boost.note">Konsisten 15 bulan — structural, bukan seasonal</td></tr>
+                <tr><td data-i18n="p05.trend.gap">Absolute Gap</td><td><strong>Rp 384,629</strong></td><td data-i18n="p05.trend.gap.note">Per hari, weekend vs weekday</td></tr>
+                <tr><td data-i18n="p05.trend.missing">Missing Dates</td><td><strong>3</strong></td><td>2025-01-13, 2025-02-27, 2025-11-24</td></tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box" data-i18n="p05.trend.insight">3 missing dates teridentifikasi — kemungkinan POS downtime atau data loss. Ini perlu di-flag ke IT team. Weekend boost +21.1% yang konsisten selama 15 bulan menunjukkan ini bukan anomali tapi demand pattern yang bisa di-leverage untuk staffing optimization dan inventory planning.</div>
+
+        <div class="disclaimer" data-i18n="p05.disclaimer">⚠️ Semua angka di halaman ini berasal dari dataset operasional yang sudah di-clean (16,229 dari 16,323 rows). Ini adalah sample data, bukan total revenue perusahaan. Angka digunakan untuk analisis pattern dan verifikasi — bukan sebagai laporan keuangan resmi.</div>
+
+    </div>
+</div>
+<script src="lang.js"></script>
+</body>
+</html>

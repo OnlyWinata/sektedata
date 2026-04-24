@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 — Pertanyaan Bisnis</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo"><img src="https://fore.coffee/wp-content/uploads/2018/12/FORe-Pin-100x100.png" alt="Fore" style="width:24px;height:24px;border-radius:4px;"> Fore Coffee</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+        <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+        <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+        <a href="business-context.html"><span class="icon">🏢</span> <span data-i18n="sidebar.konteks">Konteks Bisnis</span></a>
+        <a href="business-questions.html" class="active"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+        <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+        <a href="visualization.html"><span class="icon">📊</span> <span data-i18n="sidebar.visual">Visualisasi</span></a>
+        <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+        <a href="report.html"><span class="icon">📋</span> <span data-i18n="sidebar.report">Report Data</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+        <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+        <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+    <div class="sidebar-contact">
+        <div class="contact-label">Contact</div>
+        <a href="https://www.linkedin.com/in/winata-syahputra/" target="_blank"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a href="mailto:winatasyputra@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+    </div>
+</nav>
+<div class="main">
+    <div class="topbar">
+        <h2 data-i18n="p02.topbar">Pertanyaan Bisnis</h2>
+    </div>
+    <div class="hero-banner">
+        <div>
+            <h1 data-i18n="p02.hero.title">Pertanyaan yang Harus Dijawab</h1>
+            <p data-i18n="p02.hero.sub">Sebelum buka spreadsheet, tentukan dulu pertanyaan bisnisnya. Siapa yang butuh jawaban, dan apa yang mereka butuhkan untuk mengambil keputusan.</p>
+        </div>
+    </div>
+    <div class="content-area">
+
+        <h2 class="section-title" data-i18n="p02.sec.questions">4 Pertanyaan Strategis</h2>
+
+        <p data-i18n="p02.intro">Setiap pertanyaan punya stakeholder yang jelas. Ini bukan analisis demi analisis — ini menjawab kebutuhan orang yang harus mengambil keputusan.</p>
+
+        <div class="q-card">
+            <div class="who" data-i18n="p02.q1.who">Head of BI</div>
+            <h4 data-i18n="p02.q1.title">Q1: Seberapa bersih data kita?</h4>
+            <p data-i18n="p02.q1.text">346 outlet × multiple POS × 6 channel order. Berapa banyak anomali? Jenis apa saja? Apakah cukup parah untuk distort analisis? Sebelum bisa ranking outlet atau analisis menu, kita harus tahu dulu apakah datanya bisa dipercaya.</p>
+        </div>
+
+        <div class="q-card">
+            <div class="who" data-i18n="p02.q2.who">VP Operations</div>
+            <h4 data-i18n="p02.q2.title">Q2: Outlet mana yang perform dan underperform?</h4>
+            <p data-i18n="p02.q2.text">Dari 346 outlet, mana top 10 dan bottom 10 by revenue? Apakah ada pattern regional — Jakarta Selatan vs kota lain? Weekend vs weekday gap seberapa besar? VP Ops butuh ini untuk alokasi resource dan intervensi.</p>
+        </div>
+
+        <div class="q-card">
+            <div class="who" data-i18n="p02.q3.who">Head of Product</div>
+            <h4 data-i18n="p02.q3.title">Q3: Menu mana yang drive bisnis?</h4>
+            <p data-i18n="p02.q3.text">Revenue contribution per kategori? Best seller by volume vs by revenue — sama atau beda? 34 menu items di 7 kategori — ada yang underperform dan perlu di-rationalize? Head of Product butuh data ini untuk pricing strategy dan menu development.</p>
+        </div>
+
+        <div class="q-card">
+            <div class="who" data-i18n="p02.q4.who">CEO + Board</div>
+            <h4 data-i18n="p02.q4.title">Q4: Apa yang harus dilakukan sekarang?</h4>
+            <p data-i18n="p02.q4.text">Top findings + top recommendations. Quantified, actionable, bisa dipresentasikan di board meeting. Post-IPO, investor menunggu bukti bahwa ekspansi on track dan operasional efisien. CEO butuh 1-page executive summary.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p02.sec.framework">Framework Analisis</h2>
+
+        <p data-i18n="p02.framework.text">Kita pakai pendekatan 4-layer yang sequential. Setiap layer bergantung pada output layer sebelumnya — nggak bisa loncat.</p>
+
+        <div class="seg-grid">
+            <div class="seg-card seg-star">
+                <div class="num">1</div>
+                <div class="label" data-i18n="p02.fw.clean.label">Clean</div>
+                <div class="desc" data-i18n="p02.fw.clean.desc">Identifikasi & hapus anomali. Validasi integritas data dari 346 POS. Output: dataset bersih yang bisa dipercaya.</div>
+            </div>
+            <div class="seg-card seg-cow">
+                <div class="num">2</div>
+                <div class="label" data-i18n="p02.fw.rank.label">Rank</div>
+                <div class="desc" data-i18n="p02.fw.rank.desc">Ranking outlet by revenue. Identifikasi top & bottom performers. Analisis pattern regional dan temporal.</div>
+            </div>
+            <div class="seg-card seg-question">
+                <div class="num">3</div>
+                <div class="label" data-i18n="p02.fw.analyze.label">Analyze</div>
+                <div class="desc" data-i18n="p02.fw.analyze.desc">Deep dive: menu performance, channel distribution, weekend vs weekday pattern. Cari insight yang actionable.</div>
+            </div>
+            <div class="seg-card seg-dog">
+                <div class="num">4</div>
+                <div class="label" data-i18n="p02.fw.recommend.label">Recommend</div>
+                <div class="desc" data-i18n="p02.fw.recommend.desc">Synthesis: executive summary + rekomendasi quantified. Output yang bisa langsung dibawa ke board meeting.</div>
+            </div>
+        </div>
+
+        <div class="callout-blue">
+            <h4 data-i18n="p02.callout.approach.title">💡 Kenapa Urutan Ini?</h4>
+            <p data-i18n="p02.callout.approach.text">Data cleaning HARUS duluan. Kalau analisis pakai data kotor, semua insight jadi unreliable. Contoh: kalau ada 30 duplicate rows yang nggak di-remove, revenue bisa overstate. Kalau ada 12 negative quantity yang nggak di-handle, ranking outlet bisa terdistorsi. Ranking pakai data bersih. Menu analysis pakai data bersih. Executive summary = synthesis dari semuanya.</p>
+        </div>
+
+        <h2 class="section-title" data-i18n="p02.sec.mapping">Mapping Pertanyaan → Layer</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th data-i18n="p02.th.pertanyaan">Pertanyaan</th>
+                    <th data-i18n="p02.th.layer">Layer</th>
+                    <th data-i18n="p02.th.output">Output yang Diharapkan</th>
+                    <th data-i18n="p02.th.stakeholder">Stakeholder</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-i18n="p02.map.q1">Seberapa bersih data?</td>
+                    <td><span class="badge-ch b-yellow">Clean</span></td>
+                    <td data-i18n="p02.map.q1.output">Cleaning log: jumlah & jenis anomali, error rate, data bersih</td>
+                    <td>Head of BI</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p02.map.q2">Outlet mana perform?</td>
+                    <td><span class="badge-ch b-green">Rank</span></td>
+                    <td data-i18n="p02.map.q2.output">Top/bottom 10 outlet, city ranking, weekend vs weekday gap</td>
+                    <td>VP Operations</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p02.map.q3">Menu mana drive bisnis?</td>
+                    <td><span class="badge-ch b-blue">Analyze</span></td>
+                    <td data-i18n="p02.map.q3.output">Category revenue share, top menu by volume & revenue, channel mix</td>
+                    <td>Head of Product</td>
+                </tr>
+                <tr>
+                    <td data-i18n="p02.map.q4">Apa yang harus dilakukan?</td>
+                    <td><span class="badge-ch b-red">Recommend</span></td>
+                    <td data-i18n="p02.map.q4.output">Executive summary 1-page, 4 rekomendasi quantified + projected impact</td>
+                    <td>CEO + Board</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout-green">
+            <h4 data-i18n="p02.callout.senior.title">✅ Ini Cara Berpikir Senior Analyst</h4>
+            <p data-i18n="p02.callout.senior.text">Junior analyst langsung buka data dan bikin pivot table. Senior analyst mulai dari pertanyaan bisnis, identifikasi stakeholder, pilih framework, baru sentuh data. Perbedaannya: junior menghasilkan angka, senior menghasilkan keputusan.</p>
+        </div>
+
+    </div>
+</div>
+<script src="lang.js"></script>
+</body>
+</html>

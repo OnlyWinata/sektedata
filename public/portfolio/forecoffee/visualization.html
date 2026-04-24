@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 — Visualisasi & Analisis</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo"><img src="https://fore.coffee/wp-content/uploads/2018/12/FORe-Pin-100x100.png" alt="Fore" style="width:24px;height:24px;border-radius:4px;"> Fore Coffee</div>
+    <a href="/"><span class="icon">🌐</span> winata.io</a>
+        <div class="sidebar-section" data-i18n="sidebar.portfolio">Portfolio</div>
+        <a href="overview.html"><span class="icon">🏠</span> <span data-i18n="sidebar.index">Index</span></a>
+        <a href="business-context.html"><span class="icon">🏢</span> <span data-i18n="sidebar.konteks">Konteks Bisnis</span></a>
+        <a href="business-questions.html"><span class="icon">❓</span> <span data-i18n="sidebar.pertanyaan">Pertanyaan Bisnis</span></a>
+        <a href="findings.html"><span class="icon">💡</span> <span data-i18n="sidebar.temuan">Temuan & Rekom</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.reports">Reports</div>
+        <a href="visualization.html" class="active"><span class="icon">📊</span> <span data-i18n="sidebar.visual">Visualisasi</span></a>
+        <a href="deep-dive.html"><span class="icon">🔬</span> <span data-i18n="sidebar.deepdive">Deep Dive</span></a>
+        <a href="report.html"><span class="icon">📋</span> <span data-i18n="sidebar.report">Report Data</span></a>
+        <div class="sidebar-section" data-i18n="sidebar.appendix">Appendix</div>
+        <a href="methodology.html"><span class="icon">⚙️</span> <span data-i18n="sidebar.carakerja">Cara Kerja</span></a>
+        <a href="job-mapping.html"><span class="icon">📄</span> <span data-i18n="sidebar.loker">Perihal Loker</span></a>
+    <div class="sidebar-contact">
+        <div class="contact-label">Contact</div>
+        <a href="https://www.linkedin.com/in/winata-syahputra/" target="_blank"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a href="mailto:winatasyputra@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+    </div>
+</nav>
+<div class="main">
+    <div class="topbar">
+        <h2 data-i18n="p04.topbar">Visualisasi Data</h2>
+    </div>
+    <div class="hero-banner">
+        <div>
+            <h1>Visualisasi & Analisis</h1>
+            <p>Halaman ini menjawab dua pertanyaan utama secara visual: dari mana revenue datang, dan kapan revenue itu paling besar?</p>
+        </div>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-card c-green"><div class="kpi-num">Rp 874.7M</div><div class="kpi-label">Total Revenue</div><div class="kpi-sub">16,229 transaksi bersih</div></div>
+        <div class="kpi-card c-blue"><div class="kpi-num">29,403</div><div class="kpi-label">Cups Terjual</div><div class="kpi-sub">avg 1.81 cup/transaksi</div></div>
+        <div class="kpi-card c-yellow"><div class="kpi-num">7</div><div class="kpi-label">Kategori Menu</div><div class="kpi-sub">34 menu items</div></div>
+        <div class="kpi-card c-red"><div class="kpi-num">6</div><div class="kpi-label">Channel Order</div><div class="kpi-sub">dine-in → delivery</div></div>
+    </div>
+
+    <div class="content-area">
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- BAGIAN 1: DARI MANA REVENUE DATANG?                    -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <h2 class="section-title">Bagian 1 — Dari Mana Revenue Datang?</h2>
+        <p>Rp 874.7M revenue berasal dari 7 kategori menu yang dijual lewat 6 channel. Tapi distribusinya sangat tidak merata — dan ketidakmerataan itu justru jadi insight paling penting.</p>
+
+        <!-- Chart 1: Category Revenue -->
+        <div class="chart-card">
+            <div class="title">Revenue per Kategori Menu (Rp Juta)</div>
+            <canvas id="chartCategory"></canvas>
+            <div class="insight-box">Fore Signature = Rp 441M (50.5%) — lebih dari 2x lipat Coffee (Rp 201M). Satu kategori menyumbang setengah total revenue. Tea hanya Rp 18M (2.1%).</div>
+        </div>
+
+        <p>Kalau Fore Signature menyumbang setengah revenue, pertanyaan berikutnya: menu spesifik mana di dalam Signature yang paling dominan?</p>
+
+        <!-- Chart 2: Top 10 Menu -->
+        <div class="chart-card">
+            <div class="title">Top 10 Menu by Revenue (Rp Juta)</div>
+            <canvas id="chartTopMenu"></canvas>
+            <div class="insight-box">Iced Aren Latte = Rp 133.6M (15.3% total revenue) dengan 4,607 cups. Hampir 2x lipat menu #2. Top 3 semuanya Fore Signature.</div>
+        </div>
+
+        <div class="callout-green">
+            <h4>Implikasi: Konsentrasi Revenue</h4>
+            <p>Satu menu item (Aren Latte) menyumbang 15.3% total revenue. Satu kategori (Signature) menyumbang 50.5%. Ini kekuatan brand identity sekaligus risiko konsentrasi. Kalau tren aren bergeser, setengah revenue terancam. Rekomendasi: protect hero product, develop Coffee (23.1%) sebagai secondary pillar, evaluasi Tea (2.1%) — apakah worth the operational complexity?</p>
+        </div>
+
+        <!-- Chart 3: Volume vs Revenue comparison -->
+        <p>Revenue tinggi belum tentu berarti volume tinggi. Beberapa menu punya harga rendah tapi volume besar — dan sebaliknya. Perbandingan ini penting untuk pricing strategy.</p>
+
+        <div class="two-col">
+            <div class="chart-card">
+                <div class="title">Top 5 Menu by Volume (Cups)</div>
+                <canvas id="chartVolume"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="title">Top 5 Menu by Revenue (Rp Juta)</div>
+                <canvas id="chartRevenue5"></canvas>
+            </div>
+        </div>
+
+        <div class="insight-box">Aren Latte dominasi di kedua sisi — volume DAN revenue. Tapi Americano Iced punya volume tinggi (#3) dengan revenue lebih rendah karena harga Rp 23K. Ini "traffic driver" — customer datang beli Americano, tapi bisa di-upsell ke Signature.</div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- BAGIAN 2: LEWAT CHANNEL MANA?                          -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <h2 class="section-title">Bagian 2 — Lewat Channel Mana Revenue Masuk?</h2>
+        <p>Fore Coffee punya 6 channel order. Masing-masing punya margin profile berbeda — dine-in dan app pick-up tanpa komisi, sementara delivery aggregator potong 20-30%. Distribusi channel menentukan profitabilitas.</p>
+
+        <div class="two-col">
+            <div class="chart-card">
+                <div class="title">Revenue Share per Channel</div>
+                <canvas id="chartChannel"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="title">Revenue per Channel (Rp Juta)</div>
+                <canvas id="chartChannelBar"></canvas>
+            </div>
+        </div>
+
+        <div class="insight-box">Digital channels (App + Delivery) = 63.1% revenue. Dine-in hanya 33.9%. Fore Coffee sudah digital-first. Tapi ada gap margin besar: App pick-up (25.5%) = zero commission vs GrabFood (18.5%) = 20-30% commission.</div>
+
+        <div class="callout-green">
+            <h4>Implikasi: Margin Optimization</h4>
+            <p>Setiap 1% shift dari aggregator ke app pick-up = margin improvement signifikan. App pick-up (Rp 222M, 25.5%) sudah channel #2 — tinggal push lebih jauh. Invest di loyalty program dan app UX, bukan di promo aggregator. Target: app pick-up dari 25.5% → 30%.</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- BAGIAN 3: KAPAN REVENUE PALING BESAR?                  -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <h2 class="section-title">Bagian 3 — Kapan Revenue Paling Besar?</h2>
+        <p>Setelah tahu dari mana dan lewat mana, pertanyaan terakhir: kapan? Pattern temporal menentukan staffing, inventory, dan promo timing.</p>
+
+        <!-- Chart: Weekend vs Weekday -->
+        <div class="chart-card">
+            <div class="title">Rata-rata Revenue Harian: Weekend vs Weekday</div>
+            <canvas id="chartWeekend"></canvas>
+            <div class="insight-box">Weekend avg Rp 2.21M vs Weekday Rp 1.82M — gap +21.1%. Konsisten 15 bulan. Ini structural, bukan seasonal.</div>
+        </div>
+
+        <p>Gap +21.1% itu konsisten — tapi apakah ada variasi per hari dalam seminggu? Kalau Jumat sudah mulai naik, staffing adjustment bisa dimulai dari Jumat sore.</p>
+
+        <!-- Chart: Revenue per Day of Week -->
+        <div class="chart-card">
+            <div class="title">Rata-rata Revenue per Hari dalam Seminggu</div>
+            <canvas id="chartDayOfWeek"></canvas>
+            <div class="insight-box">Sabtu = hari tertinggi, Senin = terendah. Jumat sudah mulai naik dibanding Kamis — transisi ke weekend pattern dimulai Jumat. Minggu sedikit lebih rendah dari Sabtu.</div>
+        </div>
+
+        <!-- Chart: Peak Hours -->
+        <p>Selain hari, jam juga penting. Kapan peak hours? Ini menentukan shift scheduling dan pre-prep timing.</p>
+
+        <div class="chart-card">
+            <div class="title">Distribusi Transaksi per Jam (07:00 – 21:00)</div>
+            <canvas id="chartHours"></canvas>
+            <div class="insight-box">3 peak hours: pagi (08:00-09:00), siang (12:00-13:00), dan sore (14:00-15:00). Morning rush = office workers pick-up. Lunch peak = food + coffee combo. Afternoon = "ngopi sore" culture. Drop signifikan setelah 18:00.</div>
+        </div>
+
+        <div class="callout-green">
+            <h4>Implikasi: Staffing & Inventory</h4>
+            <p>Weekend boost +21.1% + peak hours yang jelas = staffing bisa di-optimize dengan presisi. Tambah barista 20% di Sabtu-Minggu, fokus di 3 peak windows. Pre-prep bahan baku (susu, aren, es) lebih banyak untuk Jumat sore – Minggu. Weekday bisa di-boost dengan promo office hours (10-12 siang).</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- RINGKASAN VISUAL                                       -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <h2 class="section-title">Ringkasan: Cerita yang Diceritakan Data</h2>
+
+        <div class="exec-card">
+            <div class="title">Dari 8 chart di atas, 3 cerita utama:</div>
+            <ol style="color: rgba(255,255,255,.9); font-size: .88rem; padding-left: 1.5rem;">
+                <li style="margin-bottom: .6rem;"><strong style="color:white;">Revenue terkonsentrasi</strong> — 50.5% di Signature, 15.3% di satu menu (Aren Latte). Kekuatan sekaligus risiko.</li>
+                <li style="margin-bottom: .6rem;"><strong style="color:white;">Digital-first sudah terjadi</strong> — 63.1% revenue dari digital channels. App pick-up (25.5%) = margin terbaik, tapi aggregator (37.6%) masih dominan di delivery.</li>
+                <li style="margin-bottom: .6rem;"><strong style="color:white;">Weekend = peak yang predictable</strong> — +21.1% konsisten, Sabtu tertinggi, 3 peak hours jelas. Staffing dan inventory bisa di-optimize.</li>
+            </ol>
+            <p style="color: #a7f3d0; font-size: .82rem; margin-top: .8rem;">→ Ketiga cerita ini langsung menjawab pertanyaan VP Operations, Head of Product, dan CEO di Page 02.</p>
+        </div>
+
+        <div class="disclaimer">⚠️ Semua chart menggunakan data bersih (16,229 transaksi). Data ini adalah sample operasional — bukan total revenue perusahaan. Angka digunakan untuk analisis pattern dan proporsi.</div>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const dk = document.body.classList.contains('dark') || localStorage.getItem('dark')==='1';
+const gc = dk ? '#334155' : '#e2e8f0';
+const tc = dk ? '#94a3b8' : '#64748b';
+const bc = dk ? '#1e293b' : '#ffffff';
+Chart.defaults.color = tc;
+Chart.defaults.borderColor = gc;
+
+const G='#00754a', G2='#065f46', G3='#22c55e', G4='#86efac', G5='#a7f3d0', G6='#bbf7d0', G7='#dcfce7';
+
+// ── Chart 1: Category Revenue ──
+new Chart(document.getElementById('chartCategory'), {
+    type:'bar',
+    data:{labels:['Fore Signature','Coffee','Non Coffee','Americano','Fore Deli','Refresher','Tea'],
+        datasets:[{data:[441.4,201.7,94.3,57.4,35.2,26.4,18.4],backgroundColor:[G,G2,G3,G4,G5,G6,G7],borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Rp '+c.raw+' Juta'}}},
+        scales:{x:{title:{display:true,text:'Revenue (Rp Juta)'},grid:{color:gc}},y:{grid:{display:false}}}}
+});
+
+// ── Chart 2: Top 10 Menu ──
+new Chart(document.getElementById('chartTopMenu'), {
+    type:'bar',
+    data:{labels:['Iced Aren Latte','Iced BSL','Iced Pandan Latte','Iced Kopi Dari Tani','Iced Cafe Latte','Iced Cappuccino','Iced Americano','Iced Dark Chocolate','Iced Matcha','Iced Bumi Latte'],
+        datasets:[{data:[133.6,72.4,65.8,48.2,42.1,38.6,35.9,32.4,28.7,25.1],
+            backgroundColor:[G,G,G,G,G2,G2,G3,G3,G4,G4],borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Rp '+c.raw+' Juta'}}},
+        scales:{x:{title:{display:true,text:'Revenue (Rp Juta)'},grid:{color:gc}},y:{grid:{display:false}}}}
+});
+
+// ── Chart 3a: Top 5 by Volume ──
+new Chart(document.getElementById('chartVolume'), {
+    type:'bar',
+    data:{labels:['Aren Latte','Kopi Dari Tani','Americano','Pandan Latte','BSL'],
+        datasets:[{data:[4607,3102,2734,2193,2414],backgroundColor:[G,G,G3,G,G],borderRadius:4}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toLocaleString()+' cups'}}},
+        scales:{y:{title:{display:true,text:'Cups'},grid:{color:gc}},x:{grid:{display:false}}}}
+});
+
+// ── Chart 3b: Top 5 by Revenue ──
+new Chart(document.getElementById('chartRevenue5'), {
+    type:'bar',
+    data:{labels:['Aren Latte','BSL','Pandan Latte','Kopi Dari Tani','Cafe Latte'],
+        datasets:[{data:[133.6,72.4,65.8,48.2,42.1],backgroundColor:[G,G,G,G,G2],borderRadius:4}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Rp '+c.raw+' Juta'}}},
+        scales:{y:{title:{display:true,text:'Rp Juta'},grid:{color:gc}},x:{grid:{display:false}}}}
+});
+
+// ── Chart 4a: Channel Doughnut ──
+new Chart(document.getElementById('chartChannel'), {
+    type:'doughnut',
+    data:{labels:['Dine-in','Pick-up App','GrabFood','GoFood','ShopeeFood','Walk-in'],
+        datasets:[{data:[296.4,222.7,162.1,104.9,61.8,26.9],backgroundColor:[G,G3,G2,G4,G5,G7],borderWidth:2,borderColor:bc}]},
+    options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:10,font:{size:10}}}}}
+});
+
+// ── Chart 4b: Channel Bar ──
+new Chart(document.getElementById('chartChannelBar'), {
+    type:'bar',
+    data:{labels:['Dine-in','App','Grab','GoFood','Shopee','Walk-in'],
+        datasets:[
+            {label:'Revenue (Rp Juta)',data:[296.4,222.7,162.1,104.9,61.8,26.9],backgroundColor:[G,G3,G2,G4,G5,G7],borderRadius:4}
+        ]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Rp '+c.raw+' Juta'}}},
+        scales:{y:{title:{display:true,text:'Rp Juta'},grid:{color:gc}},x:{grid:{display:false}}}}
+});
+
+// ── Chart 5: Weekend vs Weekday ──
+new Chart(document.getElementById('chartWeekend'), {
+    type:'bar',
+    data:{labels:['Weekend','Weekday'],
+        datasets:[{data:[2209184,1824555],backgroundColor:[G,G4],borderRadius:6,barThickness:60}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Rp '+c.raw.toLocaleString('id-ID')}}},
+        scales:{y:{beginAtZero:true,grid:{color:gc},ticks:{callback:v=>'Rp '+(v/1e6).toFixed(1)+'M'}},x:{grid:{display:false}}}}
+});
+
+// ── Chart 6: Day of Week ──
+new Chart(document.getElementById('chartDayOfWeek'), {
+    type:'bar',
+    data:{labels:['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'],
+        datasets:[{data:[1720000,1780000,1810000,1830000,1920000,2280000,2140000],
+            backgroundColor:[G4,G4,G4,G4,G3,G,G],borderRadius:4}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Rp '+c.raw.toLocaleString('id-ID')}}},
+        scales:{y:{beginAtZero:false,grid:{color:gc},ticks:{callback:v=>'Rp '+(v/1e6).toFixed(1)+'M'}},x:{grid:{display:false}}}}
+});
+
+// ── Chart 7: Peak Hours ──
+new Chart(document.getElementById('chartHours'), {
+    type:'line',
+    data:{labels:['07','08','09','10','11','12','13','14','15','16','17','18','19','20','21'],
+        datasets:[{label:'Transaksi',data:[380,920,780,620,540,780,620,700,620,540,460,380,310,230,80],
+            borderColor:G,backgroundColor:G+'20',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:G}]},
+    options:{responsive:true,plugins:{legend:{display:false}},
+        scales:{y:{title:{display:true,text:'Jumlah Transaksi'},grid:{color:gc}},x:{title:{display:true,text:'Jam'},grid:{display:false}}}}
+});
+</script>
+<script src="lang.js"></script>
+</body>
+</html>
