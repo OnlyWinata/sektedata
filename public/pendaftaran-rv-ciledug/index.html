@@ -6,167 +6,146 @@
 <title>Pendaftaran Pasien — RV Ciledug</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#0d9488;--primary-light:#ccfbf1;--primary-dark:#0f766e;--bg:#f0fdf4;--card:#ffffff;--text:#1e293b;--text-muted:#64748b;--border:#e2e8f0;--red:#ef4444;--green:#22c55e;--yellow:#f59e0b;--radius:14px}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px}
+a{color:var(--primary)}.container{max-width:540px;width:100%}
+.header{text-align:center;margin-bottom:20px}.header .icon{font-size:44px;margin-bottom:6px}.header h1{font-size:1.35rem;font-weight:800;color:var(--primary-dark)}.header p{color:var(--text-muted);font-size:.85rem}
+.steps{display:flex;align-items:center;justify-content:center;margin-bottom:12px;padding:0 4px}.step{display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35;transition:all .3s}.step.active,.step.done{opacity:1}.step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;background:var(--border);color:var(--text-muted);transition:all .3s}.step.active .step-num{background:var(--primary);color:#fff}.step.done .step-num{background:var(--green);color:#fff}.step-label{font-size:.64rem;font-weight:600;color:var(--text-muted)}.step.active .step-label{color:var(--primary-dark)}.step-line{flex:1;height:2px;background:var(--border);margin:0 3px;min-width:16px;max-width:36px;margin-bottom:16px}
+.refresh-bar{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 14px;margin-bottom:16px;font-size:.8rem}.refresh-bar.ok{border-color:#bbf7d0;background:#f0fdf4}.refresh-bar.ok #refreshLabel{color:#166534}.refresh-bar.loading{border-color:#bfdbfe;background:#eff6ff}.refresh-bar.err{border-color:#fecaca;background:#fef2f2}#refreshLabel{color:var(--text-muted);font-weight:600}.btn-refresh{padding:5px 12px;border:1.5px solid var(--border);border-radius:6px;background:var(--card);font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--text);white-space:nowrap}.btn-refresh:hover{border-color:var(--primary);color:var(--primary)}.btn-refresh:disabled{opacity:.4;cursor:not-allowed}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}.page{display:none}.page.active-page{display:block}
+.section-title{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:8px}.section-title::after{content:'';flex:1;height:1px;background:var(--border)}.desc{font-size:.86rem;color:var(--text-muted);margin-bottom:14px;line-height:1.55}
+.info-banner{background:var(--primary-light);border:1px solid #99f6e4;border-radius:10px;padding:11px 14px;margin-bottom:14px;font-size:.8rem;line-height:1.55;color:var(--primary-dark)}.info-banner.warn{background:#fefce8;border-color:#fef08a;color:#854d0e}
+.form-group{margin-bottom:14px}.form-group label{display:block;font-size:.8rem;font-weight:600;margin-bottom:4px}.req{color:var(--red)}.hint{font-size:.72rem;color:var(--text-muted);margin-top:3px}
+input[type="text"],input[type="tel"],select,textarea{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.86rem;color:var(--text);background:#f8fafc;transition:border-color .2s,box-shadow .2s}input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(13,148,136,.1)}textarea{resize:vertical;min-height:56px}
+.radio-group{display:flex;flex-direction:column;gap:7px;margin-bottom:6px}.radio-option{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .12s;background:#f8fafc}.radio-option:hover{border-color:var(--primary)}.radio-option.selected{border-color:var(--primary);background:var(--primary-light)}.radio-option input[type="radio"]{accent-color:var(--primary);width:16px;height:16px;cursor:pointer}.radio-option .ro-text{font-size:.84rem;font-weight:500;flex:1}.radio-option .ro-sub{font-size:.72rem;color:var(--text-muted);margin-top:1px}.radio-option .ro-badge{font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap}.ro-badge.badge-green{background:#dcfce7;color:#166534}.ro-badge.badge-yellow{background:#fef3c7;color:#92400e}.ro-badge.badge-red{background:#fecaca;color:#991b1b}.radio-option.disabled{opacity:.4;pointer-events:none}.radio-option.wl{border-style:dashed;border-color:#fecaca}.radio-option.cuti{opacity:.4;pointer-events:none;border-style:dashed}
+.empty-state{text-align:center;padding:18px;color:var(--text-muted);font-size:.82rem;font-style:italic}.divider{height:1px;background:var(--border);margin:18px 0}
+.btn-row{display:flex;gap:10px;margin-top:18px}.btn-row-stack{display:flex;flex-direction:column;gap:8px}.btn{flex:1;padding:10px 16px;border:none;border-radius:8px;font-family:inherit;font-size:.86rem;font-weight:700;cursor:pointer;transition:all .12s;text-align:center}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}.btn-primary:disabled{opacity:.4;cursor:not-allowed}.btn-secondary{background:#f8fafc;color:var(--text-muted);border:1.5px solid var(--border)}.btn-secondary:hover{border-color:var(--primary);color:var(--primary)}.btn-full{width:100%}
+.preset-row{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap}.preset-btn{padding:6px 13px;border:1.5px solid var(--border);border-radius:8px;background:var(--card);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .12s;color:var(--text)}.preset-btn:hover{border-color:var(--primary);color:var(--primary)}.preset-btn.active{border-color:var(--primary);background:var(--primary-light);color:var(--primary-dark)}
+.status{margin-top:12px;padding:10px 12px;border-radius:8px;font-size:.8rem;font-weight:600;text-align:center;display:none;line-height:1.4}.status.success{display:block;background:#dcfce7;color:#166534;border:1px solid #bbf7d0}.status.error{display:block;background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.review-table{width:100%;border-collapse:collapse;font-size:.82rem}.review-table td{padding:7px 8px;border-bottom:1px solid var(--border)}.review-table td:first-child{font-weight:600;color:var(--text-muted);width:35%;white-space:nowrap}
+.footer{margin-top:24px;text-align:center;font-size:.72rem;color:var(--text-muted);line-height:1.5}
+@keyframes spin{to{transform:rotate(360deg)}}.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--primary);border-top-color:transparent;border-radius:50%;animation:spin .5s linear infinite;vertical-align:middle;margin-right:4px}
+@media(max-width:480px){body{padding:14px 10px 36px}.card{padding:16px 14px}.btn-row{flex-direction:column}}
+</style>
 </head>
 <body>
-
 <div class="container">
-  <div class="header">
-    <div class="icon">🏥</div>
-    <h1>Pendaftaran Pasien</h1>
-    <p>Rumah Vaksinasi Ciledug</p>
-  </div>
-
-  <!-- Steps -->
+  <div class="header"><div class="icon">🏥</div><h1>Pendaftaran Pasien</h1><p>Rumah Vaksinasi Ciledug</p></div>
   <div class="steps">
-    <div class="step active" data-step="0"><span class="step-num">1</span><span class="step-label">Dokter</span></div>
-    <div class="step-line"></div>
-    <div class="step" data-step="1"><span class="step-num">2</span><span class="step-label">Jadwal</span></div>
-    <div class="step-line"></div>
-    <div class="step" data-step="2"><span class="step-num">3</span><span class="step-label">Tanggal</span></div>
-    <div class="step-line"></div>
-    <div class="step" data-step="3"><span class="step-num">4</span><span class="step-label">Data</span></div>
-    <div class="step-line"></div>
+    <div class="step active" data-step="0"><span class="step-num">1</span><span class="step-label">Dokter</span></div><div class="step-line"></div>
+    <div class="step" data-step="1"><span class="step-num">2</span><span class="step-label">Jadwal</span></div><div class="step-line"></div>
+    <div class="step" data-step="2"><span class="step-num">3</span><span class="step-label">Tanggal</span></div><div class="step-line"></div>
+    <div class="step" data-step="3"><span class="step-num">4</span><span class="step-label">Data</span></div><div class="step-line"></div>
     <div class="step" data-step="4"><span class="step-num">5</span><span class="step-label">Kirim</span></div>
   </div>
+  <div class="refresh-bar" id="refreshBar"><span id="refreshLabel">Belum di-refresh</span><button class="btn-refresh" id="btnRefresh">🔄 Refresh</button></div>
 
-  <!-- Refresh bar -->
-  <div class="refresh-bar" id="refreshBar">
-    <span id="refreshLabel">Belum di-refresh</span>
-    <button class="btn-refresh" id="btnRefresh">🔄 Refresh</button>
-  </div>
-
-  <!-- ==================== STEP 0: DOKTER TUJUAN ==================== -->
   <div class="card page active-page" id="page0">
-    <div class="section-title">🩺 Dokter Tujuan</div>
-    <p class="desc">Pilih kategori dokter yang ingin dikunjungi.</p>
-    <div class="radio-group" id="dokterTujuanGroup">
-      <div class="empty-state">Klik 🔄 Refresh dulu untuk mengambil data.</div>
-    </div>
-
+    <div class="section-title">🩺 Dokter Tujuan</div><p class="desc">Pilih kategori dokter yang ingin dikunjungi.</p>
+    <div class="radio-group" id="dokterTujuanGroup"><div class="empty-state">Klik 🔄 Refresh dulu untuk mengambil data.</div></div>
     <div class="divider" id="divPilihDokter" style="display:none"></div>
-    <div id="pilihDokterSection" style="display:none">
-      <div class="section-title">👨‍⚕️ Pilih Dokter</div>
-      <div class="radio-group" id="pilihDokterGroup"></div>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-primary" id="btnNext0" disabled>Lanjut →</button>
-    </div>
+    <div id="pilihDokterSection" style="display:none"><div class="section-title">👨‍⚕️ Pilih Dokter</div><div class="radio-group" id="pilihDokterGroup"></div></div>
+    <div class="btn-row"><button class="btn btn-primary" id="btnNext0" disabled>Lanjut →</button></div>
   </div>
 
-  <!-- ==================== STEP 1: RENCANA KEDATANGAN ==================== -->
   <div class="card page" id="page1">
-    <div class="section-title">📋 Rencana Kedatangan</div>
-    <p class="desc" id="rencanaDesc"></p>
+    <div class="section-title">📋 Rencana Kedatangan</div><p class="desc" id="rencanaDesc"></p>
     <div class="radio-group" id="rencanaGroup"></div>
-
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goStep(0)">← Kembali</button>
-      <button class="btn btn-primary" id="btnNext1" disabled>Lanjut →</button>
-    </div>
+    <div class="btn-row"><button class="btn btn-secondary" onclick="goStep(0)">← Kembali</button><button class="btn btn-primary" id="btnNext1" disabled>Lanjut →</button></div>
   </div>
 
-  <!-- ==================== STEP 2: TANGGAL ==================== -->
   <div class="card page" id="page2">
-    <div class="section-title">📅 Pilih Tanggal</div>
-    <p class="desc">Pilih tanggal kunjungan yang tersedia.</p>
-
+    <div class="section-title">📅 Pilih Tanggal</div><p class="desc">Pilih tanggal kunjungan yang tersedia.</p>
     <div id="cutiNotice" style="display:none" class="info-banner warn"></div>
-
-    <div class="radio-group" id="tanggalGroup">
-      <div class="empty-state">Pilih dokter dan rencana dulu.</div>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goStep(1)">← Kembali</button>
-      <button class="btn btn-primary" id="btnNext2" disabled>Lanjut →</button>
-    </div>
+    <div class="radio-group" id="tanggalGroup"><div class="empty-state">Pilih dokter dan rencana dulu.</div></div>
+    <div class="btn-row"><button class="btn btn-secondary" onclick="goStep(1)">← Kembali</button><button class="btn btn-primary" id="btnNext2" disabled>Lanjut →</button></div>
   </div>
 
-  <!-- ==================== STEP 3: DATA PASIEN ==================== -->
   <div class="card page" id="page3">
     <div class="section-title">👶 Data Pasien</div>
-
-    <div class="preset-row">
-      <button type="button" class="preset-btn active" data-preset="kaashifa">Kaashifa</button>
-      <button type="button" class="preset-btn" data-preset="custom">Custom</button>
-    </div>
-
-    <div class="form-group">
-      <label>Nama Lengkap Pasien <span class="req">*</span></label>
-      <input type="text" id="nama" required placeholder="Nama lengkap">
-    </div>
-    <div class="form-group">
-      <label>Tanggal Lahir <span class="req">*</span></label>
-      <input type="text" id="tglLahir" required placeholder="Contoh: 15 Maret 2024">
-    </div>
-    <div class="form-group">
-      <label>Usia <span class="req">*</span></label>
-      <input type="text" id="usia" required placeholder="Contoh: 1 tahun 1 bulan">
-    </div>
-    <div class="form-group">
-      <label>Rencana Vaksinasi</label>
-      <textarea id="rencanaVaksin" placeholder="Merk vaksin jika lanjutan, jenis vaksin jika dosis pertama"></textarea>
-      <div class="hint">Tuliskan merk vaksin jika dosis lanjutan, jenis vaksin jika dosis pertama</div>
-    </div>
-
-    <div class="divider"></div>
-    <div class="section-title">📱 Kontak</div>
-    <div class="form-group">
-      <label>No. Handphone <span class="req">*</span></label>
-      <input type="tel" id="noHp" required placeholder="08xxxxxxxxxx">
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goStep(2)">← Kembali</button>
-      <button class="btn btn-primary" id="btnNext3">Review →</button>
-    </div>
+    <div class="preset-row"><button type="button" class="preset-btn active" data-preset="kaashifa">Kaashifa</button><button type="button" class="preset-btn" data-preset="custom">Custom</button></div>
+    <div class="form-group"><label>Nama Lengkap Pasien <span class="req">*</span></label><input type="text" id="nama" required placeholder="Nama lengkap"></div>
+    <div class="form-group"><label>Tanggal Lahir <span class="req">*</span></label><input type="text" id="tglLahir" required placeholder="Contoh: 15 Maret 2024"></div>
+    <div class="form-group"><label>Usia <span class="req">*</span></label><input type="text" id="usia" required placeholder="Contoh: 1 tahun 1 bulan"></div>
+    <div class="form-group"><label>Rencana Vaksinasi</label><textarea id="rencanaVaksin" placeholder="Merk vaksin jika lanjutan, jenis vaksin jika dosis pertama"></textarea><div class="hint">Tuliskan merk vaksin jika dosis lanjutan, jenis vaksin jika dosis pertama</div></div>
+    <div class="divider"></div><div class="section-title">📱 Kontak</div>
+    <div class="form-group"><label>No. Handphone <span class="req">*</span></label><input type="tel" id="noHp" required placeholder="08xxxxxxxxxx"></div>
+    <div class="btn-row"><button class="btn btn-secondary" onclick="goStep(2)">← Kembali</button><button class="btn btn-primary" id="btnNext3">Review →</button></div>
   </div>
 
-  <!-- ==================== STEP 4: REVIEW ==================== -->
   <div class="card page" id="page4">
-    <div class="section-title">✅ Review & Kirim</div>
-    <p class="desc">Cek semua data sebelum mengirim.</p>
+    <div class="section-title">✅ Review & Kirim</div><p class="desc">Cek semua data sebelum mengirim.</p>
     <div id="reviewContent"></div>
-
     <div id="targetFormInfo" style="margin-top:12px;font-size:.8rem;text-align:center"></div>
-
     <div class="divider"></div>
-
-    <div class="section-title">🚀 Jalankan via Selenium</div>
-    <p class="desc">Klik tombol di bawah untuk save config → lalu jalankan command di terminal.</p>
-
-    <div class="btn-row-stack">
-      <button class="btn btn-primary btn-full" id="btnSaveConfig">💾 Save Config & Copy Command</button>
-    </div>
-
-    <div id="commandBox" style="display:none;margin-top:12px">
-      <div style="background:#1e293b;color:#e2e8f0;padding:12px 14px;border-radius:8px;font-family:'Fira Code',monospace;font-size:.78rem;line-height:1.6;position:relative">
-        <code id="commandText"></code>
-        <button id="btnCopyCmd" style="position:absolute;top:8px;right:8px;background:#334155;border:none;color:#94a3b8;padding:4px 8px;border-radius:4px;font-size:.7rem;cursor:pointer">Copy</button>
-      </div>
-    </div>
-
+    <div class="section-title">🚀 Jalankan via Selenium</div><p class="desc">Save config → jalankan command di terminal.</p>
+    <div class="btn-row-stack"><button class="btn btn-primary btn-full" id="btnSaveConfig">💾 Save Config & Copy Command</button></div>
+    <div id="commandBox" style="display:none;margin-top:12px"><div style="background:#1e293b;color:#e2e8f0;padding:12px 14px;border-radius:8px;font-family:monospace;font-size:.78rem;line-height:1.6;position:relative"><code id="commandText"></code><button id="btnCopyCmd" style="position:absolute;top:8px;right:8px;background:#334155;border:none;color:#94a3b8;padding:4px 8px;border-radius:4px;font-size:.7rem;cursor:pointer">Copy</button></div></div>
     <div class="divider"></div>
     <div class="section-title" style="opacity:.5">📋 Alternatif</div>
-    <div class="btn-row-stack">
-      <button class="btn btn-secondary btn-full" id="btnCopyAll">📋 Copy Semua Data ke Clipboard</button>
-      <button class="btn btn-secondary btn-full" id="btnOpenPrefilled">🔗 Buka Google Form (Pre-filled, WL only)</button>
-    </div>
+    <div class="btn-row-stack"><button class="btn btn-secondary btn-full" id="btnCopyAll">📋 Copy Semua Data ke Clipboard</button><button class="btn btn-secondary btn-full" id="btnOpenPrefilled">🔗 Buka Google Form (Pre-filled, WL only)</button></div>
     <div class="status" id="submitStatus"></div>
-
-    <div class="btn-row" style="margin-top:12px">
-      <button class="btn btn-secondary" onclick="goStep(3)">← Edit Data</button>
-    </div>
+    <div class="btn-row" style="margin-top:12px"><button class="btn btn-secondary" onclick="goStep(3)">← Edit Data</button></div>
   </div>
 
-  <div class="footer">
-    <p>Data tersimpan di browser. Tidak dikirim ke server manapun kecuali Google Form.</p>
-    <p style="margin-top:4px"><a href="https://docs.google.com/forms/d/e/1FAIpQLScqFl85ZlJCnUChOcCrzP9oAHYG9MyGks4-2MFLbOr0I83KwA/viewform" target="_blank" rel="noopener">Buka Google Form langsung ↗</a></p>
-  </div>
+  <div class="footer"><p>Data tersimpan di browser. Tidak dikirim ke server manapun kecuali Google Form.</p><p style="margin-top:4px"><a href="https://docs.google.com/forms/d/e/1FAIpQLScqFl85ZlJCnUChOcCrzP9oAHYG9MyGks4-2MFLbOr0I83KwA/viewform" target="_blank" rel="noopener">Buka Google Form langsung ↗</a></p></div>
 </div>
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const API_URL="https://script.google.com/macros/s/AKfycbz6CtXbnzTO1CXvqUcvd3EdeDPj_2CfCwvVj80cT1h5oqljC6MiKzVtKpinfJ0p4Jw/exec";
+const MAIN_FORM_URL="https://docs.google.com/forms/d/e/1FAIpQLScqFl85ZlJCnUChOcCrzP9oAHYG9MyGks4-2MFLbOr0I83KwA/viewform";
+const STORAGE_KEY="rv_ciledug_patient";
+const PRESETS={kaashifa:{nama:"Kaashifa Ilmi Samudra",tglLahir:"15 Maret 2024",usia:"1 tahun 1 bulan",rencanaVaksin:"Vaksin",noHp:"08176050546"}};
+const INPUT_IDS={nama:281593572,tglLahir:1222754963,usia:641600353,rencana:1913622837,tanggalWL:605243980,noHp:1085668742};
+const WL_FORM="https://docs.google.com/forms/d/e/1FAIpQLSd5vD1u07vBHqnAioYO0aSuXOZ7YeJNMXvHEQuAsGTBLuechA/viewform";
 
-<script src="app.js"></script>
+let api=null,dateLinks=null,sel={dokterTujuan:"",dokter:"",rencana:"",tanggal:"",tanggalFormUrl:""},currentStep=0;
+const $=id=>document.getElementById(id);
+
+function goStep(n){currentStep=n;document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active-page',i===n));document.querySelectorAll('.step').forEach((s,i)=>{s.classList.remove('active','done');if(i===n)s.classList.add('active');else if(i<n)s.classList.add('done')});if(n===4)buildReview();window.scrollTo({top:0,behavior:'smooth'})}
+window.goStep=goStep;
+
+function buildRadios(cid,opts,name,onSel){const c=$(cid);if(!opts||!opts.length){c.innerHTML='<div class="empty-state">Tidak ada pilihan tersedia.</div>';return}c.innerHTML=opts.map((o,i)=>{let cls='radio-option';if(o.cuti)cls+=' cuti';if(o.wl)cls+=' wl';if(o.disabled)cls+=' disabled';const badge=o.badge?`<span class="ro-badge ${o.badgeCls||''}">${o.badge}</span>`:'';const sub=o.sub?`<div class="ro-sub">${o.sub}</div>`:'';return`<label class="${cls}" data-val="${o.value}" data-idx="${i}"><input type="radio" name="${name}" value="${o.value}" ${o.disabled||o.cuti?'disabled':''}><div style="flex:1"><span class="ro-text">${o.label}</span>${sub}</div>${badge}</label>`}).join('');c.querySelectorAll('.radio-option').forEach(el=>{el.addEventListener('click',()=>{if(el.classList.contains('disabled')||el.classList.contains('cuti'))return;c.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');el.querySelector('input').checked=true;if(onSel)onSel(el.dataset.val,parseInt(el.dataset.idx))})})}
+
+$('btnRefresh').addEventListener('click',doRefresh);
+async function doRefresh(){const bar=$('refreshBar'),label=$('refreshLabel'),btn=$('btnRefresh');bar.className='refresh-bar loading';label.innerHTML='<span class="spinner"></span> Mengambil data...';btn.disabled=true;try{const[apiRes,linksRes]=await Promise.all([fetch(API_URL),fetch('date-links.json').catch(()=>null)]);if(!apiRes.ok)throw new Error('HTTP '+apiRes.status);api=await apiRes.json();if(api.error)throw new Error(api.error);if(linksRes&&linksRes.ok)dateLinks=await linksRes.json();bar.className='refresh-bar ok';label.textContent='✅ '+new Date().toLocaleTimeString('id-ID');populateStep0()}catch(err){bar.className='refresh-bar err';label.textContent='❌ '+err.message}finally{btn.disabled=false}}
+
+function populateStep0(){if(!api)return;buildRadios('dokterTujuanGroup',(api.dokterTujuan||[]).map(c=>({value:c,label:c})),'dokterTujuan',val=>{sel.dokterTujuan=val;sel.dokter="";showPilihDokter(val)});$('divPilihDokter').style.display='none';$('pilihDokterSection').style.display='none';$('btnNext0').disabled=true}
+function showPilihDokter(t){const key=Object.keys(api.dokterPerKategori||{}).find(k=>k.toUpperCase().includes(t.replace('DOKTER ','').trim()));if(key&&api.dokterPerKategori[key].length>0){$('divPilihDokter').style.display='';$('pilihDokterSection').style.display='';buildRadios('pilihDokterGroup',api.dokterPerKategori[key].map(d=>({value:d,label:d,sub:getJadwal(d)})),'pilihDokter',val=>{sel.dokter=val;$('btnNext0').disabled=false})}else{$('divPilihDokter').style.display='none';$('pilihDokterSection').style.display='none';sel.dokter=singleDokter(t);$('btnNext0').disabled=false}}
+function singleDokter(t){return{"DOKTER UMUM":"dr. Diyana","DOKTER SPESIALIS GIZI":"dr. Yohan Samudra, Sp.GK, AIFO-K","DOKTER KONSELOR LAKTASI":"dr. Fathtiara Inayati, CBS"}[t]||t}
+function getJadwal(n){return{"dr. Nunki Andria, Sp.A":"Sel, Rab, Jum, Sab, Min · 09-14","dr. Indah Soleha, Sp.A":"Jadwal menyesuaikan","dr. Diyana":"Rab & Jum 16-19, Sab 09-12","dr. Yohan Samudra, Sp.GK, AIFO-K":"Rab & Jum 17-19, Sab 09-12","dr. Fathtiara Inayati, CBS":"Sel & Rab 09-12"}[n]||""}
+$('btnNext0').addEventListener('click',()=>{if(!sel.dokterTujuan)return;populateStep1();goStep(1)});
+
+function populateStep1(){const q=api.allQuestions||[];if(sel.dokterTujuan==="DOKTER UMUM"){const drQ=q.find(qq=>qq.title.toUpperCase().includes("RENCANA KEDATANGAN")&&qq.choices.length>0&&qq.choices.some(c=>c.includes("202")));if(drQ){sel.rencana="KONSULTASI";populateStep2Direct(drQ.choices);goStep(2);return}}if(sel.dokterTujuan==="DOKTER KONSELOR LAKTASI"){sel.rencana="KONSULTASI";populateStep2ForKonselor();goStep(2);return}let choices=[];const ds=sel.dokter.split(",")[0].trim().toLowerCase();const si=q.findIndex(qq=>qq.title.toLowerCase().includes("pendaftaran ke "+ds));if(si>=0){for(let i=si+1;i<q.length;i++){if(q[i].choices.length>0&&q[i].title.toUpperCase().includes("RENCANA")){choices=q[i].choices;break}}}if(!choices.length)choices=api.rencana||["KONSULTASI","VAKSINASI DAN KONSULTASI"];$('rencanaDesc').textContent=`Untuk ${sel.dokter}`;buildRadios('rencanaGroup',choices.map(c=>{const icon=c.toUpperCase().includes("VAKSIN")?"💉":"🗣️";return{value:c,label:icon+" "+c}}),'rencana',val=>{sel.rencana=val;$('btnNext1').disabled=false});$('btnNext1').disabled=true}
+$('btnNext1').addEventListener('click',()=>{if(!sel.rencana)return;populateStep2();goStep(2)});
+
+function populateStep2(){const q=api.allQuestions||[];const st=sel.rencana.toUpperCase();const ds=sel.dokter.split(",")[0].trim().toLowerCase();let si2=q.findIndex(qq=>qq.title.toLowerCase().includes("pendaftaran ke "+ds));if(si2<0)si2=0;let secIdx=-1;for(let i=si2;i<q.length;i++){if((q[i].title.toUpperCase()===st||q[i].title.toUpperCase().startsWith(st))&&q[i].type===8){secIdx=i;break}}let dates=[],cutiN="";if(secIdx>=0){for(let i=secIdx+1;i<q.length;i++){const t=q[i];if(t.type===8||t.type===2)break;const tu=t.title.toUpperCase();const isWL=tu.includes("WAITING LIST");const isCuti=tu.includes("CUTI")||t.description.toUpperCase().includes("CUTI");if(isCuti&&!isWL){cutiN="⚠️ "+t.title+": "+t.description;dates.push({value:t.title,label:t.title,sub:t.description,cuti:true,badge:"CUTI",badgeCls:"badge-red"})}else if(isWL){dates.push({value:t.title,label:"⏳ WAITING LIST",sub:t.description,badge:"WL",badgeCls:"badge-yellow",formUrl:findUrl(t.title)})}else{dates.push({value:t.title,label:"📅 "+t.title,sub:t.description||"",badge:"TERSEDIA",badgeCls:"badge-green",formUrl:findUrl(t.title)})}}}$('cutiNotice').style.display=cutiN?'':'none';if(cutiN)$('cutiNotice').textContent=cutiN;if(!dates.length){$('tanggalGroup').innerHTML='<div class="empty-state">Tidak ada tanggal tersedia.</div>';$('btnNext2').disabled=true;return}buildRadios('tanggalGroup',dates,'tanggal',(val,idx)=>{sel.tanggal=val;sel.tanggalFormUrl=dates[idx].formUrl||"";$('btnNext2').disabled=false});$('btnNext2').disabled=true}
+function populateStep2Direct(ch){$('cutiNotice').style.display='none';buildRadios('tanggalGroup',ch.map(c=>({value:c,label:"📅 "+c,badge:"TERSEDIA",badgeCls:"badge-green"})),'tanggal',val=>{sel.tanggal=val;$('btnNext2').disabled=false});$('btnNext2').disabled=true}
+function populateStep2ForKonselor(){const q=api.allQuestions||[];const si=q.findIndex(qq=>qq.title.includes("Fathtiara"));let d=[];if(si>=0){for(let i=si+1;i<q.length;i++){if(q[i].type===8||q[i].type===2)break;d.push({value:q[i].title,label:"📅 "+q[i].title,sub:q[i].description,badge:"TERSEDIA",badgeCls:"badge-green",formUrl:findUrl(q[i].title)})}}$('cutiNotice').style.display='none';if(!d.length){$('tanggalGroup').innerHTML='<div class="empty-state">Tidak ada tanggal tersedia.</div>';$('btnNext2').disabled=true;return}buildRadios('tanggalGroup',d,'tanggal',(val,idx)=>{sel.tanggal=val;sel.tanggalFormUrl=d[idx].formUrl||"";$('btnNext2').disabled=false});$('btnNext2').disabled=true}
+function findUrl(title){if(!dateLinks)return"";const rk=sel.rencana.toUpperCase().includes("VAKSIN")?"vaksinasi":"konsultasi";const lk=dateLinks[rk]||{};if(lk[title])return lk[title];const tt=title.trim();for(const[k,v]of Object.entries(lk)){if(k.trim()===tt||tt.toUpperCase().includes(k.trim().toUpperCase())||k.trim().toUpperCase().includes(tt.toUpperCase()))return v}return""}
+$('btnNext2').addEventListener('click',()=>{if(!sel.tanggal)return;goStep(3)});
+
+$('btnNext3').addEventListener('click',()=>{if(!$('nama').value||!$('tglLahir').value||!$('usia').value||!$('noHp').value){alert('Isi semua field yang wajib (*)');return}saveP();goStep(4)});
+document.querySelectorAll('.preset-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const k=btn.dataset.preset;if(k==='custom'){['nama','tglLahir','usia','rencanaVaksin','noHp'].forEach(id=>$(id).value='')}else if(PRESETS[k]){const p=PRESETS[k];$('nama').value=p.nama;$('tglLahir').value=p.tglLahir;$('usia').value=p.usia;$('rencanaVaksin').value=p.rencanaVaksin;$('noHp').value=p.noHp}})});
+
+function buildReview(){const rows=[['Dokter Tujuan',sel.dokterTujuan],['Dokter',sel.dokter],['Rencana',sel.rencana],['Tanggal',sel.tanggal],['Nama Pasien',$('nama').value],['Tanggal Lahir',$('tglLahir').value],['Usia',$('usia').value],['Rencana Vaksinasi',$('rencanaVaksin').value||'—'],['No HP',$('noHp').value]];$('reviewContent').innerHTML='<table class="review-table">'+rows.map(([k,v])=>`<tr><td>${k}</td><td>${v||'—'}</td></tr>`).join('')+'</table>';$('targetFormInfo').innerHTML='<span style="color:var(--primary)">Config akan disimpan → jalankan Python script via terminal</span>'}
+
+$('btnSaveConfig').addEventListener('click',async()=>{const cfg={DOKTER_TUJUAN:sel.dokterTujuan,PILIH_DOKTER:sel.dokter,RENCANA_KEDATANGAN:sel.rencana,TANGGAL_KUNJUNGAN:sel.tanggal,NAMA_LENGKAP_PASIEN:$('nama').value,TANGGAL_LAHIR_PASIEN:$('tglLahir').value,USIA_PASIEN:$('usia').value,RENCANA_DETAIL:$('rencanaVaksin').value||sel.rencana,NO_HANDPHONE:$('noHp').value,JADWAL_MULAI:"08:00:00",PRE_LOAD_MENIT:2};const blob=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download='config.json';a.click();URL.revokeObjectURL(u);const cmd='python3 google_form_filler.py --config config.json';$('commandText').textContent=cmd;$('commandBox').style.display='block';await navigator.clipboard.writeText(cmd).catch(()=>{});showS($('submitStatus'),'success','💾 Config downloaded! Command copied.')});
+$('btnCopyCmd').addEventListener('click',()=>{navigator.clipboard.writeText($('commandText').textContent).then(()=>{$('btnCopyCmd').textContent='✓';setTimeout(()=>{$('btnCopyCmd').textContent='Copy'},1500)})});
+
+function buildPrefill(base){const p=new URLSearchParams();p.set('entry.'+INPUT_IDS.nama,$('nama').value);p.set('entry.'+INPUT_IDS.tglLahir,$('tglLahir').value);p.set('entry.'+INPUT_IDS.usia,$('usia').value);p.set('entry.'+INPUT_IDS.rencana,$('rencanaVaksin').value||sel.rencana);p.set('entry.'+INPUT_IDS.noHp,$('noHp').value);if(sel.tanggal&&sel.tanggal.toUpperCase().includes('WAITING'))p.set('entry.'+INPUT_IDS.tanggalWL,sel.tanggal);return(base||WL_FORM)+'?'+p.toString()}
+$('btnOpenPrefilled').addEventListener('click',async()=>{await navigator.clipboard.writeText([$('nama').value,$('tglLahir').value,$('usia').value,$('rencanaVaksin').value||sel.rencana,$('noHp').value].join('\n')).catch(()=>{});if(sel.tanggalFormUrl&&sel.tanggalFormUrl.includes('formlimit')){window.open(sel.tanggalFormUrl,'_blank');showS($('submitStatus'),'success','📋 Data copied! Form dibuka via formlimit.')}else{const u=buildPrefill(sel.tanggalFormUrl&&sel.tanggalFormUrl.includes('forms.g')?sel.tanggalFormUrl:WL_FORM);window.open(u,'_blank');showS($('submitStatus'),'success','✅ Form dibuka dengan data pre-filled!')}});
+$('btnCopyAll').addEventListener('click',()=>{navigator.clipboard.writeText([`Dokter: ${sel.dokterTujuan} → ${sel.dokter}`,`Rencana: ${sel.rencana}`,`Tanggal: ${sel.tanggal}`,'---',`Nama: ${$('nama').value}`,`Tgl Lahir: ${$('tglLahir').value}`,`Usia: ${$('usia').value}`,`Vaksinasi: ${$('rencanaVaksin').value}`,`HP: ${$('noHp').value}`].join('\n')).then(()=>showS($('submitStatus'),'success','📋 Copied!')).catch(()=>showS($('submitStatus'),'error','❌ Gagal'))});
+
+function showS(el,t,m){el.className='status '+t;el.textContent=m;setTimeout(()=>{el.className='status'},4000)}
+function saveP(){localStorage.setItem(STORAGE_KEY,JSON.stringify({nama:$('nama').value,tglLahir:$('tglLahir').value,usia:$('usia').value,rencanaVaksin:$('rencanaVaksin').value,noHp:$('noHp').value}))}
+function loadP(){try{const d=JSON.parse(localStorage.getItem(STORAGE_KEY));if(d&&d.nama){$('nama').value=d.nama;$('tglLahir').value=d.tglLahir;$('usia').value=d.usia;$('rencanaVaksin').value=d.rencanaVaksin||'';$('noHp').value=d.noHp;return true}}catch{}return false}
+
+(function(){if(!loadP()){const p=PRESETS.kaashifa;$('nama').value=p.nama;$('tglLahir').value=p.tglLahir;$('usia').value=p.usia;$('rencanaVaksin').value=p.rencanaVaksin;$('noHp').value=p.noHp}['nama','tglLahir','usia','rencanaVaksin','noHp'].forEach(id=>{$(id).addEventListener('input',saveP)});doRefresh()})();
+</script>
 </body>
 </html>
