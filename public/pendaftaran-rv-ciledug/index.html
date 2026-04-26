@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendaftaran Pasien — RV Ciledug</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="icon">🏥</div>
+    <h1>Pendaftaran Pasien</h1>
+    <p>Rumah Vaksinasi Ciledug</p>
+  </div>
+
+  <!-- Steps -->
+  <div class="steps">
+    <div class="step active" data-step="0"><span class="step-num">1</span><span class="step-label">Dokter</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="1"><span class="step-num">2</span><span class="step-label">Jadwal</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="2"><span class="step-num">3</span><span class="step-label">Tanggal</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="3"><span class="step-num">4</span><span class="step-label">Data</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="4"><span class="step-num">5</span><span class="step-label">Kirim</span></div>
+  </div>
+
+  <!-- Refresh bar -->
+  <div class="refresh-bar" id="refreshBar">
+    <span id="refreshLabel">Belum di-refresh</span>
+    <button class="btn-refresh" id="btnRefresh">🔄 Refresh</button>
+  </div>
+
+  <!-- ==================== STEP 0: DOKTER TUJUAN ==================== -->
+  <div class="card page active-page" id="page0">
+    <div class="section-title">🩺 Dokter Tujuan</div>
+    <p class="desc">Pilih kategori dokter yang ingin dikunjungi.</p>
+    <div class="radio-group" id="dokterTujuanGroup">
+      <div class="empty-state">Klik 🔄 Refresh dulu untuk mengambil data.</div>
+    </div>
+
+    <div class="divider" id="divPilihDokter" style="display:none"></div>
+    <div id="pilihDokterSection" style="display:none">
+      <div class="section-title">👨‍⚕️ Pilih Dokter</div>
+      <div class="radio-group" id="pilihDokterGroup"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnNext0" disabled>Lanjut →</button>
+    </div>
+  </div>
+
+  <!-- ==================== STEP 1: RENCANA KEDATANGAN ==================== -->
+  <div class="card page" id="page1">
+    <div class="section-title">📋 Rencana Kedatangan</div>
+    <p class="desc" id="rencanaDesc"></p>
+    <div class="radio-group" id="rencanaGroup"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(0)">← Kembali</button>
+      <button class="btn btn-primary" id="btnNext1" disabled>Lanjut →</button>
+    </div>
+  </div>
+
+  <!-- ==================== STEP 2: TANGGAL ==================== -->
+  <div class="card page" id="page2">
+    <div class="section-title">📅 Pilih Tanggal</div>
+    <p class="desc">Pilih tanggal kunjungan yang tersedia.</p>
+
+    <div id="cutiNotice" style="display:none" class="info-banner warn"></div>
+
+    <div class="radio-group" id="tanggalGroup">
+      <div class="empty-state">Pilih dokter dan rencana dulu.</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(1)">← Kembali</button>
+      <button class="btn btn-primary" id="btnNext2" disabled>Lanjut →</button>
+    </div>
+  </div>
+
+  <!-- ==================== STEP 3: DATA PASIEN ==================== -->
+  <div class="card page" id="page3">
+    <div class="section-title">👶 Data Pasien</div>
+
+    <div class="preset-row">
+      <button type="button" class="preset-btn active" data-preset="kaashifa">Kaashifa</button>
+      <button type="button" class="preset-btn" data-preset="custom">Custom</button>
+    </div>
+
+    <div class="form-group">
+      <label>Nama Lengkap Pasien <span class="req">*</span></label>
+      <input type="text" id="nama" required placeholder="Nama lengkap">
+    </div>
+    <div class="form-group">
+      <label>Tanggal Lahir <span class="req">*</span></label>
+      <input type="text" id="tglLahir" required placeholder="Contoh: 15 Maret 2024">
+    </div>
+    <div class="form-group">
+      <label>Usia <span class="req">*</span></label>
+      <input type="text" id="usia" required placeholder="Contoh: 1 tahun 1 bulan">
+    </div>
+    <div class="form-group">
+      <label>Rencana Vaksinasi</label>
+      <textarea id="rencanaVaksin" placeholder="Merk vaksin jika lanjutan, jenis vaksin jika dosis pertama"></textarea>
+      <div class="hint">Tuliskan merk vaksin jika dosis lanjutan, jenis vaksin jika dosis pertama</div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-title">📱 Kontak</div>
+    <div class="form-group">
+      <label>No. Handphone <span class="req">*</span></label>
+      <input type="tel" id="noHp" required placeholder="08xxxxxxxxxx">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(2)">← Kembali</button>
+      <button class="btn btn-primary" id="btnNext3">Review →</button>
+    </div>
+  </div>
+
+  <!-- ==================== STEP 4: REVIEW ==================== -->
+  <div class="card page" id="page4">
+    <div class="section-title">✅ Review & Kirim</div>
+    <p class="desc">Cek semua data sebelum mengirim.</p>
+    <div id="reviewContent"></div>
+
+    <div id="targetFormInfo" style="margin-top:12px;font-size:.8rem;text-align:center"></div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">🚀 Jalankan via Selenium</div>
+    <p class="desc">Klik tombol di bawah untuk save config → lalu jalankan command di terminal.</p>
+
+    <div class="btn-row-stack">
+      <button class="btn btn-primary btn-full" id="btnSaveConfig">💾 Save Config & Copy Command</button>
+    </div>
+
+    <div id="commandBox" style="display:none;margin-top:12px">
+      <div style="background:#1e293b;color:#e2e8f0;padding:12px 14px;border-radius:8px;font-family:'Fira Code',monospace;font-size:.78rem;line-height:1.6;position:relative">
+        <code id="commandText"></code>
+        <button id="btnCopyCmd" style="position:absolute;top:8px;right:8px;background:#334155;border:none;color:#94a3b8;padding:4px 8px;border-radius:4px;font-size:.7rem;cursor:pointer">Copy</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-title" style="opacity:.5">📋 Alternatif</div>
+    <div class="btn-row-stack">
+      <button class="btn btn-secondary btn-full" id="btnCopyAll">📋 Copy Semua Data ke Clipboard</button>
+      <button class="btn btn-secondary btn-full" id="btnOpenPrefilled">🔗 Buka Google Form (Pre-filled, WL only)</button>
+    </div>
+    <div class="status" id="submitStatus"></div>
+
+    <div class="btn-row" style="margin-top:12px">
+      <button class="btn btn-secondary" onclick="goStep(3)">← Edit Data</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Data tersimpan di browser. Tidak dikirim ke server manapun kecuali Google Form.</p>
+    <p style="margin-top:4px"><a href="https://docs.google.com/forms/d/e/1FAIpQLScqFl85ZlJCnUChOcCrzP9oAHYG9MyGks4-2MFLbOr0I83KwA/viewform" target="_blank" rel="noopener">Buka Google Form langsung ↗</a></p>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
